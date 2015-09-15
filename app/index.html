@@ -9,35 +9,58 @@
   <title>My AngularJS App</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
+  <header>
+    <hamburger-toggle state="tgState"></hamburger-toggle>
+    <div class="title">
+      <h1>Enterprise Gym</h1>
+    </div>
+  </header>
+  <div class="menu">
+    <div class="floating" ng-show="tgState" >
+      <div class="navigation animated slideInLeft">
+      <hamburger-toggle state="tgState"></hamburger-toggle>
+        <h2>Enterprise Gym</h2>
+        <ul class="floatingMenu">
+          <li><a href="#/home"><div class="center">Home</div></a></li>
+          <li><a href="#/home">Item4</a></li>
+          <li><a href="#/home">Item3</a></li>
+          <li><a href="#/home">Item2</a></li>
+        </ul>
+      </div>
+      <div class="shadow" ng-click="tgState = !tgState"><span></span></div>
+    </div>
+  </div>
+  <ul class="menu" >
+    <li><a href="#/home">Home</a></li>
+    <li><a href="#/home">Item4</a></li>
+    <li><a href="#/home">Item3</a></li>
+    <li><a href="#/home">Item2</a></li>
   </ul>
-
   <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-
   <div ng-view></div>
-
   <div>Angular seed app: v<span app-version></span></div>
-
+  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css"/>
+  <link rel="stylesheet" href="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.css"/>
+  <link rel="stylesheet" href="bower_components/open-sans-fontface/open-sans.css"/>
+  <link rel="stylesheet" href="bower_components/animate-css/animate.css"/>
+  <link rel="stylesheet" href="app.css"/>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
+  <script src="views/home/home.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
+  <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+  <script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.js"></script>
+  
 </body>
 </html>

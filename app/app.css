@@ -1,30 +1,110 @@
 /* app css stylesheet */
 
-.menu {
+ul.menu {
   list-style: none;
   border-bottom: 0.1em solid black;
   margin-bottom: 2em;
   padding: 0 0 0.5em;
 }
 
-.menu:before {
+ul.menu:before {
   content: "[";
 }
 
-.menu:after {
+ul.menu:after {
   content: "]";
 }
 
-.menu > li {
+ul.menu > li {
   display: inline;
 }
 
-.menu > li:before {
+ul.menu > li:before {
   content: "|";
   padding-right: 0.3em;
 }
 
-.menu > li:nth-child(1):before {
+ul.menu > li:nth-child(1):before {
   content: "";
   padding: 0;
+}
+
+ul.floatingMenu {
+  display:block;
+}
+
+.floating {
+  position: fixed;
+  top:0;
+  left:0;
+  margin:0;
+  height:100%;
+  width:100%;
+  text-align:center;
+  
+}
+
+
+
+.floating .shadow {
+/*background-color:rgba(50, 50, 50, 0.75);*/
+  width:100%;
+  height:100%;
+}
+.floating .navigation ul {
+  list-style: none;
+  width:100%;
+  margin:0;
+  padding:0;
+
+}
+.floating .navigation ul li a{
+  width:100%;
+
+}
+
+.floating .navigation ul li {
+  background-color:transparent;
+  margin-bottom:15px;
+  height:50px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+
+  align-items: center;
+  width:100%;
+  text-align:center;
+}
+
+.floating .navigation ul li:hover {
+  background-color:#e3e3e3;
+}
+
+.floating .navigation {
+  background-color: #fff;
+-webkit-box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.75);
+-moz-box-shadow:    0px 1px 5px 0px rgba(50, 50, 50, 0.75);
+box-shadow:         0px 1px 5px 0px rgba(50, 50, 50, 0.75);
+height:100%;
+width:300px;
+margin:0;
+position:absolute;
+}
+
+/*   Index Header   */
+header .title {
+  text-align:center;
+}
+
+header .navigation {
+  text-align:center;
+}
+
+/*   Fonts     */
+html {
+  font-family: 'Open Sans';
 }
