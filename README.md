@@ -1,8 +1,8 @@
 # Enterprise Team Website
 An angularJS one page website developed for Enterprise Gym at Dundee University.
 
-# Installation
+## Installation
 - bower dependencies: ```bower install```
 
-# Requirements
+## Requirements
 - Enterprise Java Spring Backend
