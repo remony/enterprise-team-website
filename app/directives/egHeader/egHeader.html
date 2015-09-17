@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="directives/egHeader/egHeader.css"/>
+<P>I am egHeader</p>
+<div class="item" ng-repeat="item in navItems.items">
+	<p class="main">
+		{{item.title}}
+	</p>
+	<!-- <div class="dropbutton" ng-show="item.subitems">
+			<p>V</p>
+	</div> -->
+	<div class="item sub" ng-repeat="subitem in item.subitems">
+		<p class="sub">
+			{{subitem.title}}
+		</p>
+	</div>
+</div>

@@ -1,0 +1,31 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+	<h3>{{title}}</h3>
+  </div>
+</div>
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--8-col">
+  	<div class="articles">
+	  	<div class = "article" ng-repeat="new in news.articles">
+			<div class="title">
+				{{new.title}}
+			</div>
+			<div class="content">
+				{{new.content}}
+			</div>
+			<div class="footer">
+				<div class="readmore">
+					read more
+				</div>
+			</div>
+			<br>
+		</div>
+  	</div>
+  </div>
+  <div class="mdl-cell mdl-cell--4-col">4</div>
+</div>
+
+
+
+

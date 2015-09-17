@@ -1,0 +1,31 @@
+.article {
+
+}
+.articles .article {
+	margin-bottom: 20px;
+}
+
+.articles .article .title, .articles .article .content {
+	padding:25px;
+}
+
+.articles .article .title {
+	font-size:2em;
+	font-weight:600;
+	margin-bottom:2px;
+}
+
+.articles .article .content {
+	font-size:1.2em;
+}
+
+.articles .article .footer {
+	width:100%;
+	text-align:right;
+	font-size:1.3em;
+	margin-left:-25px;
+}
+
+.articles .article .footer .readmore {
+
+}

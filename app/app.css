@@ -1,110 +1,197 @@
-/* app css stylesheet */
-
-ul.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+.wrapper {
+  background: url('assets/images/background.jpg') center / cover;
 }
 
-ul.menu:before {
-  content: "[";
-}
+@media screen and (max-width: 1025px) {
+    .wrapper .mdl-layout__header,
+    .wrapper .mdl-layout__drawer-button {
+      /* This background is dark, so we set text to white. Use 87% black instead if
+         your background is light. */
+         padding:6px;
+      color: #fff;
+    }
+    .mdl-layout__content {
+        margin-top:0px;
+    }
 
-ul.menu:after {
-  content: "]";
-}
+    .clearfix {
+        display:none;
+    }
 
-ul.menu > li {
-  display: inline;
-}
+    .menu h2 {
+        font-size:2em;
+    }
 
-ul.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
+    .header {
+        height:100px;
+    }
 
-ul.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
-}
+    .mdl-layout__drawer-button {
+        display:initial!important;
+    }
 
-ul.floatingMenu {
-  display:block;
-}
+    .mdl-layout__header {
+        display:initial!important;
+    }
 
-.floating {
-  position: fixed;
-  top:0;
-  left:0;
-  margin:0;
-  height:100%;
-  width:100%;
-  text-align:center;
-  
-}
-
-
-
-.floating .shadow {
-/*background-color:rgba(50, 50, 50, 0.75);*/
-  width:100%;
-  height:100%;
-}
-.floating .navigation ul {
-  list-style: none;
-  width:100%;
-  margin:0;
-  padding:0;
-
-}
-.floating .navigation ul li a{
-  width:100%;
 
 }
 
-.floating .navigation ul li {
-  background-color:transparent;
-  margin-bottom:15px;
-  height:50px;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+@media screen and (min-width: 1025px) {
+    .wrapper .mdl-layout__header,
+    .wrapper .mdl-layout__drawer-button {
+      /* This background is dark, so we set text to white. Use 87% black instead if
+         your background is light. */
+         padding:0;
+      color: white;
+    }
 
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
+    .mdl-layout__content {
+        margin-top:0px;
+    }
 
-  align-items: center;
-  width:100%;
-  text-align:center;
+    nav {
+        display:inital;
+    }
+
+    .mdl-layout__drawer-button {
+        display:none!important;
+    }
+
+
 }
 
-.floating .navigation ul li:hover {
-  background-color:#e3e3e3;
+
+.mdl-cell {
+    background-color: #e3e3e3;
 }
 
-.floating .navigation {
-  background-color: #fff;
--webkit-box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.75);
--moz-box-shadow:    0px 1px 5px 0px rgba(50, 50, 50, 0.75);
-box-shadow:         0px 1px 5px 0px rgba(50, 50, 50, 0.75);
-height:100%;
-width:300px;
-margin:0;
-position:absolute;
+
+
+
+.mdl-layout__content {
+    background-color: #fff;
+
 }
 
-/*   Index Header   */
-header .title {
-  text-align:center;
+.menu-wrap {
+    width:100%;
 }
 
-header .navigation {
-  text-align:center;
+.header {
+    width:100%;
+    height:200px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+
+    align-items: center;
+
 }
+
+.header h2 {
+    text-align:center;
+    font-weight:800;
+    color:#fff;
+}
+
+.header img {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mdl-layout__header {
+    background-color:transparent!important;
+}
+
+
+
 
 /*   Fonts     */
-html {
-  font-family: 'Open Sans';
+html
+{
+    font-family: 'Open Sans';
+}
+
+
+/* Navigation */
+
+nav.menu {
+    height:100%;
+}
+
+.clearfix:after {
+    display:block;
+    clear:both;
+}
+
+.menu a {
+    color:#fff;
+    text-decoration: none;
+}
+.menu a:hover {
+    color:#e3e3e3;
+    text-decoration: underline;
+}
+ 
+
+ 
+/* Main Navigation items */
+.menu > ul > li {
+    float:left;
+    display:inline-block;
+    position:relative;
+    font-size:19px;
+}
+ 
+.menu > ul > li > a {
+    padding:10px 40px;
+    display:inline-block;
+}
+ 
+ 
+/* Main Navigation sub items*/
+.menu li:hover .sub-menu {
+    z-index:100;
+    display:initial;
+}
+ 
+.sub-menu {
+    width:160%;
+    padding:5px 0px;
+    position:absolute;
+    top:100%;
+    left:0px;
+    z-index:-1;
+    display: none;
+    transition:opacity linear 0.15s;
+    box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+    background:rgba(38,50,56,0.9);
+}
+ 
+.sub-menu li {
+    display:block;
+    font-size:16px;
+}
+ 
+.sub-menu li a {
+    padding:10px 30px;
+    display:block;
+}
+ 
+.sub-menu li a:hover, .sub-menu .current-item a {
+    background:rgba(38,50,56,0.9);
+}
+
+
+/*  Sidebar navigation   */
+.mdl-navigation .subitem {
+    background-color: #e3e3e3;
+    color:#fff;
 }

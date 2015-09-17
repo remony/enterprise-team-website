@@ -12,6 +12,7 @@
     "angular-loading-bar": "~0.8.0",
     "angular-mocks": "~1.4.0",
     "angular-route": "~1.4.0",
+    "material-design-lite": "~1.0.4",
     "open-sans-fontface": "~1.4.2"
   }
 }

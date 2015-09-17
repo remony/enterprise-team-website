@@ -2,65 +2,88 @@
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>My AngularJS App</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-</head>
-<body>
-  <header>
-    <hamburger-toggle state="tgState"></hamburger-toggle>
-    <div class="title">
-      <h1>Enterprise Gym</h1>
-    </div>
-  </header>
-  <div class="menu">
-    <div class="floating" ng-show="tgState" >
-      <div class="navigation animated slideInLeft">
-      <hamburger-toggle state="tgState"></hamburger-toggle>
-        <h2>Enterprise Gym</h2>
-        <ul class="floatingMenu">
-          <li><a href="#/home"><div class="center">Home</div></a></li>
-          <li><a href="#/home">Item4</a></li>
-          <li><a href="#/home">Item3</a></li>
-          <li><a href="#/home">Item2</a></li>
-        </ul>
-      </div>
-      <div class="shadow" ng-click="tgState = !tgState"><span></span></div>
-    </div>
-  </div>
-  <ul class="menu" >
-    <li><a href="#/home">Home</a></li>
-    <li><a href="#/home">Item4</a></li>
-    <li><a href="#/home">Item3</a></li>
-    <li><a href="#/home">Item2</a></li>
-  </ul>
-  <!--[if lt IE 7]>
-  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-  <div ng-view></div>
-  <div>Angular seed app: v<span app-version></span></div>
   <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css"/>
   <link rel="stylesheet" href="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.css"/>
   <link rel="stylesheet" href="bower_components/open-sans-fontface/open-sans.css"/>
   <link rel="stylesheet" href="bower_components/animate-css/animate.css"/>
   <link rel="stylesheet" href="app.css"/>
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
+  <link rel="stylesheet" href="views/news/news.css"/>
+  <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+</head>
+<body class="animated fadeIn">
+  <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div class="wrapper mdl-layout mdl-js-layout" >
+
+  <div class="header mdl-layout__header mdl-layout__header--scroll">
+
+    <div class="menu-wrap" ng-controller="navigationCtrl">
+      <nav class="menu">
+        <!-- <h2 class="animated slideInUp">Enterprise Gym</h2> -->
+        <img class="animated fadeIn" src="assets/images/logo.png" height="130px" width="auto"/>
+        <ul class="clearfix" >
+          <li ng-repeat="item in items.items">
+            <a href="{{item.link}}">{{item.title}} <span class="arrow" ng-show="item.subitems">&#9660;</span></a>
+            
+            <ul class="sub-menu animated fadeIn" ng-show="item.subitems">
+            <div ng-repeat="subitem in item.subitems">
+              <li><a href="{{subitem.link}}" >{{subitem.title}}</a></li>  
+              </div>    
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="mdl-layout__drawer" ng-controller="navigationCtrl">
+    <span class="mdl-layout-title">Navigation</span>
+    <nav class="mdl-navigation">
+      <div ng-repeat="item in items.items" >
+        <a class="mdl-navigation__link" href="{{item.link}}" ng-click="item.clicked = !item.clicked">{{item.title}} <span ng-show="item.subitems"><span class="arrow animated rotateIn" ng-hide="item.clicked">&#9660;</span><span class="arrow animated rotateIn" ng-show="item.clicked" >&#9650;</span></span></a>
+        <div ng-show="item.clicked" class="animated fadeIn">
+        <div ng-repeat="subitem in item.subitems">
+          <a class="mdl-navigation__link subitem" href="{{subitem.link}}">{{subitem.title}}</a>
+        </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+  <div ng-view class="container" ></div>
+  </main>
+</div>
+
+
+
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
   <script src="app.js"></script>
+
+  <!-- Views -->
   <script src="views/home/home.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+  <script src="views/users/users.js"></script>
+  <script src="views/news/news.js"></script>
+  <!-- Angular Directives -->
+  <script src="directives/egHeader/egHeader.js"></script>
+  
+  <!-- Bower Dependencies -->
+  
+  <script src="/bower_components/material-design-lite/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
   <script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.js"></script>
   
+  <!-- Material Angular Dependencies -->
+
+
 </body>
 </html>
