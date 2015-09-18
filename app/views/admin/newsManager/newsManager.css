@@ -1,0 +1,22 @@
+.ta-editor {
+    height: 600px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    margin:20px 0;
+
+}
+
+.newsManager textarea {
+	height:100%!important;
+}
+
+.ta-editor:hover {
+    height: auto;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: 100%;
+    margin:20px 0;
+
+}

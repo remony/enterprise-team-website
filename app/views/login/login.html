@@ -1,0 +1,27 @@
+<div class="mdl-grid">
+	<div class="mdl-cell mdl-cell--12-col">
+		<h3>{{title}}</h3>
+	</div>
+</div>
+<div class="mdl-grid">
+	<div class="mdl-cell mdl-cell--8-col">
+		<div class="error" ng-show="error">There was an error logging you in</div>
+		<form name="login" ng-submit="userlogin(user)" ng-hide="loggedIn">
+			<p>Username:<br>
+				<input type="text" name="user.username" ng-model="user.username" required>
+			</p>
+			<p>Password:<br>
+				<input type="password" name="user.password" ng-model="user.password" required>
+			</p>
+			<p>
+				<input type="submit">
+			</p>
+		</form>
+		<div class="loggedOut" ng-show="loggedIn">
+		<h3>{{username}} you are already logged in</h3>
+		<p>Do you wish to log out?</p>
+		<button ng-click="logout()">Logout</button>
+		</div>
+	</div>
+	<div class="mdl-cell mdl-cell--4-col">4</div>
+</div>
