@@ -62,9 +62,9 @@
 }
 
 
-.mdl-cell {
+/*.mdl-cell {
     background-color: #e3e3e3;
-}
+}*/
 
 
 
@@ -116,7 +116,7 @@
 /*   Fonts     */
 html
 {
-    font-family: 'Open Sans';
+    font-family: 'Open Sans'!important;
 }
 
 

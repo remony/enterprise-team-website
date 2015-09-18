@@ -1,0 +1,29 @@
+<div class="newsManager">
+
+	<div class="mdl-grid">
+	  <div class="mdl-cell mdl-cell--12-col">
+		<h3>{{title}}</h3>
+	  </div>
+	</div>
+
+	<div class="mdl-grid">
+	  <div class="mdl-cell mdl-cell--2-col">
+	  	
+	  </div>
+	  <div class="mdl-cell mdl-cell--10-col">
+	  	<div class="editor">
+<!-- 	  		<form method="post">
+  <textarea ui-tinymce ng-model="tinymceModel"></textarea>
+</form> -->
+<text-angular ng-model="htmlVariable"></text-angular>
+	  	</div>
+	</div>
+	</div>
+
+	<div class="mdl-grid">
+	  <div class="mdl-cell mdl-cell--12-col">
+		<h3>Preview</h3>
+		<div ng-bind-html="htmlVariable"></div>
+	  </div>
+	</div>
+</div>
