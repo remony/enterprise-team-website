@@ -9,11 +9,14 @@ var App = angular.module('app', [
     'app.news',
     'app.login',
     'app.newsManager',
+    'app.admin.newUsers',
     // Dependecies
     'angular-loading-bar',
     'ngHamburger',
     'LocalStorageModule',
     'textAngular',
+    'toastr',
+    'ngAnimate',
 
 
     /*    Directives    */

@@ -1,0 +1,30 @@
+<div class="admin newUsers">
+
+	<div class="mdl-grid">
+	  <div class="mdl-cell mdl-cell--12-col">
+		<h3>{{title}}</h3>
+	  </div>
+	</div>
+
+	<div class="mdl-grid">
+	  <div class="mdl-cell mdl-cell--12-col">
+		<div class="mdl-grid" ng-repeat="newUser in newUsers.unauthorisedusers">
+			<div class="mdl-cell mdl-cell--8-col">
+				{{newUser.id}}: {{newUser.username}}
+			</div>
+			<div class="mdl-cell mdl-cell--2-col">
+				<select>
+				  <option ng-repeat="usergroup in userGroups.user_groups" value="usergroup.name">{{usergroup.name}}</option>
+				</select>
+			</div>
+			<div class="mdl-cell mdl-cell--1-col">
+				<button>Approve</button>
+			</div>
+			<div class="mdl-cell mdl-cell--1-col">
+				<button>Unapprove</button>
+			</div>
+		</div>
+	  </div>
+	  
+	</div>
+</div>

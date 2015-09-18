@@ -18,11 +18,9 @@
   <link rel="stylesheet" href="views/admin/newsManager/newsManager.css"/>
   <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
   <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css"/>
-
   <link rel='stylesheet' href='/bower_components/textAngular/dist/textAngular.css'>
-
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> 
-
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/bower_components/angular-toastr/dist/angular-toastr.min.css"/>
 </head>
 <body class="animated fadeIn">
   <div class="auth_checker" ng-controller="authCtrl"></div>
@@ -30,79 +28,72 @@
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
   <div class="wrapper mdl-layout mdl-js-layout" >
-
-  <div class="header mdl-layout__header mdl-layout__header--scroll">
-
-    <div class="menu-wrap" ng-controller="navigationCtrl">
-      <nav class="menu">
-        <!-- <h2 class="animated slideInUp">{{data.title}}</h2> -->
-        <img class="animated fadeIn" src="assets/images/logo.png" height="130px" width="auto"/>
-        <ul class="clearfix" >
-          <li ng-repeat="item in items.items track by $index">
-            <a href="{{item.link}}">{{item.title}} <span class="arrow" ng-show="item.subitems">&#9660;</span></a>
-            
-            <ul class="sub-menu animated fadeIn" ng-show="item.subitems">
-            <div ng-repeat="subitem in item.subitems  track by $index">
-              <li><a href="{{subitem.link}}" >{{subitem.title}}</a></li>  
-              </div>    
-            </ul>
-            
-          </li>
-        </ul>
+    <div class="header mdl-layout__header mdl-layout__header--scroll">
+      <div class="menu-wrap" ng-controller="navigationCtrl">
+        <nav class="menu">
+          <!-- <h2 class="animated slideInUp">{{data.title}}</h2> -->
+          <img class="animated fadeIn" src="assets/images/logo.png" height="130px" width="auto"/>
+          <ul class="clearfix" >
+            <li ng-repeat="item in items.items track by $index">
+              <a href="{{item.link}}">{{item.title}} <span class="arrow" ng-show="item.subitems">&#9660;</span></a>
+              
+              <ul class="sub-menu animated fadeIn" ng-show="item.subitems">
+                <div ng-repeat="subitem in item.subitems  track by $index">
+                  <li><a href="{{subitem.link}}" >{{subitem.title}}</a></li>
+                </div>
+              </ul>
+              
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="mdl-layout__drawer" ng-controller="navigationCtrl">
+      <span class="mdl-layout-title">Navigation</span>
+      <nav class="mdl-navigation">
+        <div ng-repeat="item in items.items track by $index" >
+          <a class="mdl-navigation__link" href="{{item.link}}" ng-click="item.clicked = !item.clicked">{{item.title}} <span ng-show="item.subitems"><span class="arrow animated rotateIn" ng-hide="item.clicked">&#9660;</span><span class="arrow animated rotateIn" ng-show="item.clicked" >&#9650;</span></span></a>
+          <div ng-show="item.clicked" class="animated fadeIn">
+            <div ng-repeat="subitem in item.subitems track by $index">
+              <a class="mdl-navigation__link subitem" href="{{subitem.link}}">{{subitem.title}}</a>
+            </div>
+          </div>
+        </div>
       </nav>
     </div>
+    <main class="mdl-layout__content">
+    <div ng-view class="container" ></div>
+    </main>
   </div>
-  <div class="mdl-layout__drawer" ng-controller="navigationCtrl">
-    <span class="mdl-layout-title">Navigation</span>
-    <nav class="mdl-navigation">
-      <div ng-repeat="item in items.items track by $index" >
-        <a class="mdl-navigation__link" href="{{item.link}}" ng-click="item.clicked = !item.clicked">{{item.title}} <span ng-show="item.subitems"><span class="arrow animated rotateIn" ng-hide="item.clicked">&#9660;</span><span class="arrow animated rotateIn" ng-show="item.clicked" >&#9650;</span></span></a>
-        <div ng-show="item.clicked" class="animated fadeIn">
-        <div ng-repeat="subitem in item.subitems track by $index">
-          <a class="mdl-navigation__link subitem" href="{{subitem.link}}">{{subitem.title}}</a>
-        </div>
-        </div>
-      </div>
-    </nav>
-  </div>
-  <main class="mdl-layout__content">
-  <div ng-view class="container" ></div>
-  </main>
-</div>
-
-
-
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-route/angular-route.min.js"></script>
   <script src="app.js"></script>
-
   <!-- Views -->
   <script src="views/home/home.js"></script>
   <script src="views/users/users.js"></script>
   <script src="views/news/news.js"></script>
   <script src="views/login/login.js"></script>
   <script src="views/admin/newsManager/newsManager.js"></script>
+  <script src="views/admin/newUsers/newUsers.js"></script>
   <!-- Angular Directives -->
   <script src="directives/egHeader/egHeader.js"></script>
   
   <!-- Bower Dependencies -->
   <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-
-<script type="text/javascript" src="bower_components/tinymce-dist/tinymce.js"></script>
-<script type="text/javascript" src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+  <script type="text/javascript" src="bower_components/tinymce-dist/tinymce.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
   
   <script src="/bower_components/material-design-lite/material.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
   <script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.js"></script>
+  <script src="/bower_components/angular-toastr/dist/angular-toastr.min.js"></script>
+  <script src="/bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
   
   <!-- Material Angular Dependencies -->
-
-
   <script src='/bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
-<script src='/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
-<script src='/bower_components/textAngular/dist/textAngular.min.js'></script>
-
-
+  <script src='/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
+  <script src='/bower_components/textAngular/dist/textAngular.min.js'></script>
 </body>
 </html>
