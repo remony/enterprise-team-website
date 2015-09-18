@@ -2,12 +2,12 @@
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="app" class="no-js" ng-controller="appCtrl"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
+  <title>{{data.title}}</title>
+  <meta name="description" content="{{data.description}}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css"/>
   <link rel="stylesheet" href="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.css"/>
@@ -35,7 +35,7 @@
 
     <div class="menu-wrap" ng-controller="navigationCtrl">
       <nav class="menu">
-        <!-- <h2 class="animated slideInUp">Enterprise Gym</h2> -->
+        <!-- <h2 class="animated slideInUp">{{data.title}}</h2> -->
         <img class="animated fadeIn" src="assets/images/logo.png" height="130px" width="auto"/>
         <ul class="clearfix" >
           <li ng-repeat="item in items.items track by $index">
