@@ -1,0 +1,77 @@
+<div class="admin newUsers">
+	<div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--12-col">
+			<h3>{{title}}</h3>
+		</div>
+	</div>
+
+	<table st-table="rowCollection" class="table table-striped">
+	<thead>
+	<tr>
+		<th>Username</th>
+
+	</tr>
+	<tr>
+	<th>
+                <input st-search="username" placeholder="search for username" class="input-sm form-control" type="search"/>
+            </th></tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="row in newUsers">
+		<td>{{row.username}}</td>
+	</tr>
+	</tbody>
+</table>
+
+<!-- 
+<table ng-table="vm.tableParams" class="table" show-filter="true">
+	<tr ng-repeat="user in newUsers">
+		<td title="'Name'" filter="{ username: 'text'}" sortable="'username'">
+		{{user.username}}</td>
+		<td title="'Age'" filter="{ age: 'number'}" sortable="'age'">
+		{{user.age}}</td>
+	</tr>
+</table>
+ -->	<!-- <div class="mdl-grid"> -->
+		<!-- <h3>ngTable directive</h3>
+			<table ng-table="demo.tableParams" class="table table-condensed table-bordered table-striped">
+				<tr ng-repeat="row in newUsers">
+					<td data-title="'username'" filter="{username: 'text'}" sortable="'username'">{{row.username}}</td>
+					<td data-title="'Accept'"><button>Approve</button></td>
+					<td data-title="'Delete'"><button>Delete</button></td>
+		<!-- 			<td data-title="'Age'" filter="{age: 'number'}">{{row.age}}</td>
+					<td data-title="'Money'">{{row.money}}</td>
+					<td data-title="'Country'" filter="{ country: 'select'}" filter-data="demo.countries">{{row.country}}</td> -->
+			<!-- 	</tr>
+			</table> --> 
+		
+		<!-- <table ng-table="vm.tableParams" class="table" show-filter="true">
+				<tr ng-repeat="user in newUsers">
+						<td title="'Username'" filter="{username: 'text'}" sortable="'Username'">
+								{{user.username}}
+						</td>
+				<!-- <td title="'Age'" filter="{ age: 'number'}" sortable="'age'">
+				{{user.age}}</td> -->
+			<!-- </tr>
+		</table> -->
+		
+		<!-- <div class="mdl-grid" ng-repeat="newUser in newUsers.unauthorisedusers">
+						<div class="mdl-cell mdl-cell--8-col">
+										{{newUser.id}}: {{newUser.username}}
+						</div>
+						<div class="mdl-cell mdl-cell--2-col">
+										<select>
+													<option ng-repeat="usergroup in userGroups.user_groups" value="usergroup.name">{{usergroup.name}}</option>
+										</select>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col">
+										<button>Approve</button>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col">
+										<button>Unapprove</button>
+						</div>
+		</div> -->
+		<!-- </div> -->
+		
+	<!-- </div> -->
+</div>
