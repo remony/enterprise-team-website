@@ -17,6 +17,7 @@ var App = angular.module('app', [
     'textAngular',
     'toastr',
     'ngAnimate',
+    'smart-table',
 
 
     /*    Directives    */
@@ -128,3 +129,4 @@ App.controller('authCtrl', ['$scope', 'localStorageService', '$http', function($
         $scope.loggedIn = false;
     }
 }]);
+
