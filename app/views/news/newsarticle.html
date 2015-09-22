@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="col s1"><h3>{{title}}</h3>
+
+	</div>
+	<div class="go Back">
+			<a href="#/news"><i class="fa fa-arrow-left"></i>Go back</a>
+		</div>
+</div>
+
+<div class="row">
+    <div class="col s12 m4 l1">
+
+    </div>
+    <div class="col s12 m4 l10">
+<div class="articles">
+	  	<div class = "article">
+			<div class="title">
+				{{article.title}}
+			</div>
+
+			<div class="content">
+			<p ng-bind-html="article.text | unsafe"></p>
+
+			<div class="footer">
+				
+			</div>
+			<br>
+		</div>
+
+		<div class="comments"> 
+			<ul>
+			<li ng-repeat="comment in article.comments">
+				{{comment.author}}: {{comment.text}}
+			</li>
+			</ul>
+		</div>
+  	</div>
+    </div>
+    <div class="col s12 m4 l1">
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+

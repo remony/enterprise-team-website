@@ -53,7 +53,7 @@ angular.module('app.login', ['ngRoute'])
 
 	
 		 $http({
-         url: "http://localhost:8080/users/login",
+         url: "http://localhost:8080/user/login",
          method: 'POST',
          dataType: 'json',
          data: '',
@@ -63,8 +63,14 @@ angular.module('app.login', ['ngRoute'])
              'password':username.password
          }
 			}).success(function(data, status, headers, config) {
+                
 
+               // document.cookie("token=" + data.user_auth.token);
 			localStorageService.set('user_auth', data);
+            localStorageService.cookie.set("username",data.user_auth.username,10);
+            //$cookies.put("token", data.user_auth.token);
+            localStorageService.cookie.set("usergroup",data.user_auth.usergroup,10);
+            localStorageService.cookie.set("token",data.user_auth.token,10);
 			$scope.loggedIn = true;
 			$scope.error = false;
             toastr.success('Login Success', 'You have logged in!');
