@@ -20,6 +20,8 @@ angular.module('app.news', ['ngRoute'])
                 data: '',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
+                    'page':1,
+                    'pagesize': 5
                 }
             }).success(function(data, status, headers, config) {
 

@@ -11,6 +11,8 @@ var App = angular.module('app', [
     'app.login',
     'app.newsManager',
     'app.admin.newUsers',
+    'app.events',
+    'app.admin',
     // Dependecies
     'angular-loading-bar',
     'ngHamburger',
@@ -20,6 +22,9 @@ var App = angular.module('app', [
     'smart-table',
     'ui.tinymce',
     'angularFileUpload',
+    'ui.calendar',
+    'ui.materialize',
+    'ngCsv',
 
 
 
@@ -76,11 +81,14 @@ App.controller('navigationCtrl', ['$scope', 'localStorageService', '$rootScope',
                     "title": "News",
                     "link": "#/news"
                 }, {
+                    "title": "Events",
+                    "link": "#/events"
+                }, {
                     "title": "Admin",
                     "link": "#/admin",
                     "subitems": [{
                         "title": "Admin Panel",
-                        "link": "#/users"
+                        "link": "#/admin"
                     }, {
                         "title": "Users",
                         "link": "#/users"
@@ -216,5 +224,11 @@ App.controller('authCtrl', ['$scope', 'localStorageService', '$http',
 App.filter('unsafe', function($sce) {
     return function(val) {
         return $sce.trustAsHtml(val);
+    };
+});
+
+App.filter('uppercase', function() {
+    return function(val) {
+        return val.toUpperCase();
     };
 });
