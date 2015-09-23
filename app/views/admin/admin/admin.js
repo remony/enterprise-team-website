@@ -19,20 +19,20 @@ angular.module('app.admin', ['ngRoute'])
         $scope.links = [{
             "title": "Users",
             "link": "#/admin"
-        },{
+        }, {
             "title": "News",
             "link": "#/admin"
-        },{
+        }, {
             "title": "Events",
             "link": "#/admin"
-        },{
+        }, {
             "title": "Pages",
             "link": "#/admin"
         }];
 
         $scope.newUsers = [{
             "username": "johndoe"
-        },{
+        }, {
             "username": "stan1"
         }]
 
@@ -57,9 +57,97 @@ angular.module('app.admin', ['ngRoute'])
 
         }
 
+        updateEvents();
 
+        function updateEvents() {
+            $http({
+                url: backend + "/events",
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                }
+            }).success(function(data, status, headers, config) {
+                $scope.events = data.events;
+            });
+        }
 
+        $scope.delete = function(event_id) {
+            console.log("deleting " + event_id);
+            $http({
+                url: backend + "/events/delete/" + event_id,
+                method: 'POST',
+                dataType: 'json',
+                data: '',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'eventid': event_id
+                }
+            }).success(function(data, status, headers, config) {
+                updateEvents();
+            });
+        }
 
 
     }
 ])
+    .config(['$routeProvider',
+        function($routeProvider) {
+            $routeProvider.when('/admin/pages/add', {
+                templateUrl: 'views/admin/admin/adminPages.html',
+                controller: 'pagesAddCtrl'
+            });
+        }
+    ])
+
+.controller('pagesAddCtrl', ['$scope', '$http', 'localStorageService',
+        function($scope, $http, localStorageService, taOptions, element) {
+          $scope.title = "Admin Panel";
+
+            function updatePages() {
+                $http({
+                    url: backend + "/pages",
+                    method: 'GET',
+                    dataType: 'json',
+                    data: '',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                    }
+                }).success(function(data, status, headers, config) {
+                    $scope.pages = data.pages;
+                });
+
+            }
+            updatePages();
+                $scope.addParent = function(name, order) {
+                    /*
+                parentSlug
+                title
+                description
+                text
+                permission
+                order
+
+
+            */
+                console.log(name, order);
+                $http({
+                    url: backend + "/pages",
+                    method: 'post',
+                    dataType: 'json',
+                    data: '',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'parentSlug': 'main',
+                        'title': name,
+                        'text': 'Please edit this page',
+                        'description': 'Please enter a description',
+                        'permission': 'admin',
+                        'order': order
+                    }
+                }).success(function(data, status, headers, config) {
+                    updatePages();
+                });
+            }  
+        }]);

@@ -1,24 +1,23 @@
 <div class="row">
-	<div class="col s1"><h3>{{title}}</h3></div>
-</div>
-<div class="row">
-	<div class="col s12 m4 l1">
-	</div>
-	<div class="col s12 m4 l8">
-		<div class="article" ng-repeat="new in news">
+    <div class="col s12 m2">
+      <p></p>
+    </div>
+    <div class="col s12 m8">
+      <h3>{{title}}</h3>
+      <div class="article" ng-repeat="new in news">
 			<div class="divider"></div>
 			<div class="section">
-				<b><h2{{new.title}}</h2></b>
-				<div><p ng-bind-html="new.text | unsafe"></p></div>
-				<p><a href="#/news/{{new.slug}}">Read mroe</a></p>
+				<a href="#/news/{{new.slug}}"><b><h2>{{new.title}}</h2></b></a>
+				<br>
+				<div><p ng-bind-html="new.text | cut:true:240"></p></div>
+				<p><a href="#/news/{{new.slug}}">Read more</a></p>
 			</div>
 			
 			
 		</div>
-		
-	</div>
-	<div class="col s12 m4 l3">
-		<div class="card">
+    </div>
+    <div class="col s12 m2">
+      <div class="card">
 			<div class="card-image waves-effect waves-block waves-light">
 				
 			</div>
@@ -28,8 +27,15 @@
 				<p><a href="#"></a></p>
 			</div>
 			<div class="card-reveal">
-				<p ng-bind-html="new.text | unsafe"></p>
+				<p id="hasvids flow-text" ng-bind-html="new.text | unsafe"></p>
 			</div>
 		</div>
-	</div>
-</div>
+    </div>
+  </div>
+
+<style>
+iframe{
+	width:100%!important;
+	margin: 0 auto;
+}
+</style>

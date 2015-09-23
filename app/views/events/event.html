@@ -1,14 +1,50 @@
-<br/>
-{{event}}
+<div class="row">
+	<div class="col s12 m4 l2"><p></p></div>
+	
+	<div class="col s12 m4 l8">
+		
+		<div class="row">
+			<div class="col s12 m4 l7">
+			<h1>{{title}}</h1>
+			<hr>
+				<h2><b>{{event.title}}</b></h2> <p>{{event.venue}} @ {{event.location}}</p>
+<a href="https://www.google.co.uk/maps/place/{{event.venue}} {{event.location}}">Google maps</a>
+			</div>
+			<div class="col s12 m4 l3">
+				
+			</div>
+			<div class="col s12 m4 l2"><p></p></div>
+		</div>
+
+<div class="row">
+			
+			<div class="col s12 m4 l10">
+
+				<p>{{event.description}}</p>
+		<div class="col s12 m4 l6">
+			<p>Starts: {{event.startdate | amCalendar}}</p>
+		</div>
+		
+		<div class="col s12 m4 l6">
+			<p>Ends: {{event.enddate | amCalendar}}</p>
+		</div>
+		<p><b>Points available:</b> {{event.points}}</p>
+		<a ng-click="attend()" class="waves-effect waves-light btn blue">Signup</a>
+		<a href="#/events/{{event.id}}/participants" class="waves-effect waves-light btn green" ng-if="usergroup === 'admin'|| usergroup === 'editor'">View Participants</a>
+		<a href="#/events/{{event.id}}/edit" class="waves-effect waves-light btn orange" ng-if="usergroup === 'admin'|| usergroup === 'editor'">Edit</a>
+			</div>
+			<div class="col s12 m4 l2"><p></p></div>
+</div>
 
 
 
-<h1>{{event.title}}</h1>
-<p>{{event.venue}} @ {{event.location}}</p>
-<h3>{{event.description}}</h3>
 
-    
 
-<p>Starts: {{event.startdate}}</p>
-<p>Ends: {{event.startdate}}</p>
+		
+			
+		
+		
+		
+	</div>
 
+</div>
