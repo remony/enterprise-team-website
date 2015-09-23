@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+
+
+<ul>
+	<div ng-repeat="page in pages">
+	<li >{{page.title}}</li>
+	<div ng-repeat="subpage in page.subpages">
+	<li>{{subpage.title}}</li>
+	</div>
+	</div>
+
+</ul>

@@ -1,0 +1,29 @@
+
+<div class="row">
+	<div class="col s12 m4 l2"><p></p></div>
+	<div class="col s12 m4 l8">
+		<h1>{{title}}</h1>
+		<table st-table="rowCollection" class="table table-striped">
+			<thead>
+				<tr>	
+					<th>First name</th>
+					<th>Last name</th>
+					<th st-sort="getters.name">username</th>
+					<th>Attendence Status</th>
+					<th st-sort="" ng-if="usergroup === 'admin'"></th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr ng-repeat="participant in participants">
+				<td><b>{{participant.firstname}}<b></td>
+				<td><b>{{participant.lastname}}<b></td>
+					<td><b>{{participant.username}}<b></td>
+					<td>{{participant.attended}}</td>
+					<td ng-if="usergroup === 'admin'"><a ng-click="attend(participant.username)" class="waves-effect waves-light btn">Attended</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col s12 m4 l2"><p></p></div>
+</div>

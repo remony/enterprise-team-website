@@ -19,7 +19,9 @@
 				<form novalidate class="simple-form">
 				<br>
 				<br>
+
 					<div class="row">
+
 						<div class="input-field col s6">
 							<input id="text" type="text" ng-model="event.title" class="validate">
 						<label for="title">Title</label>
@@ -40,11 +42,20 @@
 							<label for="last_name">Location</label>
 						</div>
 					</div>
-					<h4>Starting Date</h4>
+
+					<div class="row">
+						<div class="input-field col s6">
+							<h5>Starting Date</h5>
 					<input type="date" class="datepicker" ng-model="event.startDate">
-					<h4>Ending Date</h4>
+						</div>
+						<div class="input-field col s6">
+							<h5>Ending Date</h5>
 					<input type="date" class="datepicker" ng-model="event.endDate">
-					<h4>Points</h4>
+						</div>
+					</div>
+					
+					
+					<h5>Points</h5>
 					<i>Deselect to set custom points</i>
 					<p>
 						<input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" ng-click="customPoints = !customPoints" />

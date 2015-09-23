@@ -11,13 +11,25 @@ angular.module('app.events', ['ngRoute'])
     }
 ])
 
-.controller('eventsCtrl', ['$scope', '$http', 'localStorageService',
-    function($scope, $http, localStorageService, taOptions) {
-        $scope.title = "New Users";
+.controller('eventsCtrl', ['$scope', '$http', 'localStorageService', '$filter',
+    function($scope, $http, localStorageService, taOptions, $filter) {
+        $scope.title = "Events";
 
+        $scope.rowCollection = [
+        {firstName: 'Laurent', lastName: 'Renard', birthDate: new Date('1987-05-21'), balance: 102, email: 'whatever@gmail.com'},
+        {firstName: 'Blandine', lastName: 'Faivre', birthDate: new Date('1987-04-25'), balance: -2323.22, email: 'oufblandou@gmail.com'},
+        {firstName: 'Francoise', lastName: 'Frere', birthDate: new Date('1955-08-27'), balance: 42343, email: 'raymondef@gmail.com'}
+    ];
+
+$scope.getters={
+        firstName: function (value) {
+            //this will sort by the length of the first name string
+            return value.firstName.length;
+        }
+    }
 
         $http({
-            url: "http://localhost:8080/event",
+            url: backend + "/events",
             method: 'GET',
             dataType: 'json',
             data: '',
@@ -25,7 +37,8 @@ angular.module('app.events', ['ngRoute'])
                 'Content-Type': 'application/json; charset=utf-8',
             }
         }).success(function(data, status, headers, config) {
-            $scope.events = data;
+            $scope.events = data.events;
+            console.log("events");
             console.log(data);
 
         });
@@ -47,12 +60,12 @@ angular.module('app.events', ['ngRoute'])
 ])
 
 .controller('eventCtrl', ['$scope', '$http', 'localStorageService', '$routeParams',
-    function($scope, $http, localStorageService, $routeParams) {
+    function($scope, $http, localStorageService, $routeParams, config) {
         $scope.title = "New Users";
 
 
         $http({
-            url: "http://localhost:8080/event/" + $routeParams.id,
+            url: backend + '/events/' + $routeParams.id,
             method: 'GET',
             dataType: 'json',
             data: '',
@@ -80,7 +93,7 @@ angular.module('app.events', ['ngRoute'])
     ])
 
 .controller('calenderCtrl', ['$scope', '$http', 'localStorageService', '$routeParams',
-    function($scope, $http, localStorageService, $routeParams, $watch, uiCalendarConfig) {
+    function($scope, $http, localStorageService, $routeParams, $watch, uiCalendarConfig, config) {
         $scope.title = "New Users";
         var json = [];
         $scope.eventSources = {};
@@ -137,7 +150,7 @@ angular.module('app.events', ['ngRoute'])
         }];
 
         $http({
-            url: "http://localhost:8080/event",
+            url: backend + "/event",
             method: 'GET',
             dataType: 'json',
             data: '',
@@ -193,7 +206,7 @@ angular.module('app.events', ['ngRoute'])
 
         var awesome = $scope.events;
 
-        $scope.eventSources = [$scope.events]; //$scope.events;
+        $scope.eventSources = [savedJson]; //$scope.events;
 
 
 
@@ -224,18 +237,20 @@ angular.module('app.events', ['ngRoute'])
 ])
 
 .controller('eventEditorAddCtrl', ['$scope', '$http', 'localStorageService', '$routeParams',
-    function($scope, $http, localStorageService, $routeParams, $watch, uiCalendarConfig) {
+    function($scope, $http, localStorageService, $routeParams, $watch, uiCalendarConfig, config) {
         $scope.title = "New Event";
         $scope.siteAction = "add";
         $scope.event = [];
         $scope.event.points = 100;
-        
+
 
         $scope.update = function(event) {
             console.log(event);
 
+            var startdate = event.startDate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
+            var enddate  = event.endDate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
             $http({
-                url: "http://localhost:8080/event/insert",
+                url: backend + "/events/insert",
                 method: 'POST',
                 dataType: 'json',
                 data: '',
@@ -245,8 +260,8 @@ angular.module('app.events', ['ngRoute'])
                     'description': event.description,
                     'location': event.location,
                     'venue': event.venue,
-                    'startdate': event.startDate,
-                    'enddate': event.endDate,
+                    'startdate': startdate,
+                    'enddate': enddate,
                     'points': parseInt(event.points)
                 }
             }).success(function(data, status, headers, config) {
@@ -255,6 +270,49 @@ angular.module('app.events', ['ngRoute'])
             });
 
         }
+
+
+    }
+])
+
+.config(['$routeProvider',
+    function($routeProvider) {
+        $routeProvider.when('/events/:eventid/participants', {
+            templateUrl: 'views/events/participants.html',
+            controller: 'participantsCtrl'
+        });
+    }
+])
+
+.controller('participantsCtrl', ['$scope', '$http', 'localStorageService', '$routeParams',
+    function($scope, $http, localStorageService, $routeParams, $watch, uiCalendarConfig, config) {
+        $scope.title = "Participants";
+        if (localStorageService.get('user_auth')) {
+        var userdata = localStorageService.get('user_auth').user_auth[0];
+        $scope.usergroup = userdata.usergroup;
+        var token = userdata.token;
+        
+            $http({
+                url: backend + "/events/" + $routeParams.eventid + "/participants",
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    token: token
+                }
+            }).success(function(data, status, headers, config) {
+                $scope.participants = data.participants;    
+                console.log(data);
+            });
+
+
+        $scope.attend = function(username) {
+            console.log(username + " has attended");
+        }
+    }
+
+        
 
 
     }

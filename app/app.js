@@ -13,6 +13,12 @@ var App = angular.module('app', [
     'app.admin.newUsers',
     'app.events',
     'app.admin',
+    'app.pages',
+
+    //Factories
+    'app.config',
+
+
     // Dependecies
     'angular-loading-bar',
     'ngHamburger',
@@ -25,6 +31,7 @@ var App = angular.module('app', [
     'ui.calendar',
     'ui.materialize',
     'ngCsv',
+    'angularMoment',
 
 
 
@@ -42,10 +49,10 @@ App.config(['$routeProvider',
 ]);
 
 App.controller('appCtrl', ['$scope', '$http',
-    function($scope, $http) {
+    function($scope, $http, config) {
         console.log("Page is loading");
         $http({
-            url: "http://localhost:8080/",
+            url: backend + '/',
             method: 'GET',
             dataType: 'json',
             data: '',
@@ -229,6 +236,31 @@ App.filter('unsafe', function($sce) {
 
 App.filter('uppercase', function() {
     return function(val) {
+        if (val != null)
         return val.toUpperCase();
     };
 });
+/*
+        Filter created by: EpokK    
+        source: http://stackoverflow.com/questions/18095727/limit-the-length-of-a-string-with-angularjs
+*/
+App.filter('cut', function () {
+        return function (value, wordwise, max, tail) {
+            if (!value) return '';
+
+            max = parseInt(max, 10);
+            if (!max) return value;
+            if (value.length <= max) return value;
+
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace != -1) {
+                    value = value.substr(0, lastspace);
+                }
+            }
+
+            return value + (tail || '…');
+        };
+    });
+    
