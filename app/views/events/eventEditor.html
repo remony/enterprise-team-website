@@ -1,0 +1,86 @@
+<div class="row">
+	<div class="col s1">
+	</div>
+	<div class="go Back">
+		<a href="#/news"><i class="fa fa-arrow-left"></i>Go back</a>
+	</div>
+</div>
+<div class="row">
+	<div class="col s12 m4 l2"><p></p></div>
+	<div class="col s12 m4 l8">
+	<h3>{{title}}: <b><span ng-bind="event.title"></span><span class="colourMeBlue" ng-bind="event.points"></span></b></h3>
+	<i><span ng-bind="event.venue"></span>   <span ng-show="event.location">@</span>  <b ng-bind="event.location"></b></i>
+	<h5><i ng-bind="event.description"></i></h5>
+		<!--
+		<button class="btn btn-default" ng-click="view = !view" ng-hide="view"><p >Preview</p>
+		<button class="btn btn-default" ng-click="view = !view" ng-show="view"><p >Editor</p></button> -->
+		<div class="editor_view1" ng-hide="view">
+			<div class="editor">
+				<form novalidate class="simple-form">
+				<br>
+				<br>
+
+					<div class="row">
+
+						<div class="input-field col s6">
+							<input id="text" type="text" ng-model="event.title" class="validate">
+						<label for="title">Title</label>
+						</div>
+						<div class="input-field col s6">
+							<textarea id="textarea1" ng-model="event.description" class="materialize-textarea"></textarea>
+						<label for="textarea1">Description</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s6">
+							<input placeholder="Dundee University" id="first_name" type="text" ng-model="event.venue" class="validate">
+							<label for="first_name">Venue</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="last_name" ng-model="event.location" placeholder="Dundee" type="text" class="validate">
+							<label for="last_name">Location</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s6">
+							<h5>Starting Date</h5>
+					<input type="date" class="datepicker" ng-model="event.startDate">
+						</div>
+						<div class="input-field col s6">
+							<h5>Ending Date</h5>
+					<input type="date" class="datepicker" ng-model="event.endDate">
+						</div>
+					</div>
+					
+					
+					<h5>Points</h5>
+					<i>Deselect to set custom points</i>
+					<p>
+						<input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" ng-click="customPoints = !customPoints" />
+						<label for="filled-in-box">Default Points: {{defaultpoints}}. </label>
+					</p>
+					<div class="input-field col s12" ng-show="customPoints">
+						<input value="{{defaultpoints}}" ng-model="event.points" id="points" type="text" class="validate">
+						<label class="active" for="points">Custom Points</label>
+					</div>
+					<button class="btn waves-effect waves-light" type="submit" name="action" ng-click="update(event)">
+					{{siteAction}}
+					</button>
+					
+					<script>
+					$('.datepicker').pickadate({
+					selectMonths: true, // Creates a dropdown to control month
+					selectYears: 15 // Creates a dropdown of 15 years to control year
+					});
+					</script>
+				</form>
+			</div>
+			<div class="editor_view2" ng-show="view">
+				<div ng-bind-html="editor.content"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col s12 m4 l2"><p></p></div>
+</div>

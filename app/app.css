@@ -67,6 +67,17 @@ body {
         transition:width 0s;
     }
 
+    .brand-logo img {
+    position:absolute;
+    left:-70px;
+    top:-5px;
+}
+
+.brand-logo span {
+    position:absolute;
+    left:0px;
+}
+
 }
 
 @media screen and (min-width: 1025px) {
@@ -77,6 +88,15 @@ body {
          padding:0;
       color: white;
     }
+
+    .brand-logo img {
+    position:absolute;
+}
+
+.brand-logo span {
+    position:absolute;
+    left:100px;
+}
 
     .mdl-layout__content {
         margin-top:0px;
@@ -302,9 +322,19 @@ nav.menu {
     border:0;
 }
 
-.hamburger.fixed {
-    position: absolute;
+.body {
+    height:100%;
 }
+
+.container {
+    padding:20px;
+}
+
+html {
+    height:100%;
+}
+
+
 
 html, mdl-grid, container {
     overflow-x: hidden!important; 
@@ -433,4 +463,55 @@ body {
 
 textarea {
     height: 800px;
+}
+
+
+/*
+            Calender
+
+
+*/
+.calender {
+    width:70%;
+    margin:0 auto;
+}
+
+
+/*
+        Text
+
+
+*/
+
+span.colourMeBlue {
+    color:#8BC34A;
+    padding-left:25px;
+    right:0;
+}
+
+span.colourMeBlue::before { 
+    content: "Points : ";
+
+
+
+/*
+        CSS hacks
+*/
+
+.collapsible-body {
+    display: initial!important;
+    border-bottom: 1px solid #ddd;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/*
+        Admin panel
+
+*/
+
+.admin h1 {
+    font-weight: 1200;
 }

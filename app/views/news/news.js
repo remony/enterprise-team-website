@@ -20,6 +20,8 @@ angular.module('app.news', ['ngRoute'])
                 data: '',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
+                    'page':1,
+                    'pagesize': 5
                 }
             }).success(function(data, status, headers, config) {
 
@@ -186,16 +188,19 @@ angular.module('app.news', ['ngRoute'])
 
 
             $scope.tinymceOptions = {
-                onChange: function(e) {
-                    // put logic here for keypress and cut/paste changes
-                },
-                inline: false,
-                plugins: 'advlist autolink link image lists charmap print preview youtube',
-                toolbar: 'youtube',
-                theme: "modern",
-                skin: 'light'
-            };
-
+            onChange: function(e) {
+                // put logic here for keypress and cut/paste changes
+            },
+            inline: false,
+            plugins: 'advlist autolink link image lists charmap print preview youtube rImage',
+            toolbar: 'youtube rImage',
+            external_plugins: {
+            "rImage": '/assets/js/rimage/plugin.js'
+        },
+            theme: "modern",
+            skin: 'light'
+        
+    };
 
 
             $scope.update = function(editor) {

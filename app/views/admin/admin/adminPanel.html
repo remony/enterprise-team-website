@@ -1,0 +1,116 @@
+<div class="admin">
+<b><h1  ng-bind="active | uppercase">Admin Panel</h1></b>
+</div>
+<div class="row">
+	<div class="col s3">
+		<div class="collection">
+			<a ng-repeat="link in links" href="{{link.link}}" class="collection-item" ng-click="click(link.title)">{{link.title}}</a>
+		</div>
+	</div>
+	<div class="col s9">
+		<div ng-if="active === 'users'">
+		<div class="row">
+				<div class="col s1"><a href="#/admin/user/add" class="waves-effect waves-light btn">Add</a></div>
+			</div>
+			<table st-table="rowCollection" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th></th>
+						<th></th>
+					</tr>
+					
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in newUsers">
+						<td>{{row.username}}</td>
+						<td><a class="waves-effect waves-light btn">Edit</a></td>
+						<td><a class="waves-effect waves-light btn red">Delete</a></td>
+					</tr>
+				</tbody>
+
+				<div class="panel-body" export-table="newUsers">
+				</div>
+			</table>
+		</div>
+		<div ng-if="active === 'events'">
+		<div class="row">
+				<div class="col s1"><a href="#/admin/events/add" class="waves-effect waves-light btn">Add</a></div>
+			</div>
+			<table st-table="rowCollection" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Event Title</th>
+						<th></th>
+						<th></th>
+					</tr>
+					
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in newUsers">
+						<td>{{row.username}}</td>
+						<td><a class="waves-effect waves-light btn">Edit</a></td>
+						<td><a class="waves-effect waves-light btn red">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div ng-if="active === null">
+			<div class="row">
+				<div class="col s12 m5">
+					<div class="card-panel teal">
+						<span class="white-text">
+							<h3>Welcome To the admin page</h3>
+							<p>Select one of the options to the left to continue</p>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="active === 'news'">
+			<div class="row">
+				<div class="col s1"><a href="#/admin/news/add" class="waves-effect waves-light btn">Add</a></div>
+			</div>
+			<table st-table="rowCollection" class="table table-striped">
+				<thead>
+					<tr>
+						<th>News Title</th>
+						<th></th>
+						<th></th>
+					</tr>
+					
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in newUsers">
+						<td>{{row.username}}</td>
+						<td><a class="waves-effect waves-light btn">Edit</a></td>
+						<td><a class="waves-effect waves-light btn red">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div ng-if="active === 'pages'">
+		<div class="row">
+				<div class="col s1"><a href="#/admin/pages/add" class="waves-effect waves-light btn">Add</a></div>
+			</div>
+			<table st-table="rowCollection" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Page Title</th>
+						<th></th>
+						<th></th>
+
+					</tr>
+					
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in newUsers">
+						<td>{{row.username}}</td>
+						<td><a class="waves-effect waves-light btn">Edit</a></td>
+						<td><a class="waves-effect waves-light btn red">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

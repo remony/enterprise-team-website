@@ -1,0 +1,8 @@
+<ul class="collection with-header">
+    <li class="collection-header">
+        <h4>{{title}}</h4></li>
+    <li class="collection-item" ng-repeat="event in events">
+        <div>{{event.name}}: <i>{{event.description}}</i><a href="#/news/{{event.id}}" class="secondary-content"><i class="material-icons">send</i></a></div>
+    </li>
+
+</ul>
