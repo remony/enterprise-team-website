@@ -1,46 +1,29 @@
 <h2>{{title}}</h2>
 
-	<table st-table="rowCollection" class="table table-striped">
-	<thead>
-	<tr>
-		<th>Username</th>
-		<th>First name</th>
-		<th>Last name</th>
-		<th>Contact number</th>
-		<th>Country</th>
-		<th>Email</th>
-		<th>Gender</th>
-		<th>University</th>
-		<th>Status</th>
-		<th>Matric Number</th>
-		<th>Degree Subject</th>
-		<th>Year of Study</th>
-		<th>User Group</th>
+	<div ng-repeat="row in users">
+		<ul class="collection">
+        	<li class="collection-item"> <div style="float:left"><a href="#/users/{{row.username}}"">{{row.username}}</a></div><div align="right"><a class="waves-effect waves-light btn" id="button" onClick="myFunction()">Expand</a></div></li> 
 
+   	    </ul>
+   	    <ul class="collection" id="expanduser" style="display:none",  >
+   	    <div>
+	   	    <li class="collection-item">
+	        <p>Firstname:{{row.firstname}}</p>
+	        <p>Secondname:{{row.lastname}}</p>
+	        <p>{{row.contactNo}}</p>
+	        <p>{{row.country}}</p>
+	        <p>{{row.email}}</p>
+	        <p>{{row.gender}}</p>
+	        <p>{{row.University}}</p>
+	        <p>{{row.status}}</p>
+	        <p>{{row.matricNo}}</p>
+	        <p>{{row.degreeSubject}}</p>
+	        <p>{{row.yearofstudy}}</p>
+	        <p>{{row.usergroup}}</p>
+	    </li>
 
-	</tr>
-	<tr>
-	<th>
-                <input st-search="username" placeholder="search for username" class="input-sm form-control" type="search"/>
-            </th></tr>
-	</thead>
-	<tbody>
-	<tr ng-repeat="row in users">
-		<td>{{row.username}}</td>
-		<td>{{row.firstname}}</td>
-		<td>{{row.lastname}}</td>
-		<td>{{row.contactNo}}</td>
-		<td>{{row.country}}</td>
-		<td>{{row.email}}</td>
-		<td>{{row.gender}}</td>
-		<td>{{row.University}}</td>
-		<td>{{row.status}}</td>
-		<td>{{row.matricNo}}</td>
-		<td>{{row.degreeSubject}}</td>
-		<td>{{row.yearofstudy}}</td>
-		<td>{{row.usergroup}}</td>
+   	    </div>
+   	    </ul>
+   	</div>
 
-	</tr>
-
-	</tbody>
-</table>
+	

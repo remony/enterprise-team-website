@@ -1,4 +1,13 @@
 'use strict';
+function myFunction() {
+            if(document.getElementById("expanduser").style.display == "block"){
+                document.getElementById("expanduser").style.display="none",
+                document.getElementById("button").innerHTML="Display"}
+            else{
+                document.getElementById("expanduser").style.display="block",
+                document.getElementById("button").innerHTML="Hide"}
+
+}
 
 angular.module('app.users', ['ngRoute'])
 .config(['$routeProvider', function ($routeProvider) {
