@@ -9,6 +9,7 @@ var App = angular.module('app', [
     'app.users',
     'app.news',
     'app.login',
+    'app.register',
     'app.newsManager',
     'app.admin.newUsers',
     'app.events',
@@ -34,7 +35,6 @@ var App = angular.module('app', [
     'ngCsv',
     'angularMoment',
     'draggableList',
-
 
 
 
@@ -106,8 +106,6 @@ App.controller('navigationCtrl', ['$scope', 'localStorageService', '$rootScope',
             };
         }
 
-
-
         resetMenu();
 
 
@@ -145,53 +143,42 @@ App.controller('navigationCtrl', ['$scope', 'localStorageService', '$rootScope',
                 "link": "#/login"
             });
         } else {
-            var username = "";
-            if (localStorageService.get('user_auth').user_auth) {
-                username = localStorageService.get('user_auth').user_auth[0].username;
-            } else {
-                username = "error";
+          var username = "";
+  if (localStorageService.get('user_auth').user_auth) {
+      username = localStorageService.get('user_auth').user_auth[0].username;
+  } else {
+      username = "error";
 
-            }
+  }
 
-            
 
-            $scope.items.items.push(
-                {
-                    "title": username,
-                    "link": "#/my",
-                    "subitems": [{
-                        "title": "My details",
-                        "link": "#/user/" + username
-                    }, {
-                        "title": "My Events",
-                        "link": "#/my/events"
-                    }, {
-                        "title": "logout",
-                        "link": "#/logout"
-                    }]
-                });
 
-            
+  $scope.items.items.push(
+      {
+          "title": username,
+          "link": "#/my",
+          "subitems": [{
+              "title": "My details",
+              "link": "#/user/" + username
+          }, {
+              "title": "My Events",
+              "link": "#/my/events"
+          }, {
+              "title": "logout",
+              "link": "#/logout"
+          }]
+      });
+
+
+
+
+            $scope.items.items.push({
+                "title": "logout",
+                "link": "#/logout"
+            });
         }
 
-$scope.items.items.push(
-                {
-                    "title": "Editor",
-                    "link": "#/add",
-                    "subitems": [{
-                        "title": "Add News",
-                        "link": "#/admin/news/add"
-                    }, {
-                        "title": "Add Event",
-                        "link": "#/admin/events/new"
-                    }, {
-                        "title": "Add Page",
-                        "link": "#/"
-                    }, {
-                        "title": "Add Subpage",
-                        "link": "#/logout"
-                    }]
-                });
+
     }
 ]);
 
@@ -285,10 +272,10 @@ App.filter('uppercase', function() {
     };
 });
 /*
-        Filter created by: EpokK    
+        Filter created by: EpokK
         source: http://stackoverflow.com/questions/18095727/limit-the-length-of-a-string-with-angularjs
 */
-App.filter('cut', function ($sce) {
+App.filter('cut', function () {
         return function (value, wordwise, max, tail) {
             if (!value) return '';
 
@@ -304,7 +291,6 @@ App.filter('cut', function ($sce) {
                 }
             }
 
-            return $sce.trustAsHtml(value + (tail || '…'));
+            return value + (tail || '…');
         };
     });
-    
