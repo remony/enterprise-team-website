@@ -21,7 +21,7 @@ angular.module('app.register', ['ngRoute'])
 ])
 
 .controller('registerCtrl', ['$scope', '$http', 'localStorageService', '$rootScope',
-  function($scope, $http, localStorageService, $rootScope) {
+  function($scope, $http, localStorageService, $rootScope config) {
     $scope.title = "register";
     //$scope.error = false;
     var auth = "";
@@ -71,7 +71,7 @@ angular.module('app.register', ['ngRoute'])
 
       console.log(user);
       $http({
-        url: "http://localhost:8080/registration",
+        url: backend + "/registration",
         method: 'POST',
         dataType: 'json',
         data: '',
