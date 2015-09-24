@@ -18,9 +18,14 @@
       <ul ng-repeat="item in items.items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
         <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}">{{subitem.title}}</a></li>
         
-      </ul>
+      </ul><style>
+      nav {
+        height:128px!important;
+      }
+      </style>
       <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">The Enterprise Gym</a>
+
+        <div class="nav-wrapper container"><a id="logo-container" href="#/" class="brand-logo">The Enterprise Gym</a><br>  
         <ul class="right hide-on-med-and-down">
           
           <li class="dropdown-button" ng-show="item.subitems" ng-repeat="item in items.items track by $index" data-activates="dropdown{{$index}}"><a href="{{item.link}}">{{item.title}}<i class="fa fa-chevron-down right" ></i></a></li>
@@ -116,6 +121,7 @@
   <script src="/views/admin/admin/admin.js"></script>
   <script src="/views/pages/pages.js"></script>
   <script src="/views/my/my.js"></script>
+  <script src="/views/admin/points/points.js"></script>
   <!-- Angular Directives -->
   <script src="directives/egHeader/egHeader.js"></script>
   <!-- Bower Dependencies -->

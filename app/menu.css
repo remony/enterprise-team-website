@@ -8,3 +8,6 @@ img {
 	margin-right:25%;
 }
 
+.container {
+	min-height:600px;
+}

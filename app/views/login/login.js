@@ -78,7 +78,7 @@ angular.module('app.login', ['ngRoute'])
             $rootScope.$emit('loginStatus', true);
 		}).
 		error(function(data, status, headers, config) {
-            toastr.error('Login Failed', 'Something went wrong...');
+            Materialize.toast("Login failed", 1000);
 			$scope.error = true;
             $scope.$emit('loginStatus', false);
 			$rootScope.loggedIn = false;

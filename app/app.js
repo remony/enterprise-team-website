@@ -15,7 +15,7 @@ var App = angular.module('app', [
     'app.admin',
     'app.pages',
     'app.my',
-
+    'app.points.manager',                
     //Factories
     'app.config',
 
@@ -90,6 +90,9 @@ App.controller('navigationCtrl', ['$scope', 'localStorageService', '$rootScope',
                     "title": "News",
                     "link": "#/news"
                 }, {
+                    "title": "Calendar",
+                    "link": "#/calendar"
+                }, {
                     "title": "Events",
                     "link": "#/events"
                 }, {
@@ -109,9 +112,12 @@ App.controller('navigationCtrl', ['$scope', 'localStorageService', '$rootScope',
 
 
         resetMenu();
+        var isAuthed;
+            if (localStorageService.get('loggedIn')) {
+                    isAuthed =    localStorageService.get('loggedIn');
+            }
 
-
-        var isAuthed = localStorageService.get('loggedIn');
+       
 
 
         $rootScope.$on('loginStatus', function(event, args) {
@@ -132,7 +138,10 @@ App.controller('navigationCtrl', ['$scope', 'localStorageService', '$rootScope',
 
 
         $scope.$watch(function() {
+            if (localStorageService.get('loggedIn')){
+
             return localStorageService.get('loggedIn');
+            }
         }, function(newVal, oldVal) {
             console.log("new value > " + newVal);
             isAuthed = newVal;
@@ -238,7 +247,11 @@ App.controller('sidebarCtrl', ['$scope', '$timeout', '$window', '$rootScope',
 
 App.controller('authCtrl', ['$scope', 'localStorageService', '$http',
     function($scope, localStorageService, $http) {
-        var auth = localStorageService.get('user_auth');
+        var auth;
+
+        if (auth = localStorageService.get('user_auth')) {
+            auth = localStorageService.get('user_auth');
+        }
         if (auth) {
             $http({
                 url: "http://localhost:8080/auth",
