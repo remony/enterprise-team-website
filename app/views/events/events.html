@@ -1,21 +1,22 @@
 <div class="row">
-	<div class="col s12 m4 l2"><p></p></div>
-	<div class="col s12 m4 l8">
-		<h1>{{title}}</h1>
-		<table st-table="rowCollection" class="table table-striped">
+	<div class="col s12 m1">
+		<p></p>
+	</div>
+	<div class="col s12 m10">
+		<table>
 			<thead>
 				<tr>
-					<th st-sort="getters.name">Title</th>
-					<th st-sort="description">Description</th>
-					<th st-sort="startDate">When</th>
-					<th st-sort="venue">Where</th>
-					<th st-sort="points">Points available</th>
-					<th st-sort=""></th>
+					<th ></th>
+					<th >Title</th>
+					<th >Description</th>
+					<th >When</th>
+					<th>Where</th>
+					<th>Points available</th>
 				</tr>
-				
 			</thead>
 			<tbody>
 				<tr ng-repeat="event in events">
+					<td><a href="#/events/{{event.id}}" class="waves-effect waves-light btn">View Event</a></td>
 					<td><b>{{event.name}}<b></td>
 					<td>{{event.description | cut:true:10}}</td>
 					<!-- <td><span am-time-ago="event.startDate"></span></td> -->
@@ -24,10 +25,11 @@
 					<td><div class="chip">
 						{{event.points}}
 					</div></td>
-					<td><a href="#/events/{{event.id}}" class="waves-effect waves-light btn">View Event</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<div class="col s12 m4 l2"><p></p></div>
+	<div class="col s12 m1">
+		<p></p>
+	</div>
 </div>

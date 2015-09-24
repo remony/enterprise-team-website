@@ -174,6 +174,7 @@ angular.module('app.news', ['ngRoute'])
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
+                Materialize.toast("Failed to fetch post", 1000);
             });
 
 
@@ -198,13 +199,10 @@ angular.module('app.news', ['ngRoute'])
                     console.log(data);
                     $location.path("/news/" + slug + '/edit');
 
-                    toastr.success('News article updated!', '<a href="' + backend + '/news.' + slug + '">View post</a>', {
-                        allowHtml: true,
-                        closeButton: true
-                    });
+                    Materialize.toast("Post edit success", 1000);
                 }).
                 error(function(data, status, headers) {
-                    toastr.error('Login Success', 'Article failed to Update :(');
+                    Materialize.toast("Failed to update post", 1000);
                 });
             }
         }
@@ -218,8 +216,8 @@ angular.module('app.news', ['ngRoute'])
         });
     }
 ])
-    .controller('newsArticleEditorNewCtrl', ['$scope', '$http', '$routeParams', 'toastr', '$location',
-        function($scope, $http, $routeParams, toastr, $location) {
+    .controller('newsArticleEditorNewCtrl', ['$scope', '$http', '$routeParams', '$location',
+        function($scope, $http, $routeParams, config, $location) {
             $scope.title = "News Article Editor";
             $scope.editor = {};
             $scope.editor.title = "example title";
@@ -264,13 +262,12 @@ angular.module('app.news', ['ngRoute'])
 
 
                 }).success(function(data, status, headers) {
-                    toastr.success('News article updated!', '<a href="localhost:8080/news.' + 'slug' + '">View post</a>', {
-                        allowHtml: true,
-                        closeButton: true
-                    });
+                    console.log(data);
+                    Materialize.toast("Post created successfully <a href=data", 1000);
                 }).
                 error(function(data, status, headers) {
-                    toastr.error('Login Success', 'Article failed to Update :(');
+                    Materialize.toast("Post Failed", 1000);
+                    //toastr.error('Login Success', 'Article failed to Update :(');
                 });
             }
         }
