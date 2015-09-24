@@ -20,7 +20,7 @@
 				<td><b>{{participant.lastname}}<b></td>
 					<td><b>{{participant.username}}<b></td>
 					<td>{{participant.attended}}</td>
-					<td ng-if="usergroup === 'admin'"><a ng-click="attend(participant.username)" class="waves-effect waves-light btn">Attended</a></td>
+					<td ng-if="usergroup === 'admin'"><a ng-click="attend(participant.userid)" class="waves-effect waves-light btn" ng-if="participant.attended == 0">Attended</a><a ng-click="unAttend(participant.userid)" class="waves-effect waves-light btn red" ng-if="participant.attended == 1">Unattended</a></td>
 				</tr>
 			</tbody>
 		</table>

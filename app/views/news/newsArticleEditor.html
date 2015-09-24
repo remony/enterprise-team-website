@@ -1,35 +1,46 @@
 <div class="row">
-	<div class="col s1"><h3>{{title}}</h3>
-
+	<div class="col s12 m2">
+		<a href="#/news/{{editor.slug}}"><i class="fa fa-arrow-left"></i>Go back</a>
 	</div>
-	<div class="go Back">
-			<a href="#/news"><i class="fa fa-arrow-left"></i>Go back</a>
-		</div>
-</div>
-
-<div class="row">
-
-    <div class="col s12 m4 l2"><p></p></div>
-    <div class="col s12 m4 l8">
-<!--     	
-<button class="btn btn-default" ng-click="view = !view" ng-hide="view"><p >Preview</p>
-<button class="btn btn-default" ng-click="view = !view" ng-show="view"><p >Editor</p></button> -->
+	<div class="col s12 m8">
+		<h2><b>{{title}}</b></h2>
+		<!--
+		<button class="btn btn-default" ng-click="view = !view" ng-hide="view"><p >Preview</p>
+		<button class="btn btn-default" ng-click="view = !view" ng-show="view"><p >Editor</p></button> -->
 		<div class="editor_view1" ng-hide="view">
 			<div class="editor">
 				<form novalidate class="simple-form">
-					<h3>Title</h3><input type="text" value="{{title}}" ng-model="editor.title"></div>
-
-
+					<div class="row">
+						<div class="col s12 m3">
+							<h3>Title </h3>
+						</div>
+						<div class="col s12 m9">
+							<input type="text" value="{{title}}" ng-model="editor.title"></input>
+						</div>
+					</div>
+					
 					<textarea ui-tinymce="tinymceOptions" ng-model="editor.content" ></textarea>
 					<input type="submit" class="btn btn-primary" ng-click="update(editor)" value="Update"/>
 				</form>
 			</div>
-			<div class="editor_view2" ng-show="view">
-				<div ng-bind-html="editor.content"></div>
-			</div>
+			
 		</div>
-
-    </div>
-    <div class="col s12 m4 l2"><p></p></div>
-  </div>
-
+	</div>
+	<div class="col s12 m2">
+		
+	</div>
+</div>
+<div class="row">
+	<div class="col s1">
+	</div>
+	<div class="go Back">
+		
+	</div>
+</div>
+<div class="row">
+	<div class="col s12 m4 l2"><p></p></div>
+	<div class="col s12 m4 l8">
+		
+	</div>
+	<div class="col s12 m4 l2"><p></p></div>
+</div>

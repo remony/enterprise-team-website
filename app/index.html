@@ -1,224 +1,161 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="app" class="no-js" ng-controller="appCtrl"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{data.title}}</title>
-  <meta name="description" content="{{data.description}}">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/bower_components/normalize-css/normalize.css"/>
-  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css"/>
-  <!-- <link rel="stylesheet" href="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.css"/> -->
-  <link rel="stylesheet" href="bower_components/open-sans-fontface/open-sans.css"/>
-  <link rel="stylesheet" href="bower_components/animate-css/animate.css"/>
-  <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css"/>
-  <!-- <link rel='stylesheet' href='/bower_components/textAngular/dist/textAngular.css'> -->
-  <link rel="stylesheet" href="/bower_components/angular-toastr/dist/angular-toastr.min.css"/>
-  <link rel="stylesheet" href="/bower_components/ng-table/dist/ng-table.min.css"/>
+<html lang="en" ng-app="app" class="no-js" ng-controller="appCtrl">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>{{data.title}}</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/bower_components/Materialize/dist/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css"/>
+     <link rel="stylesheet" href="/bower_components/ng-table/dist/ng-table.min.css"/>
   <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
-  <!-- <link rel-"stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/> -->
-  <!-- <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css"> -->
-  <link rel="stylesheet" href="/bower_components/Materialize/dist/css/materialize.min.css"/>
-  <!-- <link rel="stylesheet" href="/bower_components/Materialize/extras/noUiSlider/nouislider.css"/> -->
-  <link rel="stylesheet" href="app.css"/>
-  <link rel="stylesheet" href="views/news/news.css"/>
-  <!-- <link rel="stylesheet" href="views/admin/newsManager/newsManager.css"/> -->
-  
-</head>
-<body class="animated fadeIn">
-  <div class="auth_checker" ng-controller="authCtrl"></div>
-  <!--[if lt IE 7]>
-  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-  <!-- <div class="wrapper mdl-layout mdl-js-layout" >
-    <div class="something">
-      <div class="menu-wrap" ng-controller="navigationCtrl">
-        <nav class="menu"> -->
-          <!-- <h2 class="animated slideInUp">{{data.title}}</h2> -->
-          <!--     <img class="animated fadeIn" src="assets/images/logo.png" height="130px" width="auto"/>
-          <ul class="clearfix" >
-            <li ng-repeat="item in items.items track by $index">
-              <a href="{{item.link}}">{{item.title}} <span class="arrow" ng-show="item.subitems">&#9660;</span></a>
-              
-              <ul class="sub-menu animated fadeIn" ng-show="item.subitems">
-                <div ng-repeat="subitem in item.subitems  track by $index">
-                  <li><a href="{{subitem.link}}" >{{subitem.title}}</a></li>
-                </div>
-              </ul>
-              
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-    <div class="mdl-layout__drawer" ng-controller="navigationCtrl">
-      <span class="mdl-layout-title">Navigation</span>
-      <nav class="mdl-navigation">
-        <div ng-repeat="item in items.items track by $index" >
-          <a class="mdl-navigation__link" href="{{item.link}}" ng-click="item.clicked = !item.clicked">{{item.title}} <span ng-show="item.subitems"><span class="arrow animated rotateIn" ng-hide="item.clicked">&#9660;</span><span class="arrow animated rotateIn" ng-show="item.clicked" >&#9650;</span></span></a>
-          <div ng-show="item.clicked" class="animated fadeIn">
-            <div ng-repeat="subitem in item.subitems track by $index">
-              <a class="mdl-navigation__link subitem" href="{{subitem.link}}">{{subitem.title}}</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div> -->
-    
-    <div class="sidebar" ng-controller="sidebarCtrl">
-      
-      
-      <div class="rSidebar" ng-controller="navigationCtrl">
-        <class class="close" ng-click="hamburgerClick(sidebarClick)"><i class="fa fa-times"></i></class>
-        <div class="title">Menu</div>
-        <!-- <div ng-repeat="item in items.items track by $index" >
-          <a class="item" href="{{item.link}}" ng-click="item.clicked = !item.clicked">{{item.title}} <span ng-show="item.subitems"><span class="arrow animated rotateIn" ng-hide="item.clicked">&#9660;</span><span class="arrow animated rotateIn" ng-show="item.clicked" >&#9650;</span></span></a>
-          <div ng-show="item.clicked" class="animated fadeIn">
-            <div ng-repeat="subitem in item.subitems track by $index">
-              <a class="subitem" href="{{subitem.link}}">{{subitem.title}}</a>
-            </div>
-          </div>
-        </div> -->
-        <ul>
-          <div class="item" ng-repeat="item in items.items track by $index">
-            <li><a class="item" href="{{item.link}}" ng-click="item.clicked = !item.clicked">{{item.title}} <span ng-show="item.subitems"><span class="arrow animated rotateIn" ng-hide="item.clicked">&#9660;</span><span class="arrow animated rotateIn" ng-show="item.clicked" >&#9650;</span></span></a></li>
-            <ul ng-show="item.clicked" class="animated fadeIn">
-              <div ng-repeat="subitem in item.subitems track by $index">
-                <li>
-                  <a class="subitem" href="{{subitem.link}}">{{subitem.title}}</a>
-                </li>
-              </div>
-            </ul>
-          </div>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="content">
-    
-    <!-- <header>
-      
-      <div class="header title">
-        <img class="animated fadeIn" src="assets/images/logo.png" height="130px" width="auto"/>
-      </div>
-      <div class="header navigation">
-        <div class="menu-wrap" ng-controller="navigationCtrl">
-          <nav class="menu">
-            <!-- <h2 class="animated slideInUp">{{data.title}}</h2> -->
-            
-            <!-- <img class="animated fadeIn" src="assets/images/logo.png" height="130px" width="auto"/> -->
-            <!--   <ul class="clearfix" >
-              <li ng-repeat="item in items.items track by $index">
-                <a href="{{item.link}}">{{item.title}} <span class="arrow" ng-show="item.subitems">&#9660;</span></a>
-                
-                <ul class="sub-menu animated fadeIn" ng-show="item.subitems">
-                  <div ng-repeat="subitem in item.subitems  track by $index">
-                    <li><a href="{{subitem.link}}" >{{subitem.title}}</a></li>
-                  </div>
-                </ul>
-                
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>  -->
-    <!-- Dropdown Structure -->
+    <!-- <link href="app.css" type="text/css" rel="stylesheet" media="screen,projection"/> -->
+    <link href="menu.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
     <div class="naviCtrl" ng-controller="navigationCtrl">
       <ul ng-repeat="item in items.items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
         <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}">{{subitem.title}}</a></li>
         
       </ul>
-      <nav>
-        <div class="nav-wrapper" >
-          <button class="hamburger fixed" ng-click="hamburgerClick(sidebarClick)" ng-controller="sidebarCtrl"><i class="fa fa-bars" ></i></button>
-          <a href="#!" class="brand-logo"><img src="assets/images/logo.png" height="70px"/><span>The Enterprise Gym</span></a>
-          <ul class="right hide-on-med-and-down">
-         
-              <li class="dropdown-button" ng-show="item.subitems" ng-repeat="item in items.items track by $index" data-activates="dropdown{{$index}}"><a href="{{item.link}}">{{item.title}}<i class="fa fa-chevron-down right" ></i></a></li>
-            
-              <li ng-hide="item.subitems" ng-repeat="item in items.items track by $index"><a href="{{item.link}}">{{item.title}}</a></li>
-            
-            
+      <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">The Enterprise Gym</a>
+        <ul class="right hide-on-med-and-down">
+          
+          <li class="dropdown-button" ng-show="item.subitems" ng-repeat="item in items.items track by $index" data-activates="dropdown{{$index}}"><a href="{{item.link}}">{{item.title}}<i class="fa fa-chevron-down right" ></i></a></li>
+          
+          <li ng-hide="item.subitems" class="subitem" ng-repeat="item in items.items track by $index"><a href="{{item.link}}">{{item.title}}</a></li>
+          
+          
+        </ul>
+        <!--  sidebar   -->
+        <ul id="nav-mobile" class="side-nav">
+          <div class="items" ng-repeat="item in items.items track by $index">          
+            <li><a ng-show="item.subitems" ng-click="clicked = !clicked">{{item.title}}</a><a ng-hide="item.subitems" href="{{item.link}}">{{item.title}}</a></li>
+            <div class="subitems" ng-repeat="subitems in item.subitems" ng-show="clicked">
+              <li><a href="{{subitems.link}}">{{subitems.title}}</a></li>
+            </div>
+          </div>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </div>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <div ng-view ></div>
+    </div>
+  </div>
+  
+  <!--   Icon Section   -->
+  <!-- <div class="row">
+    <div class="col s12 m4">
+      
+    </div>
+    <div class="col s12 m4">
+      
+    </div>
+    <div class="col s12 m4">
+      
+    </div>
+  </div> -->
+  
+  
+  
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">{{data.titl}}</h5>
+          <p class="grey-text text-lighten-4">{{data.description}}</p>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
           </ul>
         </div>
-      </nav>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    
-    <div ng-view class="container" ></div>
-  </div>
-</div>
+    <div class="footer-copyright">
+      <div class="container">
+        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+  <!--  Scripts-->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="/bower_components/angular-materialize/src/angular-materialize.js"></script>
+  <script src="/bower_components/Materialize/dist/js/materialize.min.js"></script>
+  <!-- <script src="js/init.js"></script> -->
+  <!-- Views -->
+  <script src="app.js"></script>
+  <!-- Views -->
+  <script src="views/home/home.js"></script>
+  <script src="views/users/users.js"></script>
+  <script src="views/news/news.js"></script>
+  <script src="views/login/login.js"></script>
+  <script src="views/admin/newsManager/newsManager.js"></script>
+  <script src="views/admin/newUsers/newUsers.js"></script>
+  <script src="/views/events/events.js"></script>
+  <script src="/views/admin/admin/admin.js"></script>
+  <script src="/views/pages/pages.js"></script>
+  <script src="/views/my/my.js"></script>
+  <!-- Angular Directives -->
+  <script src="directives/egHeader/egHeader.js"></script>
+  <!-- Bower Dependencies -->
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+  <script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.js"></script>
+  <script src="/bower_components/angular-toastr/dist/angular-toastr.min.js"></script>
+  <script src="/bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+  <script src="/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+  <script src="/bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+  <!-- Material Angular Dependencies -->
+  <script src="/bower_components/Materialize/dist/js/materialize.min.js"></script>
+  <script src="/bower_components/Materialize/extras/noUiSlider/nouislider.min.js"></script>
+  <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+  <script type="text/javascript" src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+  <script type="text/javascript" src="bower_components/fullcalendar/dist/gcal.js"></script>
+  <script src="/bower_components/ng-csv/build/ng-csv.min.js"></script>
+  <script src="/config.js"></script>
+  <!-- <script src="/bower_components/ng-pickadate/ng-pickadate.min.js"></script>
+  <script src="/bower_components/Materialize/js/date_picker/picker.js"></script>
+  <script src="/bower_components/Materialize/js/date_picker/picker.date.js"></script> -->
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular-moment/angular-moment.js"></script>
+  <script src="/assets/js/jquery.fitvids.js"></script>
+  <script src="/assets/js/draggable-list.js"></script>
+  <script>(function($){
+  $(function(){
+  $('.button-collapse').sideNav();
+  }); 
 
-
- <footer class="page-footer">
-          <div class="container2">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">{{data.title}}</h5>
-                <p class="grey-text text-lighten-4">{{data.description}}</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Twitter</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container2">
-            © 2015 Copyright {{data.title}}
-            <a class="grey-text text-lighten-4 right" href="#!"></a>
-            </div>
-          </div>
-        </footer>
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/angular-route/angular-route.min.js"></script>
-<script src="/bower_components/angular-materialize/src/angular-materialize.js"></script>
-<script src="app.js"></script>
-<!-- Views -->
-<script src="views/home/home.js"></script>
-<script src="views/users/users.js"></script>
-<script src="views/news/news.js"></script>
-<script src="views/login/login.js"></script>
-<script src="views/admin/newsManager/newsManager.js"></script>
-<script src="views/admin/newUsers/newUsers.js"></script>
-<script src="/views/events/events.js"></script>
-<script src="/views/admin/admin/admin.js"></script>
-<script src="/views/pages/pages.js"></script>
-<!-- Angular Directives -->
-<script src="directives/egHeader/egHeader.js"></script>
-<!-- Bower Dependencies -->
-<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-<script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
-<script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
-<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
-<script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-<script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
-<script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.min.js"></script>
-<script src="/bower_components/angular-toastr/dist/angular-toastr.min.js"></script>
-<script src="/bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
-<script src="/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
-<script src="/bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
-<!-- Material Angular Dependencies -->
-<script src="/bower_components/Materialize/dist/js/materialize.min.js"></script>
-<script src="/bower_components/Materialize/extras/noUiSlider/nouislider.min.js"></script>
-<script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
-<script type="text/javascript" src="bower_components/angular-ui-calendar/src/calendar.js"></script>
-<script type="text/javascript" src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-<script type="text/javascript" src="bower_components/fullcalendar/dist/gcal.js"></script>
-<script src="/bower_components/ng-csv/build/ng-csv.min.js"></script>
-<script src="/config.js"></script>
-<!-- <script src="/bower_components/ng-pickadate/ng-pickadate.min.js"></script>
-<script src="/bower_components/Materialize/js/date_picker/picker.js"></script>
-<script src="/bower_components/Materialize/js/date_picker/picker.date.js"></script> -->
-<script src="bower_components/moment/moment.js"></script>
-<script src="bower_components/angular-moment/angular-moment.js"></script>
+  $(document).ready(function(){
+    // Target your .container, .wrapper, .post, etc.
+    $("#ytplayer").fitVids();
+  });
+  })(jQuery); // end of jQuery name space
+  </script>
 </body>
 </html>

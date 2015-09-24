@@ -1,0 +1,27 @@
+<div class="admin">
+	<b><h1  ng-bind="active | uppercase">Admin Panel</h1></b>
+</div>
+<div class="row">
+	<div class="col s3">
+		<p></p>
+	</div>
+	<div class="col s6">
+		<h1>{{title}}</h1>
+		<div class="row" ng-show="events">
+			<div class="col s12 m5">
+				<div class="card-panel blue">
+					<span class="white-text">
+						<h4><b>Sorry</b></h4>
+						<p>You don't seem to have any events..</p>
+					</span>
+				</div>
+			</div>
+		</div>
+		<ul>
+			<li ng-repeat="event in events">{{event.name}}</li>
+		</ul>
+	</div>
+	<div class="col s3">
+		<p></p>
+	</div>
+</div>

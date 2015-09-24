@@ -19,8 +19,8 @@ angular.module('app.login', ['ngRoute'])
         });
     }
 ])
-.controller('loginCtrl', ['$scope', '$http', 'localStorageService', '$rootScope', 'toastr',
-    function($scope, $http, localStorageService, $rootScope, toastr) {
+.controller('loginCtrl', ['$scope', '$http', 'localStorageService', '$rootScope', '$location',
+    function($scope, $http, localStorageService, $rootScope, $location) {
         $scope.title = "Login";
         $scope.error = false;
 		var auth = localStorageService.get('user_auth');
@@ -45,7 +45,7 @@ angular.module('app.login', ['ngRoute'])
 			$scope.loggedIn = false;
             localStorageService.set('loggedIn', false);
             $rootScope.$emit('loginStatus', false);
-            toastr.info('Logout Success', 'You have logged out :(');
+            //toastr.info('Logout Success', 'You have logged out :(');
 		}
 
 
@@ -53,7 +53,7 @@ angular.module('app.login', ['ngRoute'])
 
 	
 		 $http({
-         url: "http://localhost:8080/user/login",
+         url: backend + "/user/login",
          method: 'POST',
          dataType: 'json',
          data: '',
@@ -73,7 +73,8 @@ angular.module('app.login', ['ngRoute'])
             localStorageService.cookie.set("token",data.user_auth.token,10);
 			$scope.loggedIn = true;
 			$scope.error = false;
-            toastr.success('Login Success', 'You have logged in!');
+            //$location.path( "#/" );
+            // toastr.success('Login Success', 'You have logged in!');
             $rootScope.$emit('loginStatus', true);
 		}).
 		error(function(data, status, headers, config) {
