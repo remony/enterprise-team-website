@@ -2,7 +2,7 @@
 
 	<div ng-repeat="row in users">
 		<ul class="collection">
-        	<li class="collection-item"> <div style="float:left"><a href="#/users/{{row.username}}"">{{row.username}}</a></div><div align="right"><a class="waves-effect waves-light btn" id="button" onClick="myFunction()">Expand</a></div></li> 
+        	<li class="collection-item"> <div style="float:left"><a href="#/user/{{row.username}}"">{{row.username}}</a></div><div align="right"><a class="waves-effect waves-light btn" id="button" onClick="myFunction()">Expand</a></div></li> 
 
    	    </ul>
    	    <ul class="collection" id="expanduser" style="display:none",  >
@@ -10,16 +10,19 @@
 	   	    <li class="collection-item">
 	        <p>Firstname:{{row.firstname}}</p>
 	        <p>Secondname:{{row.lastname}}</p>
-	        <p>{{row.contactNo}}</p>
-	        <p>{{row.country}}</p>
-	        <p>{{row.email}}</p>
-	        <p>{{row.gender}}</p>
-	        <p>{{row.University}}</p>
-	        <p>{{row.status}}</p>
-	        <p>{{row.matricNo}}</p>
-	        <p>{{row.degreeSubject}}</p>
-	        <p>{{row.yearofstudy}}</p>
-	        <p>{{row.usergroup}}</p>
+	        <p>Contact number:{{row.contactNo}}</p>
+	        <p>Country:{{row.country}}</p>
+	        <p>Email:{{row.email}}</p>
+	        <p>Gender:{{row.gender}}</p>
+	        <p>Univertity:{{row.University}}</p>
+	        <p>Status:{{row.status}}</p>
+	        <p>Matriculation number:{{row.matricNo}}</p>
+	        <p>Degree:{{row.degreeSubject}}</p>
+	        <p>Year of Study{{row.yearofstudy}}</p>
+	        <p>User Group{{row.usergroup}}</p>
+	       <div> <div style="float:right"><a class="waves-effect waves-light btn" id="button" ng-click="delete(row.id)" >Delete</a></div>
+	        <div style="float:right"><a class="waves-effect waves-light btn" id="button" ng-click="update(row)"> Edit</a></div></div>
+
 	    </li>
 
    	    </div>
