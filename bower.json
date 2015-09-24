@@ -22,13 +22,16 @@
     "angular-ui-calendar": "~1.0.1",
     "angular-ui-tinymce": "~0.0.9",
     "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0",
     "material-design-lite": "~1.0.4",
     "Materialize": "materialize#~0.97.1",
     "ng-csv": "~0.3.4",
     "ng-pickadate": "~0.2.2",
     "ng-table": "~0.8.3",
     "normalize-css": "normalize.css#~3.0.3",
+    "normalize-strings": "normalize#~1.0.4",
     "open-sans-fontface": "~1.4.2",
-    "textAngular": "~1.4.5"
+    "textAngular": "~1.4.5",
+    "toastr": "~2.1.2"
   }
 }

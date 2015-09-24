@@ -9,6 +9,7 @@ var App = angular.module('app', [
     'app.users',
     'app.news',
     'app.login',
+    'app.register',
     'app.newsManager',
     'app.admin.newUsers',
     'app.events',
@@ -238,7 +239,9 @@ App.controller('sidebarCtrl', ['$scope', '$timeout', '$window', '$rootScope',
 
 App.controller('authCtrl', ['$scope', 'localStorageService', '$http',
     function($scope, localStorageService, $http) {
-        var auth = localStorageService.get('user_auth');
+
+      if (localStorageService.get('user_auth').user_auth) {
+        var auth = localStorageService.get('user_auth').user_auth[0];
         if (auth) {
             $http({
                 url: "http://localhost:8080/auth",
@@ -247,8 +250,8 @@ App.controller('authCtrl', ['$scope', 'localStorageService', '$http',
                 data: '',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
-                    'username': auth.user_auth.username,
-                    'password': auth.user_auth.password
+                    'username': auth.username,
+                    'password': auth.password
                 }
             }).success(function(data, status, headers, config) {
 
@@ -269,7 +272,10 @@ App.controller('authCtrl', ['$scope', 'localStorageService', '$http',
         } else {
             $scope.loggedIn = false;
         }
+    }else {
+      $scope.loggedIn = false;
     }
+  }
 ]);
 
 App.filter('unsafe', function($sce) {
@@ -285,7 +291,7 @@ App.filter('uppercase', function() {
     };
 });
 /*
-        Filter created by: EpokK    
+        Filter created by: EpokK
         source: http://stackoverflow.com/questions/18095727/limit-the-length-of-a-string-with-angularjs
 */
 App.filter('cut', function ($sce) {
@@ -307,4 +313,3 @@ App.filter('cut', function ($sce) {
             return $sce.trustAsHtml(value + (tail || '…'));
         };
     });
-    

@@ -1,0 +1,133 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <h3>{{title}}</h3>
+  </div>
+</div>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--8-col">
+<!--div class="error" ng-show="error">There was an error logging you in</div-->
+
+    <form name="register" ng-submit="userregister(user)">
+
+      <p>Username:<br>
+        <input name="user.username" ng-model="user.username" required type="text">
+      </p>
+
+      <p>Password:<br>
+        <input name="user.password" ng-model="user.password" required type="password">
+      </p>
+
+      <p>First Name:<br>
+        <input name="user.firstname" ng-model="user.firstname" required type="text">
+      </p>
+
+      <p>Last Name:<br>
+        <input name="user.lastname" ng-model="user.lastname" required type="text">
+      </p>
+
+      <p>Gender:<br>
+        <select>
+          <option ng-model="user.gender" value="male">Male</option>
+          <option ng-model="user.gender" value="female">Female</option>
+          <option ng-model="user.gender" value="other">Other</option>
+        </select>
+      </p>
+
+      <p>Email:<br>
+        <input name="user.email" ng-model="user.email" required type="text">
+      </p>
+
+      <p>Contact Number:<br>
+        <input name="user.contactnumber" ng-model="user.contactnumber" required type="text">
+      </p>
+
+      <p>Country:<br>
+        <input name="user.country" ng-model="user.country" required type="text">
+      </p>
+
+
+
+
+      <script type="text/javascript">
+        function checkValue(val) {
+          if (val="other")
+            document.getElementById('uni').style.display='block'
+          else
+            document.getElementById('uni').style.display='none';
+        }
+      </script>
+
+      <p>University:<br>
+        <select name="uni" onchange='checkValue(this.value);'>
+          <option ng-model="user.university" value="uod">University of Dundee</option>
+          <option ng-model="user.university" value="uoa">University of Abertay</option>
+					<option ng-model="user.university" value="dundeecollege">Dundee College</option>
+          <option ng-model="user.university" value="other">Other</option>
+					<option ng-model="user.university" value="none">none</option>
+
+        </select>
+        <p ng-bind="user.university"></p>
+        <input type="text" name="uni" id="uni" style='display:none;' ng-if="user.univerity == other"/>
+      </p>
+
+
+
+
+
+      <p>Status:<br>
+        <select name="university" onchange='InputOtherUniversity(this.value);'>
+          <option ng-model="user.university" value="undergraduate">Undergraduate</option>
+          <option ng-model="user.university" value="graduate">Graduate</option>
+          <option ng-model="user.university" value="postgraduate">Postgraduate</option>
+          <option ng-model="user.university" value="alumni">Alumni</option>
+          <option ng-model="user.university" value="Staff">Staff</option>
+          <option ng-model="user.university" value="Event">Event</option>
+          <option ng-model="user.university" value="other">Other</option>
+          <option ng-model="user.university" value="none">None</option>
+        </select>
+      </p>
+
+      <p>Subject:<br>
+        <input name="user.subject" ng-model="user.subject" required type="text">
+      </p>
+
+      <p>Matriculation Number:<br>
+        <input name="user.matricnumber" ng-model="user.matricnumber" required type="text">
+      </p>
+
+
+      <p>
+      <input type="checkbox" ng-model="master" id="test5" />
+      <label for="test5">Red</label>
+    </p>
+
+			<label>Young Entrepreneurs Society</label><br/>
+			Tick here if you wish to become a member of the Young Entrepreneurs Society.
+			<a href="http://www.youngentrepreneursociety.org.uk/">For more information on Y.E.S click here</a>.<br/><br/>
+
+      Usergroup:
+      <input name="user.usergroup" ng-model="user.usergroup" required type="text">
+
+      <p>Year of Study:<br>
+        <select>
+          <option ng-model="user.yearofstudy" value="1">1</option>
+          <option ng-model="user.yearofstudy" value="2">2</option>
+          <option ng-model="user.yearofstudy" value="3">3</option>
+          <option ng-model="user.yearofstudy" value="4">4</option>
+          <option ng-model="user.yearofstudy" value="5">5</option>
+          <option ng-model="user.yearofstudy" value="6">6</option>
+        </select>
+      </p>
+
+      <p>Biography:<br>
+        <input name="user.bio" ng-model="user.bio" required type="text">
+      </p>
+
+      <p>
+        <input type="submit">
+      </p>
+    </form>
+
+  </div>
+  <div class="mdl-cell mdl-cell--4-col">4</div>
+</div>
