@@ -8,8 +8,8 @@ img {
 	margin-right:25%;
 }
 
-.light-blue.lighten-1 {
-    background-color: #800020 !important;
+.light-blue.lighten-1, .orange {
+    background-color: #9a2d43 !important;
 }
 
 .time-date {
@@ -30,3 +30,13 @@ span.colourMeBlue {
 
 span.colourMeBlue::before { 
     content: "Points : ";
+}
+.container {
+    color:#444!important;
+}
+
+.rmItem {
+    width:100%;
+    background-color:#e3e3e3;
+    position:absolute;
+}

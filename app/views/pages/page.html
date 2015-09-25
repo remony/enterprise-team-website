@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col s12 m1">
+      <p></p>
+    </div>
+    <div class="col s12 m7">
+      <h1>{{page[0].title}}</h1>
+
+<p id="hasvids flow-text" ng-bind-html="page[0].text | unsafe"></p>
+    </div>
+    <div class="col s12 m4">
+
+ 		<h5>Sub pages</h5>
+     
+        <ul ng-repeat="subpages in page[0].subpages">
+        <li><a href="#/page/{{subpages.slug}}">{{subpages.title}}</a></li><br>
+        </ul>
+ 
+  
+</div>
+
+
+<div ng-show="error">
+{{title}} could not be found
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

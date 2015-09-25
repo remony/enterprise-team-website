@@ -36,6 +36,7 @@
         <ul id="nav-mobile" class="side-nav">
           <div class="items" ng-repeat="item in items.items track by $index">          
             <li><a ng-show="item.subitems" ng-click="clicked = !clicked">{{item.title}}</a><a ng-hide="item.subitems" href="{{item.link}}">{{item.title}}</a></li>
+
             <div class="subitems" ng-repeat="subitems in item.subitems" ng-show="clicked">
               <li><a href="{{subitems.link}}">{{subitems.title}}</a></li>
             </div>
@@ -70,7 +71,7 @@
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">{{data.titl}}</h5>
+          <h5 class="white-text">{{data.title}}</h5>
           <p class="grey-text text-lighten-4">{{data.description}}</p>
         </div>
         <div class="col l3 s12">

@@ -3,9 +3,9 @@
 
 <ul>
 	<div ng-repeat="page in pages">
-	<li >{{page.title}}</li>
+	<li><a href="#/page/{{page.slug}}">{{page.title}}</a></li>
 	<div ng-repeat="subpage in page.subpages">
-	<li>{{subpage.title}}</li>
+	<li><a href="#/page/{{subpage.slug}}">>>>{{subpage.title}}</a></li>
 	</div>
 	</div>
 
