@@ -35,9 +35,28 @@
 	     		    <label class="active" for="first_name2">University</label> </div></div>
 	     		    <div class="row"> <div class="input-field col m12 s12 l12">
 	     		    <input ng-model="user.status" id="first_name2" type="text" class="validate">
+	    
+
+
 	     		    <label class="active" for="first_name2">Status</label> </div></div>
 	     		     <div class="row"> <div class="input-field col m12 s12 l12">
 	     		    <input ng-model="user.degreeSubject" id="first_name2" type="text" class="validate">
+	     		   <p>Status:<br><br>
+        				<select name="university" ng-model="user.status" class="browser-default" >
+         					 <option value="" disabled selected>Choose your student status</option>
+        					 <option value="undergraduate">Undergraduate</option>
+					          <option value="graduate">Graduate</option>
+					          <option value="postgraduate">Postgraduate</option>
+					          <option value="alumni">Alumni</option>
+					          <option value="staff">Staff</option>
+					          <option value="event">Event</option>
+					          <option value="other">Other</option>
+					          <option value="none">None</option>
+       					 </select> </p><br>
+
+
+
+
 	     		    <label class="active" for="first_name2">Subject</label> </div></div>
 	     		     <div class="row"> <div class="input-field col m12 s12 l12">
 	     		    <input ng-model="user.yearofstudy" id="first_name2" type="text" class="validate">
