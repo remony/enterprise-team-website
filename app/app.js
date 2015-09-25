@@ -15,6 +15,7 @@ var App = angular.module('app', [
     'app.admin',
     'app.pages',
     'app.my',
+    // 'app.points.manager',
 
     //Factories
     'app.config',
@@ -22,7 +23,7 @@ var App = angular.module('app', [
 
     // Dependecies
     'angular-loading-bar',
-    'ngHamburger',
+    // 'ngHamburger',
     'LocalStorageModule',
     'toastr',
     'ngAnimate',
@@ -34,7 +35,10 @@ var App = angular.module('app', [
     'ngCsv',
     'angularMoment',
     'draggableList',
-
+    // 'ui.bootstrap',
+    // 'ui.bootstrap.datetimepicker',
+    'scDateTime',
+    'ngMaterial',
 
 
 
@@ -82,52 +86,91 @@ App.controller('navigationCtrl', ['$scope', 'localStorageService', '$rootScope',
     function($scope, localStorageService, $rootScope) {
 
         function resetMenu() {
-            $scope.items = {
-                "items": [{
-                    "title": "Home",
-                    "link": '#/home'
-                }, {
-                    "title": "News",
-                    "link": "#/news"
-                }, {
-                    "title": "Events",
-                    "link": "#/events"
-                }, {
-                    "title": "Admin",
-                    "link": "#/admin",
-                    "subitems": [{
-                        "title": "Admin Panel",
-                        "link": "#/admin"
-                    }, {
-                        "title": "Users",
-                        "link": "#/users"
-                    }]
-                }]
-            };
+            $scope.items = [{"items":[{}]}];
+
+            $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3}]}];
+            if (localStorageService.get('user_auth')) {
+
+                if (localStorageService.get('user_auth').user_auth) {
+                    var isAuthed = localStorageService.get('user_auth').user_auth[0];
+
+
+
+
+
+                    var username = isAuthed.username;
+
+                    if (isAuthed.usergroup === 'admin') {
+                        //location.reload();
+                        // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]},{"title":"Admin","link":"#/admin","order":5,"subitems":[{"title":"Admin Panel","link":"#/admin"},{"title":"Users","link":"#/users"}]},{"title":"Editor","link":"#/add","subitems":[{"title":"Add News","link":"#/admin/news/add"},{"title":"Add Event","link":"#/admin/event/add"},{"title":"Add Page","link":"#/admin/pages/add"},{"title":"Add Subpage","link":"#/admin/pages/subpages/add"}]}]}];
+                   $scope.items[0].items.push({"title":"Admin Tools","link":"#/admin","order":5,"subitems":[{"title":"Admin Panel","link":"#/admin"},{"title":"Users","link":"#/users"}]})
+                    } else if (isAuthed.usergroup === 'editor') {
+                        // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]},{"title":"Editor","link":"#/add","subitems":[{"title":"Add News","link":"#/admin/news/add"},{"title":"Add Event","link":"#/admin/events/new"},{"title":"Add Page","link":"#/"},{"title":"Add Subpage","link":"#/logout"}]}]}];
+                        //location.reload();
+                        $scope.items[0].items.push({
+                            "title":"editor"
+                        })
+                    } else {
+                         // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]}]}];
+                        //location.reload();
+                    }
+                   //$scope.items =$scope.items[0].items;
+
+                   $scope.items[0].items.push({"title":"Editor","link":"#/add","subitems":[{"title":"Add News","link":"#/admin/news/add"},{"title":"Add Event","link":"#/admin/events/new"},{"title":"Add Page","link":"#/"},{"title":"Add Subpage","link":"#/logout"}]})
+
+
+                    $scope.login = true;
+            $scope.items[0].items.push({"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]})
+               } else {
+$scope.items[0].items.push({
+                            "title":"login",
+                            "link": "#/login"
+                        })
+                // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
+                //setTimeout(function() {$rootScope.$apply();}, 10);
+                //$scope.items =$scope.items[0].items;
+                $scope.login = false;
+               }
+                
+            } else {
+                $scope.items[0].items.push({
+                            "title":"login",
+                            "link": "#/login"
+                        })
+                $scope.login = false;
+                // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
+                //setTimeout(function() {$rootScope.$apply();}, 10);
+            }
+
+// $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
+            
+
+
+
+
+
+            $scope.items =$scope.items[0].items;
+
+
+
+       
+    
+    
+            
+
         }
-
-
 
         resetMenu();
 
 
-        var isAuthed = localStorageService.get('loggedIn');
-
+        $scope.click = function(click) {
+            console.log(click);
+        }
 
         $rootScope.$on('loginStatus', function(event, args) {
             resetMenu();
+
             console.log("New login status: " + args);
-            if (!args) {
-                $scope.items.items.push({
-                    "title": "login",
-                    "link": "#/login"
-                });
-            } else {
-                $scope.items.items.push({
-                    "title": "logout",
-                    "link": "#/logout"
-                });
-            }
         });
 
 
@@ -135,63 +178,18 @@ App.controller('navigationCtrl', ['$scope', 'localStorageService', '$rootScope',
             return localStorageService.get('loggedIn');
         }, function(newVal, oldVal) {
             console.log("new value > " + newVal);
-            isAuthed = newVal;
-        })
-
-
-        if (!isAuthed) {
-            $scope.items.items.push({
-                "title": "login",
-                "link": "#/login"
-            });
-        } else {
-            var username = "";
-            if (localStorageService.get('user_auth').user_auth) {
-                username = localStorageService.get('user_auth').user_auth[0].username;
-            } else {
-                username = "error";
-
+            if (newVal != null) {
+                console.log(newVal);
+                resetMenu();
             }
 
             
-
-            $scope.items.items.push(
-                {
-                    "title": username,
-                    "link": "#/my",
-                    "subitems": [{
-                        "title": "My details",
-                        "link": "#/user/" + username
-                    }, {
-                        "title": "My Events",
-                        "link": "#/my/events"
-                    }, {
-                        "title": "logout",
-                        "link": "#/logout"
-                    }]
-                });
-
             
-        }
+            // isAuthed = newVal;
+        })
 
-$scope.items.items.push(
-                {
-                    "title": "Editor",
-                    "link": "#/add",
-                    "subitems": [{
-                        "title": "Add News",
-                        "link": "#/admin/news/add"
-                    }, {
-                        "title": "Add Event",
-                        "link": "#/admin/events/new"
-                    }, {
-                        "title": "Add Page",
-                        "link": "#/"
-                    }, {
-                        "title": "Add Subpage",
-                        "link": "#/logout"
-                    }]
-                });
+
+        
     }
 ]);
 
@@ -281,30 +279,29 @@ App.filter('unsafe', function($sce) {
 App.filter('uppercase', function() {
     return function(val) {
         if (val != null)
-        return val.toUpperCase();
+            return val.toUpperCase();
     };
 });
 /*
         Filter created by: EpokK    
         source: http://stackoverflow.com/questions/18095727/limit-the-length-of-a-string-with-angularjs
 */
-App.filter('cut', function ($sce) {
-        return function (value, wordwise, max, tail) {
-            if (!value) return '';
+App.filter('cut', function($sce) {
+    return function(value, wordwise, max, tail) {
+        if (!value) return '';
 
-            max = parseInt(max, 10);
-            if (!max) return value;
-            if (value.length <= max) return value;
+        max = parseInt(max, 10);
+        if (!max) return value;
+        if (value.length <= max) return value;
 
-            value = value.substr(0, max);
-            if (wordwise) {
-                var lastspace = value.lastIndexOf(' ');
-                if (lastspace != -1) {
-                    value = value.substr(0, lastspace);
-                }
+        value = value.substr(0, max);
+        if (wordwise) {
+            var lastspace = value.lastIndexOf(' ');
+            if (lastspace != -1) {
+                value = value.substr(0, lastspace);
             }
+        }
 
-            return $sce.trustAsHtml(value + (tail || '…'));
-        };
-    });
-    
+        return $sce.trustAsHtml(value + (tail || '…'));
+    };
+});

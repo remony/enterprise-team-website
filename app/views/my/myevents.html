@@ -1,5 +1,7 @@
 <div class="admin">
 	<b><h1  ng-bind="active | uppercase">Admin Panel</h1></b>
+
+
 </div>
 <div class="row">
 	<div class="col s3">
@@ -7,9 +9,13 @@
 	</div>
 	<div class="col s6">
 		<h1>{{title}}</h1>
-		<div class="row" ng-show="events">
-			<div class="col s12 m5">
-				<div class="card-panel blue">
+
+
+  
+
+		<div class="row" ng-hide="events">
+			<div class="col s12 m8">
+				<div class="card-panel blue" ng-hide="events">
 					<span class="white-text">
 						<h4><b>Sorry</b></h4>
 						<p>You don't seem to have any events..</p>
@@ -17,9 +23,29 @@
 				</div>
 			</div>
 		</div>
-		<ul>
-			<li ng-repeat="event in events">{{event.name}}</li>
-		</ul>
+		
+		
+		<table>
+			<thead>
+				<tr>
+					<th data-field="id">Event name</th>
+					<th data-field="name">Description</th>
+					<th data-field="price">Start Date</th>
+					<th data-field="email">End Date</th>
+	
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="event in events">
+					<td><a href="#/events/{{event.id}}">{{event.name}}</a></td>
+					<td>{{event.description}}</td>
+					<td>{{event.startDate}}</td>
+					<td>{{event.endDate}}</td>
+
+				</tr>
+			</tbody>
+		</table>
+
 	</div>
 	<div class="col s3">
 		<p></p>

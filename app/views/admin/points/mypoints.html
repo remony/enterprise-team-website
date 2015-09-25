@@ -1,0 +1,35 @@
+<h1>{{title}}</h1>
+
+
+          
+
+  <table>
+        <thead>
+          <tr>
+              <th data-field="id">username</th>
+              <th data-field="name">first name</th>
+              <th data-field="price">last name</th>
+              <th data-field="email">email</th>
+              <th data-field="price">action points</th>
+              <th data-field="price">project points</th>
+              <th data-field="price">theory points</th>
+              <th data-field="price">virtual points</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="point in points">
+            <td>{{point.user[0].username}}</td>
+            <td>{{point.user[0].firstname}}</td>
+            <td>{{point.user[0].lastname}}</td>
+            <td>{{point.user[0].email}}</td>
+            <td>{{point.action}}</td>
+            <td>{{point.project}}</td>
+            <td>{{point.theory}}</td>
+            <td>{{point.virtual}}</td>
+            
+          </tr>
+
+        </tbody>
+      </table>

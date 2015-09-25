@@ -483,16 +483,6 @@ textarea {
 
 */
 
-span.colourMeBlue {
-    color:#8BC34A;
-    padding-left:25px;
-    right:0;
-}
-
-span.colourMeBlue::before { 
-    content: "Points : ";
-
-
 
 /*
         CSS hacks

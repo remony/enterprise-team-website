@@ -1,0 +1,27 @@
+{{title}}
+
+<ul>
+	<div ng-repeat="page in pages">
+	<li >{{page.title}} </li>
+	<div ng-repeat="subpage in page.subpages">
+	<li> > {{subpage.title}} </li>
+	<!-- <a ng-click="deleteSubpage({{subpage.slug}})">delete</a>  -->
+	</div>
+	</div>
+
+</ul>
+
+<form class="input-field col s6" ng-submit="addPage(page, pages.length)">
+          <input id="first_name" type="text" ng-model="page.title"class="validate">
+          <label for="first_name" value=" ">Add page</label>
+        </form>
+
+
+        <form class="input-field col s6" ng-submit="addSubpage(subpage, pages.length)">
+        	<select class="browser-default">
+      <option value="" ng-model="subpage.parent" selected>Choose your option</option>
+      <option ng-repeat="pages in pages track by $index" value="$index">{{page.title}}</option>
+    </select>
+          <input id="first_name" type="text" ng-model="subpage.title"class="validate">
+          <label for="first_name" value=" ">Add page</label>
+        </form>
