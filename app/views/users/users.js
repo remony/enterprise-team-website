@@ -19,14 +19,14 @@ angular.module('app.users', ['ngRoute'])
 	});
 }])
 
-.controller('usersCtrl', ['$scope', '$http', 'localStorageService', function($scope, $http, localStorageService) {
+.controller('usersCtrl', ['$scope', '$http', 'localStorageService', function($scope, $http, localStorageService, config) {
 	console.log("Users has been loaded");
 	$scope.title = "Users";
 	var token = localStorageService.get('user_auth').user_auth[0].token;
 
 	console.log(token);
 	$http({
-                url: "http://localhost:8080/users",
+                url: backend+"/users",
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -38,7 +38,6 @@ angular.module('app.users', ['ngRoute'])
                 // $scope.title = data.article[0].title;
                 // $scope.article = data.article[0];
                 $scope.users = data.UserInfo;
-                console.log(data);
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
@@ -54,7 +53,7 @@ angular.module('app.users', ['ngRoute'])
 	});
 }])
 
-.controller('userCtrl', ['$scope', '$http', 'localStorageService', '$routeParams', function($scope, $http, localStorageService, $routeParams) {
+.controller('userCtrl', ['$scope', '$http', 'localStorageService', '$routeParams', function($scope, $http, localStorageService, $routeParams,config) {
 	
     console.log("Users has been loaded");
 	$scope.title = "Users";
@@ -63,7 +62,7 @@ angular.module('app.users', ['ngRoute'])
 	console.log("Token: " + token);
 	
 	$http({
-                url: "http://localhost:8080/user/" + $routeParams.user,
+                url: backend+"/user/" + $routeParams.user,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -73,7 +72,6 @@ angular.module('app.users', ['ngRoute'])
                 }
             }).success(function(data, status, headers, config) {
                 $scope.users =  data.UserInfo[0];
-                console.log(data);
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
@@ -82,7 +80,7 @@ angular.module('app.users', ['ngRoute'])
     $scope.confirm = function(userid,username) {
                 
                 $http({
-                    url: "http://localhost:8080/user/"+username+"/delete",
+                    url: backend+"/user/"+username+"/delete",
                     method: 'POST',
                     dataType: 'json',
                     headers: {
@@ -111,14 +109,14 @@ angular.module('app.users', ['ngRoute'])
     });
 }])
 
-.controller('userEditorCtrl', ['$scope', '$http', 'localStorageService', '$routeParams', function($scope, $http, localStorageService, $routeParams) {
+.controller('userEditorCtrl', ['$scope', '$http', 'localStorageService', '$routeParams', function($scope, $http, localStorageService, $routeParams,config) {
     
     var username = $routeParams.username;
     var token = localStorageService.get('user_auth').user_auth[0].token;
     console.log("Token: " + token);
     console.log("Username: " + username);
        $http({
-        url: "http://localhost:8080/user/" + username,
+        url: backend+"/user/" + username,
         method: 'GET',
         dataType: 'json',
         data: '',
@@ -128,8 +126,7 @@ angular.module('app.users', ['ngRoute'])
 
         }
     }).success(function(data, status, headers, config) {
-        
-        console.log(data.UserInfo[0]);
+
         $scope.user=data.UserInfo[0];
 
     }).
@@ -163,7 +160,7 @@ angular.module('app.users', ['ngRoute'])
 
 
                 $http({
-                    url: "http://localhost:8080/user/"+username,
+                    url: backend+"/user/"+username,
                     method: 'POST',
                     dataType: 'json',
 
@@ -212,7 +209,7 @@ angular.module('app.users', ['ngRoute'])
     });
 }])
 
-.controller('usersPasswordResetCtrl',  ['$scope', '$http', 'localStorageService', '$routeParams', function($scope, $http, localStorageService, $routeParams) {
+.controller('usersPasswordResetCtrl',  ['$scope', '$http', 'localStorageService', '$routeParams', function($scope, $http, localStorageService, $routeParams,config) {
     console.log("Users has been loaded");
 
     var username = $routeParams.username;
@@ -221,7 +218,7 @@ angular.module('app.users', ['ngRoute'])
     console.log("Token: " + token);
     console.log("Username: " + username);
        $http({
-        url: "http://localhost:8080/user/" + username,
+        url: backend+"/user/" + username,
         method: 'GET',
         dataType: 'json',
         data: '',
@@ -231,8 +228,7 @@ angular.module('app.users', ['ngRoute'])
 
         }
     }).success(function(data, status, headers, config) {
-        
-        console.log(data.UserInfo[0]);
+
         $scope.email=data.UserInfo[0].email;
 
     }).
@@ -255,7 +251,7 @@ angular.module('app.users', ['ngRoute'])
                 var email = email;
                 if(newpassword===newpasswordre){
     $http({
-                url: "http://localhost:8080/user/"+username+"/passwordreset",
+                url: backend+"/user/"+username+"/passwordreset",
                 method: 'POST',
                 dataType: 'json',
                 data: '',
