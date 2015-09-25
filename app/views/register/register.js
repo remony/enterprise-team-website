@@ -37,26 +37,24 @@ angular.module('app.register', ['ngRoute'])
 
     //mock user for testing:
 
-    $scope.user = {
-      "username":"johndoesOasd1",
-      "password":"johndoee",
-      "firstname":"johndoee",
-      "lastname":"johndoee",
-      //"gender":"f",
-      "email":"johndoesOasd1",
-      "contactnumber":"0121",
-      "country":"johndoee",
-      //"university":"johndoee",
-      //"status":"johndoee",
-      "subject":"johndoee",
-      "matricnumber":"johndoee",
-      "young_es":0,
-      //"yearofstudy":1,
-      //"usergroup":"unauthorised",
-      "bio":"johndoee"
-    }
-        /*
-    */
+    // $scope.user = {
+    //   "username":"johndoesOasd1",
+    //   "password":"johndoee",
+    //   "firstname":"johndoee",
+    //   "lastname":"johndoee",
+    //   "gender":"f",
+    //   "email":"johndoesOasd1",
+    //   "contactnumber":"0121",
+    //   "country":"johndoee",
+    //   "university":"johndoee",
+    //   "status":"johndoee",
+    //   "subject":"johndoee",
+    //   "matricnumber":"johndoee",
+    //   //"young_es":0,
+    //   "yearofstudy":3,
+    //   "usergroup":"unauthorised",
+    //   "bio":"johndoee"
+    // }
 
     //username, password, firstname, lastname, gender, email, contactnumber, country, university, status, subject, matricnumber, young_es, yearofstudy, bio
     $scope.userregister = function(user) {
