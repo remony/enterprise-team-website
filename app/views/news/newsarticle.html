@@ -6,8 +6,9 @@
 		<div class="article">
 			<div class="section">
 				<a href="#/news/{{new.slug}}"><b><h2>{{article.title}}</h2></b></a>
+				<a href="#/events/{{event.id}}/edit" class="waves-effect waves-light btn orange" ng-if="usergroup === 'admin'|| usergroup === 'editor'">Edit</a>
 				<br>
-				<div><p ng-bind-html="article.text | cut:true:240"></p></div>
+				<div><p ng-bind-html="article.text"></p></div>
 			</div>
 			<form class="input-field col s12" ng-submit="comment(message)">
 				<h3>Leave a comment</h3>				

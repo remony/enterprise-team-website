@@ -1,0 +1,13 @@
+<h3>{{title}}</h3>
+    <form class="input-field col s12" ng-submit="update(page)">
+      <h5>Page title</h5>
+      <input id="first_name" type="text" ng-model="page.title" placeholder="page title" class="validate">
+
+      <h5>Page description</h5>
+      <input id="first_name" type="text" ng-model="page.description" placeholder="page title" class="validate">
+      <textarea ui-tinymce="tinymceOptions" ng-model="page.text" ></textarea>
+
+
+      <br>
+      <input type="submit" class="btn btn-primary" ng-click="update(page)" value="Update Page"/>
+    </form>

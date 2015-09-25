@@ -15,18 +15,7 @@ angular.module('app.events', ['ngRoute'])
     function($scope, $http, localStorageService, taOptions, $filter) {
         $scope.title = "Events";
 
-        $scope.rowCollection = [
-        {firstName: 'Laurent', lastName: 'Renard', birthDate: new Date('1987-05-21'), balance: 102, email: 'whatever@gmail.com'},
-        {firstName: 'Blandine', lastName: 'Faivre', birthDate: new Date('1987-04-25'), balance: -2323.22, email: 'oufblandou@gmail.com'},
-        {firstName: 'Francoise', lastName: 'Frere', birthDate: new Date('1955-08-27'), balance: 42343, email: 'raymondef@gmail.com'}
-    ];
-
-$scope.getters={
-        firstName: function (value) {
-            //this will sort by the length of the first name string
-            return value.firstName.length;
-        }
-    }
+  
 
         $http({
             url: backend + "/events",
@@ -188,9 +177,9 @@ $scope.getters={
 
         $scope.update = function(event) {
             console.log(event);
-
-            var startdate = event.startDate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
-            var enddate  = event.endDate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
+            debugger;
+             var startdate = event.startdate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
+             var enddate  = event.enddate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
             $http({
                 url: backend + "/events/insert",
                 method: 'POST',
@@ -245,7 +234,7 @@ $scope.getters={
                 }
             }).success(function(data, status, headers, config) {
                 $scope.event = data.event[0];
-                sd = data.event[0].startDate;
+                sd = data.event[0].startate;
                 ed = data.event[0].endDate;
 
 
@@ -258,19 +247,13 @@ $scope.getters={
 
         $scope.update = function(event) {
             console.log(event);
-            var startdate = "";
-            var enddate = "";
-            if(event.startDate) {
-                startdate = event.startDate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
-            } else {
-                startdate = sd;
-            }
-
-            if(event.endDate) {
-                enddate  = event.endDate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
-            }   else {
-                enddate = ed;
-            }
+            
+            
+     
+                var startdate = event.startdate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
+        
+                var enddate = event.enddate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
+    
 
             console.log(event);
 
@@ -285,8 +268,8 @@ $scope.getters={
                     'description': event.description,
                     'location': event.location,
                     'venue': event.venue,
-                    'startdate': event.startdate,
-                    'enddate': event.enddate,
+                    'startdate': startdate,
+                    'enddate': enddate,
                     'points': parseInt(event.points)
                 }
             }).success(function(data, status, headers, config) {

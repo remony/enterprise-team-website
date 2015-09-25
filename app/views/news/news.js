@@ -142,6 +142,8 @@ angular.module('app.news', ['ngRoute'])
                 "page_id": -1
             };
 
+           
+
 
             $scope.tinymceOptions = {
                 onChange: function(e) {

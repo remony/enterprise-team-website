@@ -1,0 +1,68 @@
+
+
+
+<div class="row">
+  <div class="col s12 m1">
+    <p></p>
+  </div>
+  <div class="col s12 m10">
+    <div ng-hide="pages">
+<div class="preloader-wrapper big active" ng-hide="pages">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+
+    <div ng-show="pages">
+    <h1>{{title}}</h1>
+    <!-- Table of all pages and subpages -->
+
+ 
+
+
+
+    <ul>
+      <div ng-repeat="page in pages">
+        <li >{{page.title}} <a ng-click="delete(page)" value="Delete"/>Delete</a></li>
+        <div ng-repeat="subpage in page.subpages">
+          <li> > {{subpage.title}} <a ng-click="delete(subpage)" value="Delete"/>Delete</a>
+          <!-- <a ng-click="deleteSubpage({{subpage.slug}})">delete</a>  -->
+        </div>
+      </div>
+    </ul>
+    <!-- Editor -->
+    <br>
+    <hr>
+    <br>
+    <h3>Add new page</h3>
+    <form class="input-field col s12" ng-submit="addPage(page, pages.length)">
+      <h5>Page title</h5>
+      <input id="first_name" type="text" ng-model="page.title" placeholder="page title" class="validate">
+      <h5>Select Parent</h5>
+      
+      <select class="browser-default" ng-model="page.parent">
+<option value="main">Main [Add as parent]</option>
+        <option ng-repeat="page in pages track by $index" value="{{page.title}}">{{page.title}}</option>
+      </select>
+      <h5>Page description</h5>
+      <input id="first_name" type="text" ng-model="page.description" placeholder="page title" class="validate">
+      <textarea ui-tinymce="tinymceOptions" ng-model="page.body" ></textarea>
+
+
+      <br>
+      <input type="submit" class="btn btn-primary" ng-click="add(page, pages.length)" value="Add Page"/>
+    </form>
+    </div>
+  </div>
+  <div class="col s12 m1">
+    
+  </div>
+</div>
