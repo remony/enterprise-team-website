@@ -6,8 +6,8 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col s12 m4 l2"><p></p></div>
-	<div class="col s12 m4 l8">
+	<div class="col s12 m1 l2"><p></p></div>
+	<div class="col s12 m10 l8">
 	<h3>{{title}}: <b><span class="colourMeBlue" ng-bind="event.points"></span></b></h3>
 		<!--
 		<button class="btn btn-default" ng-click="view = !view" ng-hide="view"><p >Preview</p>
@@ -40,26 +40,24 @@
 							<label for="last_name">Location</label>
 						</div>
 					</div>
-
-					<div class="row">
-						<div class="input-field col s6">
+						<i></i>
+					
 							<h5>Starting Date</h5>
-					<input type="date" class="datepicker" ng-model="event.startDate">
-						</div>
-						<div class="input-field col s6">
+
+
+							<time-date-picker ng-model="event.startdate" data-display-mode="full"  autoSave="true"></time-date-picker>
+					<!-- <input type="date" class="datepicker" ng-model="event.startDate"> -->
+					
+				
 							<h5>Ending Date</h5>
-					<input type="date" class="datepicker" ng-model="event.endDate">
-						</div>
-					</div>
+				
+							<time-date-picker ng-model="event.enddate" data-display-mode="full"  autoSave="true"></time-date-picker>
+					<!-- <input type="date" class="datepicker" ng-model="event.endDate"> -->
+						
 					
 					
 					<h5>Points</h5>
-					<i>Deselect to set custom points</i>
-					<p>
-						<input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" ng-click="customPoints = !customPoints" />
-						<label for="filled-in-box">Default Points: {{defaultpoints}}. </label>
-					</p>
-					<div class="input-field col s12" ng-show="customPoints">
+					<div class="input-field col s12" >
 						<input value="{{defaultpoints}}" ng-model="event.points" id="points" type="text" class="validate">
 						<label class="active" for="points">Custom Points</label>
 					</div>
@@ -80,5 +78,5 @@
 			</div>
 		</div>
 	</div>
-	<div class="col s12 m4 l2"><p></p></div>
+	<div class="col s12 m1 l2"><p></p></div>
 </div>

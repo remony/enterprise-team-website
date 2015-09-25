@@ -1,18 +1,26 @@
 <div class="row">
+  <div class="col s12 m1">
+    <p></p>
+  </div>
+  <div class="col s12 m8">
+    <h1>{{title}}</h1>
+    <div  ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+    
+  </div>
+  <div class="col s12 m2">
+    <h2>Upcoming</h2>
+    <table>
+      <thead>
+        <tr>
+          <th data-field="title">Title</th>
 
-      <div class="col s2">
-       <p></p>
-      </div>
-
-      <div class="col s8">
-        
-		<h1>{{title}}</h1>
-	<div  ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
-
-      </div>
-
-      <div class="col s2">
-        <!-- Teal page content  -->
-      </div>
-
-    </div>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="event in events[0] | orderBy:'-start'">
+          <td>{{event.title}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -11,11 +11,14 @@
      <link rel="stylesheet" href="/bower_components/ng-table/dist/ng-table.min.css"/>
   <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
     <!-- <link href="app.css" type="text/css" rel="stylesheet" media="screen,projection"/> -->
-    <link href="menu.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="menu.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css"/>
+    <link  rel="stylesheet"href="/bower_components/sc-date-time/dist/sc-date-time.css"/>
+    <!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/> -->
   </head>
   <body>
     <div class="naviCtrl" ng-controller="navigationCtrl">
-      <ul ng-repeat="item in items.items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
+      <ul ng-repeat="item in items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
         <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}">{{subitem.title}}</a></li>
         
       </ul>
@@ -23,9 +26,9 @@
         <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">The Enterprise Gym</a>
         <ul class="right hide-on-med-and-down">
           
-          <li class="dropdown-button" ng-show="item.subitems" ng-repeat="item in items.items track by $index" data-activates="dropdown{{$index}}"><a href="{{item.link}}">{{item.title}}<i class="fa fa-chevron-down right" ></i></a></li>
+          <li class="dropdown-button" ng-show="item.subitems" ng-repeat="item in items track by $index" data-activates="dropdown{{$index}}"><a href="{{item.link}}">{{item.title}}<i class="fa fa-chevron-down right" ></i></a></li>
           
-          <li ng-hide="item.subitems" class="subitem" ng-repeat="item in items.items track by $index"><a href="{{item.link}}">{{item.title}}</a></li>
+          <li ng-hide="item.subitems" class="subitem" ng-repeat="item in items track by $index"><a href="{{item.link}}">{{item.title}}</a></li>
           
           
         </ul>
@@ -116,6 +119,7 @@
   <script src="/views/admin/admin/admin.js"></script>
   <script src="/views/pages/pages.js"></script>
   <script src="/views/my/my.js"></script>
+  <script src="/views/admin/points/points.js"></script>
   <!-- Angular Directives -->
   <script src="directives/egHeader/egHeader.js"></script>
   <!-- Bower Dependencies -->
@@ -137,6 +141,7 @@
   <script type="text/javascript" src="bower_components/angular-ui-calendar/src/calendar.js"></script>
   <script type="text/javascript" src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
   <script type="text/javascript" src="bower_components/fullcalendar/dist/gcal.js"></script>
+  <script src="/bower_components/angular-materialize/src/angular-materialize.js"></script>
   <script src="/bower_components/ng-csv/build/ng-csv.min.js"></script>
   <script src="/config.js"></script>
   <!-- <script src="/bower_components/ng-pickadate/ng-pickadate.min.js"></script>
@@ -144,8 +149,11 @@
   <script src="/bower_components/Materialize/js/date_picker/picker.date.js"></script> -->
   <script src="bower_components/moment/moment.js"></script>
   <script src="bower_components/angular-moment/angular-moment.js"></script>
+   <script src="/bower_components/angular-material/angular-material.min.js"></script>
+  <script src="/bower_components/sc-date-time/dist/sc-date-time.js"></script>
   <script src="/assets/js/jquery.fitvids.js"></script>
   <script src="/assets/js/draggable-list.js"></script>
+  <script src="/bower_components/angular-aria/angular-aria.min.js"></script>
   <script>(function($){
   $(function(){
   $('.button-collapse').sideNav();

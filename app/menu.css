@@ -8,3 +8,25 @@ img {
 	margin-right:25%;
 }
 
+.light-blue.lighten-1 {
+    background-color: #800020 !important;
+}
+
+.time-date {
+    font-size: 14px !important;
+}
+
+.time-date input {
+	height:100%!important;
+}
+
+
+
+span.colourMeBlue {
+    color:#8BC34A;
+    padding-left:25px;
+    right:0;
+}
+
+span.colourMeBlue::before { 
+    content: "Points : ";
