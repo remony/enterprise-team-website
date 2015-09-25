@@ -86,7 +86,7 @@ angular.module('app.users', ['ngRoute'])
                     method: 'POST',
                     dataType: 'json',
                     headers: {
-                        'userid': 1,
+                        'userid': userid,
                     }
                 }).success(function(data, status, headers) {
                     console.log("success");
