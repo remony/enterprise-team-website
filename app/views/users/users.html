@@ -1,46 +1,31 @@
 <h2>{{title}}</h2>
 
-	<table st-table="rowCollection" class="table table-striped">
-	<thead>
-	<tr>
-		<th>Username</th>
-		<th>First name</th>
-		<th>Last name</th>
-		<th>Contact number</th>
-		<th>Country</th>
-		<th>Email</th>
-		<th>Gender</th>
-		<th>University</th>
-		<th>Status</th>
-		<th>Matric Number</th>
-		<th>Degree Subject</th>
-		<th>Year of Study</th>
-		<th>User Group</th>
+	<div ng-repeat="row in users">
+		<ul class="collection">
+        	<li class="collection-item"> <div style="float:left"><a href="#/user/{{row.username}}"">{{row.username}}</a></div><div align="right"><a class="waves-effect waves-light btn" id="button" onClick="myFunction()">Expand</a></div></li> 
 
+   	    </ul>
+   	    <ul class="collection" id="expanduser" style="display:none",  >
+   	    <div>
+	   	    <li class="collection-item">
+	        <p>Firstname: {{row.firstname}}</p>
+	        <p>Secondname: {{row.lastname}}</p>
+	        <p>Contact number: {{row.contactNo}}</p>
+	        <p>Country: {{row.country}}</p>
+	        <p>Email: {{row.email}}</p>
+	        <p>Gender: {{row.gender}}</p>
+	        <p>Univertity: {{row.University}}</p>
+	        <p>Status: {{row.status}}</p>
+	        <p>Matriculation number: {{row.matricNo}}</p>
+	        <p>Degree: {{row.degreeSubject}}</p>
+	        <p>Year of Study: {{row.yearofstudy}}</p>
+	        <p>User Group: {{row.usergroup}}</p>
+	       <div> </div>
 
-	</tr>
-	<tr>
-	<th>
-                <input st-search="username" placeholder="search for username" class="input-sm form-control" type="search"/>
-            </th></tr>
-	</thead>
-	<tbody>
-	<tr ng-repeat="row in users">
-		<td>{{row.username}}</td>
-		<td>{{row.firstname}}</td>
-		<td>{{row.lastname}}</td>
-		<td>{{row.contactNo}}</td>
-		<td>{{row.country}}</td>
-		<td>{{row.email}}</td>
-		<td>{{row.gender}}</td>
-		<td>{{row.University}}</td>
-		<td>{{row.status}}</td>
-		<td>{{row.matricNo}}</td>
-		<td>{{row.degreeSubject}}</td>
-		<td>{{row.yearofstudy}}</td>
-		<td>{{row.usergroup}}</td>
+	    </li>
 
-	</tr>
+   	    </div>
+   	    </ul>
+   	</div>
 
-	</tbody>
-</table>
+	

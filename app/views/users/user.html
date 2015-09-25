@@ -1,0 +1,53 @@
+<h1>{{users.username}}</h1>
+
+
+  
+        <div class="card-panel white">
+          <div id="content" style="display:block" ng-hide="deleting">
+        	    <div class="row">
+      				<div class="col s12 m7 l7">
+      					<h3>User Profile </h3>
+      					<span class="black-text"><b>Firstname:</b> {{users.firstname}}</span></br>
+      					<span class="black-text"><b>Lastname:</b> {{users.lastname}}</span></br>
+      					<span class="black-text"><b>Gender:</b> {{users.gender}}</span></br>
+      					<span class="black-text"><b>Email:</b> {{users.email}}</span></br>
+      					<span class="black-text"><b>Contact Number:</b> {{users.contactNo}}</span></br>
+      					<span class="black-text"><b>Country:</b> {{users.country}}</span></br>
+      					<span class="black-text"><b>University:</b> {{users.university}}</span></br>
+      					<span class="black-text"><b>Subject:</b> {{users.degreeSubject}}</span></br>
+      					<span class="black-text"><b>Status:</b> {{users.status}}</span></br>
+      					<span class="black-text"><b>Year of Study:</b> {{users.yearofstudy}}</span></br>
+      					<span class="black-text"><b>Matriculation number:</b> {{users.matricNo}}</span></br>
+      					<span class="black-text"><b>Young Enterprineurs Society:</b> {{users.firstname}}</span></br>
+      					<span class="black-text"><b>User Group:</b> {{users.usergroup}}</span></br>
+      					<span class="black-text"><b>Registration:</b> {{users.regDate}}</span></br>
+                <span class="black-text" hidden><b>Registration:</b> {{users.id}}</span></br>
+                <span class="black-text" hidden>{{deleting}}</span></br>
+      				</div>
+             
+   
+
+      				<div class="col m1 s0 l1">
+      					
+      				</div>
+
+      				<div class="col m4 s12 l4">
+      					<h3>Biography </h3>
+      					<span class="black-text">{{users.bio}}</span>
+      				</div>
+          
+       			</div>
+          </div>
+            <div class="row">
+          <div id="message" style="display:none"> <h3>Are you sure you want to delete user?</h3></div>
+         
+          <div style="float:right"  ng-hide="deleting" ><a href="#/user/{{users.username}}/reset" class="waves-effect waves-light btn" id="resetbtn">Reset Password</a></div>
+         <div style="float:right" ng-hide="deleting"><a href="#/user/{{users.username}}/edit" class="waves-effect waves-light btn" id="editbtn" >Edit</a></div>
+         <div style="float:right" ng-hide="deleting"><a class="waves-effect waves-light btn" id="deletebtn" ng-click="delete()" >Delete</a></div>
+        
+
+         <div ng-show="deleting"><h3>Are you sure you want to delete {{users.username}} ?</h3> </div>
+          <div style="float:right" ng-show="deleting"><a class="waves-effect waves-light btn" id="deletebtn" ng-click="confirm(users.id,users.username)" >Confirm</a></div>
+         </div> </div>
+       
+    	</div>
