@@ -128,13 +128,14 @@ angular.module('app.users', ['ngRoute'])
     }).success(function(data, status, headers, config) {
 
         $scope.user=data.UserInfo[0];
+        $scope.user.yearofstudy=""+data.UserInfo[0].yearofstudy;
 
     }).
     error(function(data, status, headers, config) {
         $scope.error = true;
     });
 
-    $scope.update = function(editor) {
+    $scope.updateUser = function(editor) {
                 var username = editor.username;
                 var firstname = editor.firstname;
                 var lastname = editor.lastname;
@@ -163,7 +164,7 @@ angular.module('app.users', ['ngRoute'])
                     url: backend+"/user/"+username,
                     method: 'POST',
                     dataType: 'json',
-
+                     data:  bio ,
                     headers: {
                         'Content-Type': 'application/json; charset=utf-8',
                         'username': username,
@@ -184,7 +185,7 @@ angular.module('app.users', ['ngRoute'])
                         'young_es': young_es,
 
                     },
-                    bio: "'" + editor.bio + "'"
+                   
 
 
                 }).success(function(data, status, headers) {
@@ -197,8 +198,7 @@ angular.module('app.users', ['ngRoute'])
                     toastr.error('Login Success', 'User failed to Update :(');
                 });
             }
-        }
-    ])
+        }])
 
 
 
