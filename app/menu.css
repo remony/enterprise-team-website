@@ -40,3 +40,21 @@ span.colourMeBlue::before {
     background-color:#e3e3e3;
     position:absolute;
 }
+
+html { 
+  background: url(assets/images/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.light-blue {
+    height:150px!important;
+}
+
+.navigaiton {
+    position:absolute!important
+    ;
+    bottom:0!important;
+}

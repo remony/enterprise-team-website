@@ -31,9 +31,9 @@
 
     <ul>
       <div ng-repeat="page in pages">
-        <li >{{page.title}} </li>
+        <li >{{page.title}} <a ng-click="delete(page)" value="Delete"/>Delete</a></li>
         <div ng-repeat="subpage in page.subpages">
-          <li> > {{subpage.title}} </li>
+          <li> > {{subpage.title}} <a ng-click="delete(subpage)" value="Delete"/>Delete</a>
           <!-- <a ng-click="deleteSubpage({{subpage.slug}})">delete</a>  -->
         </div>
       </div>

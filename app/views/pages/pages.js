@@ -18,6 +18,11 @@ angular.module('app.pages', ['ngRoute'])
             templateUrl: 'views/pages/page.html',
             controller: 'pageCtrl'
         });
+
+        $routeProvider.when('/page/:slug/edit', {
+            templateUrl: 'views/pages/pageEditor.html',
+            controller: 'pageEditorCtrl'
+        });
     }
 ])
 
@@ -29,7 +34,7 @@ angular.module('app.pages', ['ngRoute'])
 
 
         $http({
-            url:  backend + "/pages",
+            url: backend + "/pages",
             method: 'GET',
             dataType: 'json',
             data: '',
@@ -60,24 +65,24 @@ angular.module('app.pages', ['ngRoute'])
 
             function loadPages() {
                 $http({
-                url: backend + "/pages",
-                method: 'GET',
-                dataType: 'json',
-                data: '',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                }
-            }).success(function(data, status, headers, config) {
-                $scope.pages = data.pages;
-                console.log(data.pages);
+                    url: backend + "/pages",
+                    method: 'GET',
+                    dataType: 'json',
+                    data: '',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    }
+                }).success(function(data, status, headers, config) {
+                    $scope.pages = data.pages;
+                    console.log(data.pages);
 
-            }).
-            error(function(data, status, headers, config) {
-                console.log(status);
+                }).
+                error(function(data, status, headers, config) {
+                    console.log(status);
 
-            });
+                });
             }
-loadPages();
+            loadPages();
 
             $scope.ad = function(page, index) {
                 console.log(page);
@@ -86,7 +91,7 @@ loadPages();
             }
 
             $scope.addPage = function(page, index) {
-                
+
 
                 addPage(page, index);
             }
@@ -104,13 +109,36 @@ loadPages();
                         'parentSlug': slug,
                         'title': page.title,
                         'description': page.description,
-                        'order':index,
-                        'permission': 'admin'
+                        'order': index,
+                        'permission': 'admin',
+                        'token': localStorageService.get('user_auth').user_auth[0].token
 
                     }
                 }).success(function(data, status, headers, config) {
                     $scope.pages = data.pages;
                     console.log(data);
+                    loadPages();
+
+                }).
+                error(function(data, status, headers, config) {
+                    console.log(status);
+
+                });
+            }
+
+            $scope.delete = function(page) {
+                console.log(page);
+                $http({
+                    url: "http://localhost:8080/pages/" + page.slug + "/delete",
+                    method: 'POST',
+                    dataType: 'json',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'slug': page.slug,
+                        'token': localStorageService.get('user_auth').user_auth[0].token
+                    }
+                }).success(function(data, status, headers, config) {
+                    
                     loadPages();
 
                 }).
@@ -126,14 +154,14 @@ loadPages();
         }
     ])
 
- .controller('pageCtrl', ['$scope', '$http', 'localStorageService', '$rootScope', '$routeParams',
-        function($scope, $http, localStorageService, $rootScope, $routeParams) {
-            $scope.title = $routeParams.slug;
+.controller('pageCtrl', ['$scope', '$http', 'localStorageService', '$rootScope', '$routeParams',
+    function($scope, $http, localStorageService, $rootScope, $routeParams) {
+        $scope.title = $routeParams.slug;
 
-            getPage($routeParams.slug);
+        getPage($routeParams.slug);
 
-            function getPage(slug) {
-                 $http({
+        function getPage(slug) {
+            $http({
                 url: backend + "/pages/" + slug,
                 method: 'GET',
                 dataType: 'json',
@@ -150,6 +178,86 @@ loadPages();
                 console.log(status);
 
             });
+        }
+
+    }
+])
+    .controller('pageEditorCtrl', ['$scope', '$http', 'localStorageService', '$rootScope', '$routeParams',
+        function($scope, $http, localStorageService, $rootScope, $routeParams, config) {
+            $scope.title = "Editing " + $routeParams.slug;
+
+            getPage($routeParams.slug);
+
+ $scope.tinymceOptions = {
+    onChange: function(e) {
+      // put logic here for keypress and cut/paste changes
+    },
+    inline: false,
+    plugins : 'advlist autolink link image lists charmap print preview rImage youtube',
+    toolbar: ["undo redo | styleselect | bold italic | link image",
+        "alignleft aligncenter alignright | youtube rImage"],
+    external_plugins: {
+                    "rImage": '/assets/js/rimage/plugin.js'
+                },theme: "modern",
+                skin: 'light'
+  };
+
+
+            $scope.update = function(page) {
+             
+
+                $http({
+                    url: backend + "/pages/" + $routeParams.slug + '/edit',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: page.text,
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'parentSlug': page.parentSlug,
+                        'title': page.title,
+                        'description': page.description,
+                        'order': page.order,
+                        'permission': 'admin',
+                        'token': localStorageService.get('user_auth').user_auth[0].token
+
+                    }
+                }).success(function(data, status, headers, config) {
+                    $scope.pages = data.pages;
+                    console.log($routeParams.slug);
+                    getPage();
+                    location.reload();
+
+                }).
+                error(function(data, status, headers, config) {
+                    console.log(status);
+
+                });
+
+
+
+            }
+            
+
+            function getPage(slug) {
+                $http({
+                    url: backend + "/pages/" + slug,
+                    method: 'GET',
+                    dataType: 'json',
+                    data: '',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    }
+                }).success(function(data, status, headers, config) {
+                    $scope.page = data.singlepage[0];
+                    $scope.body = data.singlepage[0].text;
+                    console.log(data.singlepage[0]);
+
+                }).
+                error(function(data, status, headers, config) {
+                    console.log(status);
+
+                });
             }
 
-        }]);
+        }
+    ]);

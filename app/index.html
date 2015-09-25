@@ -23,8 +23,9 @@
         
       </ul>
       <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">The Enterprise Gym</a>
-        <ul class="right hide-on-med-and-down">
+        <div class="nav-wrapper container"><a id="logo-container" href="#/" class="brand-logo">The Enterprise Gym</a>
+        <br>
+        <ul class="center left navigaiton hide-on-med-and-down">
           
           <li class="dropdown-button" ng-show="item.subitems" ng-repeat="item in items track by $index" data-activates="dropdown{{$index}}"><a href="{{item.link}}">{{item.title}}<i class="fa fa-chevron-down right" ></i></a></li>
           
@@ -34,7 +35,7 @@
         </ul>
         <!--  sidebar   -->
         <ul id="nav-mobile" class="side-nav">
-          <div class="items" ng-repeat="item in items.items track by $index">          
+          <div class="items" ng-repeat="item in items track by $index">          
             <li><a ng-show="item.subitems" ng-click="clicked = !clicked">{{item.title}}</a><a ng-hide="item.subitems" href="{{item.link}}">{{item.title}}</a></li>
 
             <div class="subitems" ng-repeat="subitems in item.subitems" ng-show="clicked">

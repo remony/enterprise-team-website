@@ -23,6 +23,7 @@ angular.module('app.points.manager', ['ngRoute'])
                 data: '',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
+                        'token': localStorageService.get('user_auth').user_auth[0].token
                 }
             }).success(function(data, status, headers, config) {
                 console.log(data.points);
