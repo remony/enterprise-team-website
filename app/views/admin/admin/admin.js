@@ -16,7 +16,7 @@ angular.module('app.admin', ['ngRoute'])
         $scope.title = "Admin Panel";
         Materialize.toast("Welcome " + localStorageService.get('user_auth').user_auth[0].username, 1000);
         $scope.active = null;
-        $scope.links = [{
+        $scope.links = [{"title": "Site", "link":"#/admin"},{
             "title": "Users",
             "link": "#/admin"
         }, {
@@ -36,6 +36,11 @@ angular.module('app.admin', ['ngRoute'])
             "username": "stan1"
         }]
 
+        $scope.siteinfo = [{
+            "name": "The Enterprise Gym",
+            "description": "Stuff"
+        }]
+
 
         $scope.click = function(selection) {
 
@@ -53,6 +58,14 @@ angular.module('app.admin', ['ngRoute'])
 
             if (selection === 'Pages') {
                 $scope.active = 'pages';
+            }
+
+            if (selection === 'Site') {
+                $scope.active = 'site';
+            }
+
+            if (selection === 'export') {
+                $scope.active = 'export';
             }
 
         }

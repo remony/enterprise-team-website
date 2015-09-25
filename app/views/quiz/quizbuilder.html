@@ -1,0 +1,39 @@
+<h1>{{title}}</h1>
+{{quiz}}
+<!-- For each question in the quiz -->
+<div  ng-repeat="question in quiz[0].question track by $index">
+	<hr>
+	<!-- Display the title -->
+	{{question.title}}
+	<br>
+	<i>Select the answer you wish to set as the correct answer.</i>
+	<!-- For each answer in the question -->
+	<div ng-repeat="answer in question.answers">
+		<!-- Display the answer -->
+		<p ng-click="selectRightAnswer()">{{answer.title}}</p>
+	</div>
+	<!-- Display a input field to allow users to enter a new answer -->
+	<form name="answer" ng-submit="addAnswer(answer, $index)">
+		
+		<div class="col s12 m6">
+			<p>Add answer:<br>
+				<input type="text" name="user.password" ng-model="answer" required>
+			</p>
+		</div>
+		<p>
+			<input class="waves-effect waves-light btn" type="submit"  value="Add Answer">
+		</p>
+	</form>
+</div>
+<!-- Display an input field to allow users to enter new questions -->
+<form name="question" ng-submit="addQuestion(quiz)">
+	
+	<div class="col s12 m6">
+		<p>Password:<br>
+			<input type="text" name="user.password" ng-model="quiz.question" required>
+		</p>
+	</div>
+	<p>
+		<input class="waves-effect waves-light btn" type="submit"  value="Add Question">
+	</p>
+</form>

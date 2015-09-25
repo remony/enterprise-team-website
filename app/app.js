@@ -16,7 +16,7 @@ var App = angular.module('app', [
     'app.pages',
     'app.my',
     'app.points.manager',
-
+    'app.quiz',
     //Factories
     'app.config',
 
