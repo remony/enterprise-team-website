@@ -50,7 +50,7 @@ angular.module('app.register', ['ngRoute'])
     //   "status":"johndoee",
     //   "subject":"johndoee",
     //   "matricnumber":"johndoee",
-    //   //"young_es":0,
+    //   "young_es":0,
     //   "yearofstudy":3,
     //   "usergroup":"unauthorised",
     //   "bio":"johndoee"
@@ -106,4 +106,5 @@ angular.module('app.register', ['ngRoute'])
       });
 
     }
-}]);
+}
+]);
