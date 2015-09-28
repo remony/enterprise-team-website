@@ -275,7 +275,7 @@ App.filter('uppercase', function() {
         Filter created by: EpokK
         source: http://stackoverflow.com/questions/18095727/limit-the-length-of-a-string-with-angularjs
 */
-App.filter('cut', function () {
+App.filter('cut', function ($sce) {
         return function (value, wordwise, max, tail) {
             if (!value) return '';
 
@@ -291,6 +291,6 @@ App.filter('cut', function () {
                 }
             }
 
-            return value + (tail || '…');
+            return $sce.trustAsHtml(value + (tail || '…'));
         };
     });
