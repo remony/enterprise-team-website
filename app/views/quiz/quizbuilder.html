@@ -1,0 +1,53 @@
+<h1>{{title}}</h1>
+
+{{quiz}}
+<div ng-repeat="question in quiz track by $index" ng-init="parentindex = $index">
+	<h3>{{question.question}}</h3>
+	<table >
+		<thead>
+			
+			<tr>
+				<th data-field="id">Question</th>
+				<th data-field="name"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="answer in question.options track by $index" ng-init="childindex = $index">
+				<td><a ng-click="selectRightAnswer( parentindex, childindex)"><span ng-show="answer.iscorrect">>   </span>{{answer.title}} <span ng-show="answer.iscorrect"> (Selected answer)</span></a></td>
+			</tr>
+			
+		</tbody>
+	</table>
+	<form name="answer" ng-submit="addAnswer(answer, parentindex, childindex)">
+		
+		<div class="col s12 m6">
+			<p>Add answer:<br>
+				<input type="text" name="answer.title" ng-model="answer.title">
+			</p>
+		</div>
+		<p>
+			<input class="waves-effect waves-light btn" type="submit"  value="Add Answer">
+		</p>
+	</form>
+</div>
+<!-- Display an input field to allow users to enter new questions -->
+<form name="question" ng-submit="addQuestion(input)">
+	
+	<div class="col s12 m6">
+		<p>Add Question<br>
+			<input type="text" name="input.question" ng-model="input.question">
+		</p>
+	</div>
+	<p>
+		<input class="waves-effect waves-light btn" type="submit"  value="Add Question">
+	</p>
+</form>
+<form novalidate>
+	Title:<br>
+	<input type="text" ng-model="title"><br>
+	Points:<br>
+	<input type="text" ng-model="points">
+	Pass Mark:<br>
+	<input type="text" ng-model="passmark"><br><br>
+	<button class="waves-effect waves-light btn" ng-click="save(title, points, passmark)">Save Quiz</button>
+</form>

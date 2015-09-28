@@ -1,0 +1,190 @@
+/*
+            Kuizu Css
+
+
+*/
+
+
+.kuizu_base {
+    padding: 10px;
+    background-color: transparent;
+
+}
+
+.kuizu_questionNumber {
+    text-align: right;
+    color: #212121;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.kuizu_question_window {
+
+}
+
+.kuizu_question_window_icon {
+    position: relative;
+    float: right;
+    margin-top: -80px;
+    left: 0;
+    font-size: 9em;
+}
+
+.kuizu_base ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.kuizu_base button, .kuizu_intro button {
+    background-color: #333;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 1em;
+    color: #fff;
+    -webkit-appearance: none;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.kuizu_base button:hover {
+    background-color: #111;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.56);
+}
+
+.kuizu_options    {
+    position:absolute;
+}
+
+.kuizu_question_list {
+    background-color: transparent;
+}
+
+.kuizu_question_list button {
+    background: #2196F3;
+}
+
+.kuizu_question_list button:hover {
+    background-color: #208ce5;
+}
+
+.kuizu_question {
+    font-size: 2em;
+    background-color: transparent;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    text-align: center;
+    color: #212121;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.kuizu_wrong, .kuizu_correct    {
+    font-size:10em;
+    position:absolute;
+    top:-50%;
+    left:50%;
+    right:50%;
+}
+
+.kuizu_correct  {
+    color:#64DD17;
+}
+
+.kuizu_wrong {
+    color:#D50000;
+}
+
+/*
+                Score screen
+
+*/
+
+.kuizu_score {
+    text-align: center;
+}
+
+
+
+.kuizu_score p {
+    font-size: 4em;
+    font-weight: 900;
+}
+
+.kuizu_score_title   {
+    border-style: solid;
+    border-width: 8px;
+    border-color:#333333;
+    width:150px;
+    height:90px;
+    margin:0 auto;
+    text-align:center;
+
+}
+
+.kuizu_twitterButton {
+    background-color: #4099FF;
+    padding: 10px;
+    color: #fff;
+    min-width: 50%;
+    text-align: center;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.kuizu_twitterButton:hover {
+    background-color: #3682d9;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.5);
+}
+
+.kuizu_twitterButton a:link {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none
+}
+
+.kuizu_twitterButton a:visited {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none
+}
+
+.kuizu_twitterButton a:hover {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: underline
+}
+
+.kuizu_twitterButton a:active {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: underline
+}
+
+.kuizu_twitterButton_icon {
+    font-size: 2em;
+    color: #333;
+}
+
+
+/*
+            File not found view
+*/
+
+.kuizu_fileNotFound   {
+    width:100%;
+    text-align:center;
+    padding-top:20px;
+    padding-bottom:20px;
+    background-color: #F44336;
+    color:#fff;
+}

@@ -8,9 +8,26 @@
 		</div>
 	</div>
 	<div class="col s9">
+		<!--
+				Site editing section
+		-->
+		<div ng-if="active === 'site'">
+			<p>Site name<br>
+				<input type="password" name="user.password" ng-model="siteinfo.site_name" required>
+			</p>
+			<p>Site description<br>
+				<input type="password" name="user.password" ng-model="siteinfo.site_description" required>
+			</p>
+			<p>
+				<input class="waves-effect waves-light btn" type="submit" value="Update">
+			</p>
+		</div>
+		<!--
+					User editing section
+		-->
 		<div ng-if="active === 'users'">
 			<div class="row">
-				<div class="col s1"><a href="#/admin/user/add" class="waves-effect waves-light btn">Add</a></div>
+				
 			</div>
 			<table st-table="rowCollection" class="table table-striped">
 				<thead>
@@ -88,19 +105,11 @@
 			</table>
 		</div>
 		<div ng-if="active === 'pages'">
-		<div class="row">
+			<div class="row">
 				<input type="text"></div><div class="col s1"><a href="#/admin/news/add" class="waves-effect waves-light btn">Add</a></div>
 			</div>
-				
-  		</div>
-
-    <label>Browser Select</label>
-    <select class="browser-default">
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
+			
 		</div>
 	</div>
+</div>
 </div>
