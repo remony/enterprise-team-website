@@ -8,23 +8,61 @@
 
 
 
-<div id="slideshow">
-     <img src="{{image}}" > 
+<div id="slidesh">
+     <img src="{{image}}" class="animated slideInLeft" > 
+     <div id="slideshdesc"><p><a href="#/events/{{id}}">{{title}}</a></p></div>
 </div>
-{{image}}
 
 
 
 
 <style>
-#slideshow { 
-    margin: 50px auto; 
+#slidesh { 
+
     position: relative; 
     width: 100%; 
-    height: 400px; 
-    padding: 10px; 
+    height: 350px; 
     box-shadow: 0 0 20px rgba(0,0,0,0.4); 
+  
 }
+#slidesh img { 
+   
+    width: 100%; 
+    height: 100%; 
+    margin-left: 0%;
+    margin-right: :0%;
+    bottom: 0%;
+ 
+
+}
+#slideshdesc { 
+   position: absolute; 
+    width: 100%; 
+    height: 15%; 
+    margin-left: 0%;
+    margin-right: :0%;
+    bottom: 0%;
+    background: rgba(0, 0, 0, .4);
+
+
+}
+#slideshdesc p { 
+
+   color:white;
+   margin-left: 5%;
+   font-size: 14 px;
+   
+    
+}
+#slideshdesc a { 
+
+   color:white;
+   margin-left: 5%;
+   font-size: 14 px;
+   
+    
+}
+
 
 </style>
 

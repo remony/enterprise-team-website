@@ -302,26 +302,46 @@ angular.module('app.users', ['ngRoute'])
         
         var imageNo=0;
          $scope.slides = [
-            {image: '../assets/images/background.jpg', description: 'Image 00'},
-            {image: '../assets/images/logo.png', description: 'Image 01'},
-            {image: '../assets/images/background.jpg', description: 'Image 02'},
-            {image: '../assets/images/logo.png', description: 'Image 03'},
+            {image: '../assets/images/1.jpg', description: 'Image 00'},
+            {image: '../assets/images/2.jpg', description: 'Image 01'},
+            {image: '../assets/images/3.jpg', description: 'Image 02'},
+            {image: '../assets/images/4.jpg', description: 'Image 03'},
             
         ];
 
-        $scope.image=$scope.slides[imageNo].image;
+        $http({
+            url: backend + "/events",
+            method: 'GET',
+            dataType: 'json',
+            data: '',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+            }
+        }).success(function(data, status, headers, config) {
+            $scope.eventtitle = [ data.events[0].name,data.events[1].name,data.events[2].name,data.events[3].name,data.events[4].name];
+            $scope.eventid = [ data.events[0].id,data.events[1].id,data.events[2].id,data.events[3].id,data.events[4].id];
+
+             $scope.image=$scope.slides[imageNo].image;
+             $scope.title=$scope.eventtitle[imageNo];
+             $scope.id=$scope.eventid[imageNo];
+        });
+
+
+
+       
    
           setInterval(function(){
             imageNo++;
-            console.log("hello"+imageNo);
             if(imageNo===$scope.slides.length)
             {
                 imageNo=0;
             }
            $scope.image=$scope.slides[imageNo].image;
-         
+           $scope.title=$scope.eventtitle[imageNo];
+           $scope.id=$scope.eventid[imageNo];
 
-         }, 2000);
+           $scope.$digest();
+         }, 4000);
         
 
 
