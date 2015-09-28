@@ -77,6 +77,40 @@ angular.module('app.users', ['ngRoute'])
                 $scope.error = true;
             });
 
+            $http({
+                url: backend+"/points/" + $routeParams.user,
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'token':token
+                }
+            }).success(function(data, status, headers, config) {
+                if(data.points.length==0)
+                {
+                    $scope.enterprise=0;
+                    $scope.total=0;
+                    $scope.virtual=0;
+                    $scope.project=0;
+                    $scope.action=0;
+                    $scope.theory=0;
+                }
+                else{
+                    $scope.enterprise=data.points[0].enterprise_challenge;
+                    $scope.total=data.points[0].total;
+                    $scope.virtual=data.points[0].virtual;
+                    $scope.project=data.points[0].total;
+                    $scope.action=data.points[0].action;
+                    $scope.theory=data.points[0].theory;
+                }
+
+               
+            }).
+            error(function(data, status, headers, config) {
+                $scope.error = true;
+            });
+
     $scope.confirm = function(userid,username) {
                 
                 $http({
