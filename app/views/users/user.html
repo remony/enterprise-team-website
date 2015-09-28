@@ -35,19 +35,22 @@
       					<h3>Biography </h3>
       					<span class="black-text">{{users.bio}}</span>
       				</div>
+
           
+
        			</div>
           </div>
             <div class="row">
           <div id="message" style="display:none"> <h3>Are you sure you want to delete user?</h3></div>
-         
+           <a href="#/user/{{users.id}}/quizzes">Click to see performed quizzes</a>
           <div style="float:right"  ng-hide="deleting" ><a href="#/user/{{users.username}}/reset" class="waves-effect waves-light btn" id="resetbtn">Reset Password</a></div>
          <div style="float:right" ng-hide="deleting"><a href="#/user/{{users.username}}/edit" class="waves-effect waves-light btn" id="editbtn" >Edit</a></div>
          <div style="float:right" ng-hide="deleting"><a class="waves-effect waves-light btn" id="deletebtn" ng-click="delete()" >Delete</a></div>
+
         
 
          <div ng-show="deleting"><h3>Are you sure you want to delete {{users.username}} ?</h3> </div>
           <div style="float:right" ng-show="deleting"><a class="waves-effect waves-light btn" id="deletebtn" ng-click="confirm(users.id,users.username)" >Confirm</a></div>
          </div> </div>
-       
+             
     	</div>
