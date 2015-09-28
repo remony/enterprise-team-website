@@ -3,17 +3,29 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
 
-<body ng-controller="SliderCtrl">
 
-<div class="container slider">
-   <img ng-repeat="slide in slides" class="slide slide-animation"
-        ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}">
-   
-     <div style="float:right" ><a class="waves-effect waves-light btn" ng-click="nextSlide()" >Next Slide</a></div>
-	<div style="float:left" ><a class="waves-effect waves-light btn" ng-click="prevSlide()" >Previous Slide</a></div>
-		        
+
+
+
+
+<div id="slideshow">
+     <img src="{{image}}" > 
 </div>
+{{image}}
 
 
 
-<body ng-controller="MainCtrl">
+
+<style>
+#slideshow { 
+    margin: 50px auto; 
+    position: relative; 
+    width: 100%; 
+    height: 400px; 
+    padding: 10px; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.4); 
+}
+
+</style>
+
+
