@@ -43,7 +43,8 @@ var App = angular.module('app', [
 
 
     /*    Directives    */
-    'app.egHeader'
+    'app.egHeader',
+    'app.kuizu'
 ]);
 
 App.config(['$routeProvider',
