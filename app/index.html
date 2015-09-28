@@ -19,6 +19,20 @@
   </head>
   <body>
     <div class="naviCtrl" ng-controller="navigationCtrl">
+    <nav class="grey admin_panel" role="navigation" ng-show="admineditor">
+
+      <ul class="center left navigaiton hide-on-med-and-down">
+          <span ng-repeat="item in admin_items track by $index" >
+          <li class="dropdown-button" ng-show="item.subitems" data-activates="dropdown{{$index}}"><a href="{{item.link}}" ng-bind="item.title"><i class="fa fa-chevron-down right" ></i></a></li>
+          <ul ng-repeat="item in admin_items track by $index" id="dropdown{{$index}}" class="dropdown-content admin" ng-show="item.subitems">
+        <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}" ng-bind="subitem.title"></a></li>
+        
+      </ul>
+          <li ng-hide="item.subitems" class="subitem" ><a href="{{item.link}}" ng-bind="item.title"></a></li>
+          
+          </span>
+        </ul>
+    </nav>
       <!-- <ul ng-repeat="item in items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
         <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}" ng-bind="subitem.title"></a></li>
         
@@ -94,17 +108,16 @@
         <div class="col l3 s12">
           <h5 class="white-text">Connect</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="#!/pages/contact">Contact</a></li>
+            <li><a class="white-text" href="#!">Facebook</a></li>
+            <li><a class="white-text" href="#!">Twitter</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
-        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">The Enterprise Gym</a>
       </div>
     </div>
   </footer>

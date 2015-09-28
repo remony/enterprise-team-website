@@ -62,3 +62,13 @@ html {
 .isAnswer {
   color:green;
 }
+
+.grey, .admin_panel{
+  position: relative;
+  background-color:#333!important;
+}
+
+.dropdown-content.admin {
+  
+}
+

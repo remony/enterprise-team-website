@@ -16,7 +16,10 @@ angular.module('app.admin', ['ngRoute'])
         $scope.title = "Admin Panel";
         Materialize.toast("Welcome " + localStorageService.get('user_auth').user_auth[0].username, 1000);
         $scope.active = null;
-        $scope.links = [{"title": "Site", "link":"#/admin"},{
+        $scope.links = [{
+            "title": "Site",
+            "link": "#/admin"
+        }, {
             "title": "Users",
             "link": "#/admin"
         }, {
@@ -68,6 +71,10 @@ angular.module('app.admin', ['ngRoute'])
                 $scope.active = 'export';
             }
 
+            if (selection === 'quiz') {
+                $scope.active = 'quiz';
+            }
+
         }
 
         updateEvents();
@@ -115,26 +122,26 @@ angular.module('app.admin', ['ngRoute'])
     ])
 
 .controller('pagesAddCtrl', ['$scope', '$http', 'localStorageService',
-        function($scope, $http, localStorageService, taOptions, element) {
-          $scope.title = "Admin Panel";
+    function($scope, $http, localStorageService, taOptions, element) {
+        $scope.title = "Admin Panel";
 
-            function updatePages() {
-                $http({
-                    url: backend + "/pages",
-                    method: 'GET',
-                    dataType: 'json',
-                    data: '',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                    }
-                }).success(function(data, status, headers, config) {
-                    $scope.pages = data.pages;
-                });
+        function updatePages() {
+            $http({
+                url: backend + "/pages",
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                }
+            }).success(function(data, status, headers, config) {
+                $scope.pages = data.pages;
+            });
 
-            }
-            updatePages();
-                $scope.addParent = function(name, order) {
-                    /*
+        }
+        updatePages();
+        $scope.addParent = function(name, order) {
+            /*
                 parentSlug
                 title
                 description
@@ -144,23 +151,24 @@ angular.module('app.admin', ['ngRoute'])
 
 
             */
-                console.log(name, order);
-                $http({
-                    url: backend + "/pages",
-                    method: 'post',
-                    dataType: 'json',
-                    data: '',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                        'parentSlug': 'main',
-                        'title': name,
-                        'text': 'Please edit this page',
-                        'description': 'Please enter a description',
-                        'permission': 'admin',
-                        'order': order
-                    }
-                }).success(function(data, status, headers, config) {
-                    updatePages();
-                });
-            }  
-        }]);
+            console.log(name, order);
+            $http({
+                url: backend + "/pages",
+                method: 'post',
+                dataType: 'json',
+                data: '',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'parentSlug': 'main',
+                    'title': name,
+                    'text': 'Please edit this page',
+                    'description': 'Please enter a description',
+                    'permission': 'admin',
+                    'order': order
+                }
+            }).success(function(data, status, headers, config) {
+                updatePages();
+            });
+        }
+    }
+]);

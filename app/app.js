@@ -57,7 +57,12 @@ App.config(['$routeProvider',
 
 App.controller('appCtrl', ['$scope', '$http',
     function($scope, $http, config) {
-        $scope.items = [{"items":[]}];
+        $scope.items = [{
+            "items": []
+        }];
+        $scope.admin_items = [{
+            "items": []
+        }];
         console.log("Page is loading");
         $http({
             url: backend + '/',
@@ -85,47 +90,65 @@ App.controller('appCtrl', ['$scope', '$http',
 
 
 App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$rootScope',
-    function($scope, $http,  localStorageService, $rootScope, config) {
+    function($scope, $http, localStorageService, $rootScope, config) {
 
         function getPages() {
 
             var pages = [];
             console.log("getting pages");
             $http({
-                        url: backend + "/pages",
-                        method: 'GET',
-                        dataType: 'json',
-                        data: null
-                    }).success(function (data, status, headers) {
-                        pages = data.pages;
-                        var j = data.pages.length;
-                        console.log(data);
+                url: backend + "/pages",
+                method: 'GET',
+                dataType: 'json',
+                data: null
+            }).success(function(data, status, headers) {
+                pages = data.pages;
+                var j = data.pages.length;
+                console.log(data);
 
-                        for (var i = 0; i < j; i++) {
-                            console.log(data.pages[i].title);
-                            var newitem = {
-                                "title": data.pages[i].title,
-                                "link": data.pages[i].link
-                            }
+                for (var i = 0; i < j; i++) {
+                    console.log(data.pages[i].title);
+                    var newitem = {
+                        "title": data.pages[i].title,
+                        "link": data.pages[i].link
+                    }
 
-                            // debugger;
-                            $scope.items.push(newitem);
+                    // debugger;
+                    $scope.items.push(newitem);
 
-                        }
+                }
 
-                        console.log(data.pages);
+                console.log(data.pages);
 
-                    }).error(function(data, status, headers) {
-                        console.log("The file doesn't exist - please contact the site owner");
-                    });
+            }).error(function(data, status, headers) {
+                console.log("The file doesn't exist - please contact the site owner");
+            });
         }
 
 
         function resetMenu() {
-            
 
 
-            $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3}]}];
+
+            $scope.items = [{
+                "items": [{
+                    "title": "Home",
+                    "link": "#/",
+                    "order": 0
+                }, {
+                    "title": "News",
+                    "link": "#/news",
+                    "order": 1
+                }, {
+                    "title": "Events",
+                    "link": "#/events",
+                    "order": 2
+                }, {
+                    "title": "Calendar",
+                    "link": "#/calendar",
+                    "order": 3
+                }]
+            }];
             getPages();
             if (localStorageService.get('user_auth')) {
 
@@ -141,59 +164,96 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                     if (isAuthed.usergroup === 'admin') {
                         //location.reload();
                         // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]},{"title":"Admin","link":"#/admin","order":5,"subitems":[{"title":"Admin Panel","link":"#/admin"},{"title":"Users","link":"#/users"}]},{"title":"Editor","link":"#/add","subitems":[{"title":"Add News","link":"#/admin/news/add"},{"title":"Add Event","link":"#/admin/event/add"},{"title":"Add Page","link":"#/admin/pages/add"},{"title":"Add Subpage","link":"#/admin/pages/subpages/add"}]}]}];
-                   $scope.items[0].items.push({"title":"Admin Tools","link":"#/admin","order":5,"subitems":[{"title":"Admin Panel","link":"#/admin"},{"title":"Users","link":"#/users"}]})
+                        $scope.admin_items[0].items.push({
+                            "title": "Admin Panel",
+                            "link": "#/admin"
+                        })
                     } else if (isAuthed.usergroup === 'editor') {
                         // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]},{"title":"Editor","link":"#/add","subitems":[{"title":"Add News","link":"#/admin/news/add"},{"title":"Add Event","link":"#/admin/events/new"},{"title":"Add Page","link":"#/"},{"title":"Add Subpage","link":"#/logout"}]}]}];
                         //location.reload();
                         $scope.items[0].items.push({
-                            "title":"editor"
+                            "title": "editor"
                         })
                     } else {
-                         // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]}]}];
+                        // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]}]}];
                         //location.reload();
                     }
-                   //$scope.items =$scope.items[0].items;
+                    //$scope.items =$scope.items[0].items;
 
-                   $scope.items[0].items.push({"title":"Editor","link":"#/add","subitems":[{"title":"Add News","link":"#/admin/news/add"},{"title":"Add Event","link":"#/admin/events/new"},{"title":"Add Page","link":"#/"},{"title":"Add Subpage","link":"#/logout"}]})
-
+                    $scope.admin_items[0].items.push({
+                        "title": "Editor",
+                        "link": "#/add",
+                        "subitems": [{
+                            "title": "Add News",
+                            "link": "#/admin/news/add"
+                        }, {
+                            "title": "Add Event",
+                            "link": "#/admin/events/add"
+                        }, {
+                            "title": "Add Page",
+                            "link": "#/admin/pages"
+                        }, {
+                            "title": "Add quiz",
+                            "link": "#/admin/quiz/builder"
+                        }]
+                    })
+                    $scope.admineditor = true;
 
                     $scope.login = true;
-            $scope.items[0].items.push({"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]})
-               } else {
-$scope.items[0].items.push({
-                            "title":"login",
-                            "link": "#/login"
-                        })
-                // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
-                //setTimeout(function() {$rootScope.$apply();}, 10);
-                //$scope.items =$scope.items[0].items;
-                $scope.login = false;
-               }
-                
+                    $scope.items[0].items.push({
+                        "title": isAuthed.username,
+                        "link": "",
+                        "order": 4,
+                        "subitems": [{
+                            "title": "My Profile",
+                            "link": "#/user/" + isAuthed.username
+                        }, {
+                            "title": "My Events",
+                            "link": "#/my/events"
+                        }, {
+                            "title": "My Points",
+                            "link": "#/my/points"
+                        }, {
+                            "title": "Logout",
+                            "link": "#/logout/"
+                        }]
+                    })
+                } else {
+                    $scope.items[0].items.push({
+                        "title": "login",
+                        "link": "#/login"
+                    })
+                    // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
+                    //setTimeout(function() {$rootScope.$apply();}, 10);
+                    //$scope.items =$scope.items[0].items;
+                    $scope.login = false;
+                }
+
             } else {
                 $scope.items[0].items.push({
-                            "title":"login",
-                            "link": "#/login"
-                        })
+                    "title": "login",
+                    "link": "#/login"
+                })
                 $scope.login = false;
                 // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
                 //setTimeout(function() {$rootScope.$apply();}, 10);
             }
-            
-// $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
-            
+
+            // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
 
 
-            
 
-            $scope.items =$scope.items[0].items;
 
-$scope.$digest
 
-       
-    
-    
-            
+            $scope.items = $scope.items[0].items;
+            $scope.admin_items = $scope.admin_items[0].items;
+
+            $scope.$digest
+
+
+
+
+
 
         }
 
@@ -220,13 +280,13 @@ $scope.$digest
                 resetMenu();
             }
 
-            
-            
+
+
             // isAuthed = newVal;
         })
 
 
-        
+
     }
 ]);
 
