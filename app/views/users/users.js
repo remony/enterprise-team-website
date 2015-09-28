@@ -283,7 +283,73 @@ angular.module('app.users', ['ngRoute'])
 }
 }
 
-}]);
+}])
+
+
+
+
+
+.config(['$routeProvider',
+    function($routeProvider) {
+        $routeProvider.when('/slider',{
+            templateUrl: 'views/slider/slider.html',
+            controller: 'SliderCtrl'
+        });
+    }
+])
+
+    .controller('SliderCtrl',  ['$scope', '$http', 'localStorageService', '$routeParams', function($scope, $http, localStorageService, $routeParams,config) {
+        
+        var imageNo=0;
+         $scope.slides = [
+            {image: '../assets/images/1.jpg', description: 'Image 00'},
+            {image: '../assets/images/2.jpg', description: 'Image 01'},
+            {image: '../assets/images/3.jpg', description: 'Image 02'},
+            {image: '../assets/images/4.jpg', description: 'Image 03'},
+            
+        ];
+
+        $http({
+            url: backend + "/events",
+            method: 'GET',
+            dataType: 'json',
+            data: '',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+            }
+        }).success(function(data, status, headers, config) {
+            $scope.eventtitle = [ data.events[0].name,data.events[1].name,data.events[2].name,data.events[3].name,data.events[4].name];
+            $scope.eventid = [ data.events[0].id,data.events[1].id,data.events[2].id,data.events[3].id,data.events[4].id];
+
+             $scope.image=$scope.slides[imageNo].image;
+             $scope.title=$scope.eventtitle[imageNo];
+             $scope.id=$scope.eventid[imageNo];
+        });
+
+
+
+       
+   
+          setInterval(function(){
+            imageNo++;
+            if(imageNo===$scope.slides.length)
+            {
+                imageNo=0;
+            }
+           $scope.image=$scope.slides[imageNo].image;
+           $scope.title=$scope.eventtitle[imageNo];
+           $scope.id=$scope.eventid[imageNo];
+
+           $scope.$digest();
+         }, 4000);
+        
+
+
+    
+
+
+    }]);
+   
 
 
 
