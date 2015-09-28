@@ -19,20 +19,26 @@
   </head>
   <body>
     <div class="naviCtrl" ng-controller="navigationCtrl">
-      <ul ng-repeat="item in items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
-        <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}">{{subitem.title}}</a></li>
+      <!-- <ul ng-repeat="item in items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
+        <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}" ng-bind="subitem.title"></a></li>
         
-      </ul>
+      </ul> -->
       <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="#/" class="brand-logo">The Enterprise Gym</a>
+        
+<div class="nav-wrapper container "><a id="logo-container" href="#/" class="brand-logo">The Enterprise Gym</a>
+
+        
         <br>
         <ul class="center left navigaiton hide-on-med-and-down">
+          <span ng-repeat="item in items track by $index" >
+          <li class="dropdown-button" ng-show="item.subitems" data-activates="dropdown{{$index}}"><a href="{{item.link}}" ng-bind="item.title"><i class="fa fa-chevron-down right" ></i></a></li>
+          <ul ng-repeat="item in items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
+        <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}" ng-bind="subitem.title"></a></li>
+        
+      </ul>
+          <li ng-hide="item.subitems" class="subitem" ><a href="{{item.link}}" ng-bind="item.title"></a></li>
           
-          <li class="dropdown-button" ng-show="item.subitems" ng-repeat="item in items track by $index" data-activates="dropdown{{$index}}"><a href="{{item.link}}">{{item.title}}<i class="fa fa-chevron-down right" ></i></a></li>
-          
-          <li ng-hide="item.subitems" class="subitem" ng-repeat="item in items track by $index"><a href="{{item.link}}">{{item.title}}</a></li>
-          
-          
+          </span>
         </ul>
         <!--  sidebar   -->
         <ul id="nav-mobile" class="side-nav">

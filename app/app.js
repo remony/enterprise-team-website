@@ -57,6 +57,7 @@ App.config(['$routeProvider',
 
 App.controller('appCtrl', ['$scope', '$http',
     function($scope, $http, config) {
+        $scope.items = [{"items":[]}];
         console.log("Page is loading");
         $http({
             url: backend + '/',
@@ -83,13 +84,49 @@ App.controller('appCtrl', ['$scope', '$http',
 
 
 
-App.controller('navigationCtrl', ['$scope', 'localStorageService', '$rootScope',
-    function($scope, localStorageService, $rootScope) {
+App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$rootScope',
+    function($scope, $http,  localStorageService, $rootScope, config) {
+
+        function getPages() {
+
+            var pages = [];
+            console.log("getting pages");
+            $http({
+                        url: backend + "/pages",
+                        method: 'GET',
+                        dataType: 'json',
+                        data: null
+                    }).success(function (data, status, headers) {
+                        pages = data.pages;
+                        var j = data.pages.length;
+                        console.log(data);
+
+                        for (var i = 0; i < j; i++) {
+                            console.log(data.pages[i].title);
+                            var newitem = {
+                                "title": data.pages[i].title,
+                                "link": data.pages[i].link
+                            }
+
+                            // debugger;
+                            $scope.items.push(newitem);
+
+                        }
+
+                        console.log(data.pages);
+
+                    }).error(function(data, status, headers) {
+                        console.log("The file doesn't exist - please contact the site owner");
+                    });
+        }
+
 
         function resetMenu() {
-            $scope.items = [{"items":[{}]}];
+            
+
 
             $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3}]}];
+            getPages();
             if (localStorageService.get('user_auth')) {
 
                 if (localStorageService.get('user_auth').user_auth) {
@@ -142,17 +179,16 @@ $scope.items[0].items.push({
                 // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
                 //setTimeout(function() {$rootScope.$apply();}, 10);
             }
-
+            
 // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
             
 
 
-
-
+            
 
             $scope.items =$scope.items[0].items;
 
-
+$scope.$digest
 
        
     
@@ -236,11 +272,11 @@ App.controller('sidebarCtrl', ['$scope', '$timeout', '$window', '$rootScope',
 ]);
 
 App.controller('authCtrl', ['$scope', 'localStorageService', '$http',
-    function($scope, localStorageService, $http) {
+    function($scope, localStorageService, $http, config) {
         var auth = localStorageService.get('user_auth');
         if (auth) {
             $http({
-                url: "http://localhost:8080/auth",
+                url: backend + "/auth",
                 method: 'POST',
                 dataType: 'json',
                 data: '',
