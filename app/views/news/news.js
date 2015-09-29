@@ -136,7 +136,7 @@ angular.module('app.news', ['ngRoute'])
             var slug = $routeParams.slug;
             $scope.uploader = new FileUploader();
 
-            $scope.uploader.url = "http://localhost:8080/file"
+            $scope.uploader.url = backend + "/file"
             $scope.uploader.formData = {
                 "news_id": 0,
                 "event_id": -1,
@@ -263,7 +263,7 @@ angular.module('app.news', ['ngRoute'])
                         'Content-Type': 'application/json; charset=utf-8',
                         'title': title,
                         'permission': permission,
-                            'token': '26070463c825402088a88d9c0f56971d'
+                            'token': '3740cb78a1794f11a77c1dcfa9fe76da'
                     },
                     data: "'" + $scope.editor.content + "'"
 

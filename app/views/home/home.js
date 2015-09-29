@@ -129,7 +129,17 @@ $scope.attend = function(id) {
              $scope.id=$scope.eventid[imageNo];
         });
 
+$scope.image=$scope.slides[imageNo].image;
+           if ($scope.eventtitle) {
 
+           $scope.title=$scope.eventtitle[imageNo];
+           } else {
+            $scope.eventtitle = "null";
+           }
+           if ($scope.eventid) {
+           $scope.id=$scope.eventid[imageNo];
+       }
+           // $scope.$digest();
 
        
    
@@ -150,7 +160,7 @@ $scope.attend = function(id) {
            $scope.id=$scope.eventid[imageNo];
        }
            $scope.$digest();
-         }, 1000);
+         }, 4000);
         
 
 
