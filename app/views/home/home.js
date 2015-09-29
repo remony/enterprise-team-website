@@ -108,10 +108,10 @@ $scope.attend = function(id) {
 
         var imageNo=0;
          $scope.slides = [
-            {image: '../assets/images/1.jpg', description: 'Image 00'},
-            {image: '../assets/images/2.jpg', description: 'Image 01'},
-            {image: '../assets/images/3.jpg', description: 'Image 02'},
-            {image: '../assets/images/4.jpg', description: 'Image 03'},
+            {image: './assets/images/1.jpg', description: 'Image 00'},
+            {image: './assets/images/2.jpg', description: 'Image 01'},
+            {image: './assets/images/3.jpg', description: 'Image 02'},
+            {image: './assets/images/4.jpg', description: 'Image 03'},
             
         ];
 
