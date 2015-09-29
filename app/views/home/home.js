@@ -61,6 +61,7 @@ $http({
                 $scope.error = true;
             });
         }
+
 $scope.attend = function(id) {
             if (localStorageService.get('user_auth')) {
                 var user_info = localStorageService.get('user_auth').user_auth[0];
@@ -102,32 +103,55 @@ $scope.attend = function(id) {
             }
         };
 
-        $scope.slides = [{
-                image: 'assets/images/background.jpg',
-                description: 'Image 00'
-            }, {
-                image: 'assets/images/background.jpg',
-                description: 'Image 01'
-            },
-
+        var imageNo=0;
+         $scope.slides = [
+            {image: '../assets/images/1.jpg', description: 'Image 00'},
+            {image: '../assets/images/2.jpg', description: 'Image 01'},
+            {image: '../assets/images/3.jpg', description: 'Image 02'},
+            {image: '../assets/images/4.jpg', description: 'Image 03'},
+            
         ];
-        $scope.currentIndex = 0;
 
-        $scope.setCurrentSlideIndex = function(index) {
-            $scope.currentIndex = index;
-        };
+        $http({
+            url: backend + "/events",
+            method: 'GET',
+            dataType: 'json',
+            data: '',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+            }
+        }).success(function(data, status, headers, config) {
+            $scope.eventtitle = [ data.events[0].name,data.events[1].name,data.events[2].name,data.events[3].name,data.events[4].name];
+            $scope.eventid = [ data.events[0].id,data.events[1].id,data.events[2].id,data.events[3].id,data.events[4].id];
 
-        $scope.isCurrentSlideIndex = function(index) {
-            return $scope.currentIndex === index;
-        };
+             $scope.image=$scope.slides[imageNo].image;
+             $scope.title=$scope.eventtitle[imageNo];
+             $scope.id=$scope.eventid[imageNo];
+        });
 
-        $scope.prevSlide = function() {
-            $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
-        };
 
-        $scope.nextSlide = function() {
-            $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
-        };
+
+       
+   
+          setInterval(function(){
+            imageNo++;
+            if(imageNo===$scope.slides.length)
+            {
+                imageNo=0;
+            }
+           $scope.image=$scope.slides[imageNo].image;
+           if ($scope.eventtitle) {
+
+           $scope.title=$scope.eventtitle[imageNo];
+           } else {
+            $scope.eventtitle = "null";
+           }
+           if ($scope.eventid) {
+           $scope.id=$scope.eventid[imageNo];
+       }
+           $scope.$digest();
+         }, 1000);
+        
 
 
     }
