@@ -75,6 +75,7 @@ angular.module('app.news', ['ngRoute'])
                         'Content-Type': 'application/json; charset=utf-8',
                     }
                 }).success(function(data, status, headers, config) {
+                    console.log(data);
                     $scope.title = data.article[0].title;
                     $scope.article = data.article[0];
                     $scope.comments = data.article[0].comments;
