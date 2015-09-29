@@ -19,17 +19,7 @@ angular.module('app.quiz', ['ngRoute'])
     .controller('quizBuilderCtrl', ['$scope', '$http', 'localStorageService',
         function($scope, $http, localStorageService, taOptions, element, config) {
             $scope.title = "Quiz Builder";
-            $scope.quiz = [{
-                "question": "example",
-                "options": [{
-                    "title": "Option 1",
-                    "iscorrect": true
-                }, {
-                    "title": "option 2",
-                    "iscorrect": false
-                }],
-                "answer": 0
-            }];
+            $scope.quiz = [];
 
             // Add a new question to the quiz
             $scope.addQuestion = function(quiz) {

@@ -8,43 +8,57 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="bower_components/Materialize/dist/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
-     <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css"/>
-  <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
+    <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css"/>
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
     <!-- <link href="app.css" type="text/css" rel="stylesheet" media="screen,projection"/> -->
     <link rel="stylesheet" href="menu.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css"/>
     <link  rel="stylesheet"href="bower_components/sc-date-time/dist/sc-date-time.css"/>
     <link rel="stylesheet" href="directives/kuizu/kuizu.css"/>
+    <link rel="stylesheet" href="assets/css/animate.css"/>
     <!-- <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/> -->
   </head>
   <body>
     <div class="naviCtrl" ng-controller="navigationCtrl">
+      <nav class="grey admin_panel" role="navigation" ng-if="usergroup === 'admin' || usergroup === 'editor'">
+        <ul class="center left navigaiton hide-on-med-and-down">
+          <span ng-repeat="item in admin_items track by $index | orderBy:order:false" >
+            <li class="dropdown-button" ng-show="item.subitems" data-activates="dropdown{{$index}}"><a href="{{item.link}}" ng-bind="item.title"><i class="fa fa-chevron-down right" ></i></a></li>
+            <ul ng-repeat="item in admin_items track by $index" id="dropdown{{$index}}" class="dropdown-content admin" ng-show="item.subitems">
+              <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}" ng-bind="subitem.title"></a></li>
+              
+            </ul>
+            <li ng-hide="item.subitems" class="subitem" ><a href="{{item.link}}" ng-bind="item.title"></a></li>
+            
+          </span>
+        </ul>
+      </nav>
       <!-- <ul ng-repeat="item in items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
         <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}" ng-bind="subitem.title"></a></li>
         
       </ul> -->
       <nav class="light-blue lighten-1" role="navigation">
-        
-<div class="nav-wrapper container "><a id="logo-container" href="#/" class="brand-logo">The Enterprise Gym</a>
+        <!-- Title bar -->
 
+        
+        <div class="nav-wrapper container "><a id="logo-container" href="#/" class="brand-logo"><img class="logo" src="assets/images/logo.png"/>{{data.title}}</a>
         
         <br>
         <ul class="center left navigaiton hide-on-med-and-down">
           <span ng-repeat="item in items track by $index" >
-          <li class="dropdown-button" ng-show="item.subitems" data-activates="dropdown{{$index}}"><a href="{{item.link}}" ng-bind="item.title"><i class="fa fa-chevron-down right" ></i></a></li>
-          <ul ng-repeat="item in items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
-        <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}" ng-bind="subitem.title"></a></li>
-        
-      </ul>
-          <li ng-hide="item.subitems" class="subitem" ><a href="{{item.link}}" ng-bind="item.title"></a></li>
-          
+            <li class="dropdown-button" ng-show="item.subitems" data-activates="dropdown{{$index}}"><a href="{{item.link}}" ng-bind="item.title"><i class="fa fa-chevron-down right" ></i></a></li>
+            <ul ng-repeat="item in items track by $index" id="dropdown{{$index}}" class="dropdown-content" ng-show="item.subitems">
+              <li ng-repeat="subitem in item.subitems  track by $index" ng-show="item.subitems"><a href="{{subitem.link}}" ng-bind="subitem.title"></a></li>
+              
+            </ul>
+            <li ng-hide="item.subitems" class="subitem"><i class="fa fa-chevron-down right" ng-show="item.subitems"></i><a href="{{item.link}}" ng-bind="item.title"></a></li>
+            
           </span>
         </ul>
         <!--  sidebar   -->
         <ul id="nav-mobile" class="side-nav">
-          <div class="items" ng-repeat="item in items track by $index">          
+          <div class="items" ng-repeat="item in items track by $index">
             <li><a ng-show="item.subitems" ng-click="clicked = !clicked">{{item.title}}</a><a ng-hide="item.subitems" href="{{item.link}}">{{item.title}}</a></li>
-
             <div class="subitems" ng-repeat="subitems in item.subitems" ng-show="clicked">
               <li><a href="{{subitems.link}}">{{subitems.title}}</a></li>
             </div>
@@ -82,30 +96,21 @@
           <h5 class="white-text">{{data.title}}</h5>
           <p class="grey-text text-lighten-4">{{data.description}}</p>
         </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
+        
         <div class="col l3 s12">
           <h5 class="white-text">Connect</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="#/page/contact-us"><i class="fa fa-envelope"></i> Contact</a></li>
+            <li><a class="white-text" href="https://twitter.com/Enterprise_Gym"><i class="fa fa-twitter"></i> Twitter</a></li>
+            <li><a class="white-text" href="https://www.facebook.com/EnterpriseGym"><i class="fa fa-facebook-official"></i> Facebook</a></li>
+            <li><a class="white-text" href="https://www.linkedin.com/grps?mostPopular&gid=3278209"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
+            <li><a class="white-text" href="https://www.youtube.com/user/EnterpriseGym"><i class="fa fa-youtube-play"></i> Youtube</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
-      <div class="container">
-        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
+
     </div>
   </footer>
   <!--  Scripts-->
@@ -130,6 +135,7 @@
   <script src="views/my/my.js"></script>
   <script src="views/admin/points/points.js"></script>
   <script src="views/quiz/quiz.js"></script>
+  <script src="views/register/register.js"></script>
   <!-- Angular Directives -->
   <script src="directives/egHeader/egHeader.js"></script>
   <script src="directives/kuizu/Kuizu.js"></script>
@@ -160,19 +166,19 @@
   <script src="/bower_components/Materialize/js/date_picker/picker.date.js"></script> -->
   <script src="bower_components/moment/moment.js"></script>
   <script src="bower_components/angular-moment/angular-moment.js"></script>
-   <script src="bower_components/angular-material/angular-material.min.js"></script>
+  <script src="bower_components/angular-material/angular-material.min.js"></script>
   <script src="bower_components/sc-date-time/dist/sc-date-time.js"></script>
   <script src="assets/js/jquery.fitvids.js"></script>
   <script src="assets/js/draggable-list.js"></script>
   <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+ <script src="bower_components/cryptojslib/rollups/sha512.js"></script>
   <script>(function($){
   $(function(){
   $('.button-collapse').sideNav();
-  }); 
-
+  });
   $(document).ready(function(){
-    // Target your .container, .wrapper, .post, etc.
-    $("#ytplayer").fitVids();
+  // Target your .container, .wrapper, .post, etc.
+  $("#ytplayer").fitVids();
   });
   })(jQuery); // end of jQuery name space
   </script>

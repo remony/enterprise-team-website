@@ -4,10 +4,10 @@
 
 </div>
 <div class="row">
-	<div class="col s3">
+	<div class="col s1">
 		<p></p>
 	</div>
-	<div class="col s6">
+	<div class="col s1-">
 		<h1>{{title}}</h1>
 
 
@@ -37,17 +37,17 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="event in events">
-					<td><a href="#/events/{{event.id}}">{{event.name}}</a></td>
-					<td>{{event.description}}</td>
-					<td>{{event.startDate}}</td>
-					<td>{{event.endDate}}</td>
+					<td><a href="#/events/{{event.id}}">{{event.name | cut:true:25}}</a></td>
+					<td>{{event.description | cut:true:100}}</td>
+					<td>{{event.startDate  | amCalendar}}</td>
+					<td>{{event.endDate | amCalendar}}</td>
 
 				</tr>
 			</tbody>
 		</table>
 
 	</div>
-	<div class="col s3">
+	<div class="col s1">
 		<p></p>
 	</div>
 </div>

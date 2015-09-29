@@ -51,7 +51,7 @@ angular.module('app.kuizu', ['app.config'])
                         }
                         //End of quiz
                         postQuizResults($scope.score);
-                        if ($scope.score > $scope.passmark) {
+                        if ($scope.score >= $scope.passmark) {
                             $scope.pass = true;
                         } else {
                             $scope.pass = false;

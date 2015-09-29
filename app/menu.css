@@ -62,3 +62,34 @@ html {
 .isAnswer {
   color:green;
 }
+
+.grey, .admin_panel{
+  position: relative;
+  background-color:#333!important;
+}
+
+.dropdown-content.admin {
+  
+}
+
+
+#ui-tinymce-0_ifr {
+  min-height:500px!important;
+}
+
+.logo{
+ height:100px;
+ width:auto;
+ position: absolute;
+ left: -160px;
+    top: -15px;
+}
+
+#logo-container {
+  margin-top:20px;
+}
+
+.card-title {
+  color:black!important;
+  font-weight:800!important;
+}
