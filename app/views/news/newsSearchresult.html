@@ -1,0 +1,9 @@
+<div ng-repeat="new in news" ng-hide="!found">
+		<ul class="collection">
+        	<li class="collection-item"><div style="float:left"> <p>{{new.title}}</p> </div> <div  align="right"><a href="#/news/{{new.slug}}"  class="waves-effect waves-light btn" id="button">View</a></div></li> 
+
+   	    </ul>
+</div>
+<div ng-hide="found">
+		<h3>Sorry no results for your search</h3>
+</div>
