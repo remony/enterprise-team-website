@@ -104,7 +104,8 @@ angular.module('app.news', ['ngRoute'])
                         headers: {
                             'Content-Type': 'application/json; charset=utf-8',
                             'text': message,
-                            'author': username
+                            'author': username,
+                            'token': localStorageService.get('user_auth').user_auth[0].token
                         }
                     }).success(function(data, status, headers, config) {
                         getCommments();
@@ -221,8 +222,8 @@ angular.module('app.news', ['ngRoute'])
         });
     }
 ])
-    .controller('newsArticleEditorNewCtrl', ['$scope', '$http', '$routeParams', '$location',
-        function($scope, $http, $routeParams, config, $location) {
+    .controller('newsArticleEditorNewCtrl', ['$scope', '$http', '$routeParams', '$location', 'localStorageService',
+        function($scope, $http, $routeParams, config, $location, localStorageService) {
             $scope.title = "News Article Editor";
             $scope.editor = {};
             $scope.editor.title = "example title";
@@ -250,7 +251,7 @@ angular.module('app.news', ['ngRoute'])
                 var title = $scope.editor.title;
                 var text = $scope.editor.content;
                 var permission = 'admin';
-
+                // var token = localStorageService.get('user_auth').user_auth;
 
 
                 $http({
@@ -261,7 +262,8 @@ angular.module('app.news', ['ngRoute'])
                     headers: {
                         'Content-Type': 'application/json; charset=utf-8',
                         'title': title,
-                        'permission': permission
+                        'permission': permission,
+                            'token': '26070463c825402088a88d9c0f56971d'
                     },
                     data: "'" + $scope.editor.content + "'"
 
