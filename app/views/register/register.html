@@ -9,33 +9,6 @@
 
     <form name="register" ng-submit="userregister(user)">
 
-
-
-<br>==================================================================================================<br>
-
-
-<p>How the matching schools and degrees will be done:<br><br>
-  <select name="test" ng-model="user.test" class="browser-default" >
-    <option value="" disabled selected>Choose your opt </option>
-    <option value="cs">School of A</option>
-    <option value="ac">School of B</option>
-  </select>
-
-
-
-    <select name="test2" ng-show="user.test==='cs'" ng-model="user.test2" class="browser-default" >
-      <option value="aa">Degree 1 </option>
-      <option value="bb">Degree 2 </option>
-    </select>
-
-    <select name="test3" ng-show="user.test==='ac'" ng-model="user.test3" class="browser-default" >
-      <option value="aa">Degree 3 </option>
-      <option value="bb">Degree 4 </option>
-    </select>
-
-
-<br>==================================================================================================<br>
-
       <p>Username:<br>
         <input name="user.username" ng-model="user.username" required type="text">
       </p>
@@ -397,16 +370,6 @@
         <input type="submit">
       </p>
     </form>
-
-<br><br><br><br><br><br>
-============================================================================================================
-    <p>Use this for autocompleting forms </p>
-    <input ng-model="user.yearofstudy" type="text" name="city" list="cityname" >
-    <datalist id="cityname">
-      <option value="5">
-      <option value="6">
-    </datalist>
-============================================================================================================
 
   </div>
   <div class="mdl-cell mdl-cell--4-col">4</div>
