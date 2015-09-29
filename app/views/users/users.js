@@ -71,7 +71,13 @@ angular.module('app.users', ['ngRoute'])
                     'token':token
                 }
             }).success(function(data, status, headers, config) {
-                $scope.users =  data.UserInfo[0];
+                console.log(data);
+                if (data.UserInfo) {
+                     $scope.users =  data.UserInfo[0];
+                 } else {
+                    $scope.users =  data;
+                 }
+                
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
@@ -87,7 +93,9 @@ angular.module('app.users', ['ngRoute'])
                     'token':token
                 }
             }).success(function(data, status, headers, config) {
-                if(data.points.length==0)
+                console.log(data);
+                if (data.points) {
+                if(data.points.length)
                 {
                     $scope.enterprise=0;
                     $scope.total=0;
@@ -103,6 +111,8 @@ angular.module('app.users', ['ngRoute'])
                     $scope.project=data.points[0].total;
                     $scope.action=data.points[0].action;
                     $scope.theory=data.points[0].theory;
+                }
+                    
                 }
 
                
