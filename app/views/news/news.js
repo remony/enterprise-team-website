@@ -26,6 +26,7 @@ angular.module('app.news', ['ngRoute'])
             }).success(function(data, status, headers, config) {
 
                 $scope.news = data.allnews;
+                 $scope.search = "";
                 console.log(data);
 
             }).
@@ -105,13 +106,11 @@ angular.module('app.news', ['ngRoute'])
                             'author': username
                         }
                     }).success(function(data, status, headers, config) {
-                        console.log(data);
                         getCommments();
                         $scope.message = "";
                     }).
                     error(function(data, status, headers, config) {
                         $scope.error = true;
-                        console.log(data);
                     });
 
                 } else {
@@ -273,4 +272,47 @@ angular.module('app.news', ['ngRoute'])
                 });
             }
         }
+    ])
+
+
+.config(['$routeProvider',
+    function($routeProvider) {
+        $routeProvider.when('/search/news/:search', {
+            templateUrl: 'views/news/newsSearchresult.html',
+            controller: 'newsSearchCtrl'
+        });
+    }
+])
+    .controller('newsSearchCtrl', ['$scope', '$http', '$routeParams', '$location',
+        function($scope, $http, $routeParams, config, $location) {
+
+                $http({
+                    url: backend + "/search/news",
+                    method: 'GET',
+                    dataType: 'json',
+
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'searchtext': $routeParams.search
+                    },
+
+
+                }).success(function(data, status, headers) {
+                    if(data.news.length===0)
+                    {
+                        $scope.found=false;
+                    }
+                    else
+                    {
+                        $scope.found=true;
+                    }
+                    $scope.news=data.news
+
+                    
+                }).
+                error(function(data, status, headers) {
+                    Materialize.toast("Post Failed", 1000);
+                });
+            }
+        
     ]);
