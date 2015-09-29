@@ -1,17 +1,91 @@
 <div class="row">
-	<div class="col s1"><h3>{{title}}</h3></div>
-</div>
+  <div class="col s12 m1 l1">
+    <p></p>
+  </div>
+
+<div class="col s12 m12 l11">
+    <div id="slidesh">
+      <img src="{{image}}" class="animated slideInLeft" >
+      <div id="slideshdesc"><p><a href="#/events/{{id}}">{{title}}</a></p></div>
+    </div>
+  </div>
+<div class="col s12 m1 l1">
+    <p></p>
+  </div>
+
+</div> 
 <div class="row">
-	<div class="col s12 m4 l1">
-	<p></p>
-	</div>
-	<div class="col s12 m4 l8">
-		<p></p>
-		
-	</div>
-	<div class="col s12 m4 l3">
-		<div class="card">
-				<!-- <div  ui-calendar="uiConfig.calendar" ng-model="eventSources"></div> -->
-		</div>
-	</div>
+  <div class="col s12 m1 l1">
+    <p></p>
+  </div>
+  <div class="col s12 m8 l8">
+    
+    <h3><b>Latest News</b></h3>
+    <div class="article" ng-repeat="new in news">
+      <div class="divider"></div>
+      <div class="section">
+        <a href="#/news/{{new.slug}}"><b><h4>{{new.title}}</h4></b></a>
+        <br>
+        <div><p ng-bind-html="new.text | cut:true:120"></p></div>
+        <p><a href="#/news/{{new.slug}}">Read more</a></p>
+      </div>
+      
+      
+    </div>
+    <a href="#/news/">View more news</a>
+
+  </div>
+  <div class="col s12 m3 l3">
+    <ul class="collection with-header">
+      <li class="collection-header"><h4><b>Upcoming Events</b></h4></li>
+      <li class="collection-item" ng-repeat="event in events"><div><a href="{{event.url}}">{{event.title}} {{event.start | amCalendar}}</a><a ng-click="attend()" class="secondary-content">Attend</a></div></li>
+    </ul>
+
+    <br>
+
+    <iframe src="https://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FEnterpriseGym&amp;width=305&amp;colorscheme=light&amp;show_faces=false&amp;border_color=%23315c99&amp;stream=true&amp;header=false&amp;height=395" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:305px; height:395px; background-color: #FFFFFF;" allowTransparency="false"></iframe>
+
+    
+  </div>
 </div>
+<style>
+#slidesh {
+position: relative;
+width: 100%;
+height: 350px;
+box-shadow: 0 0 20px rgba(0,0,0,0.4);
+
+}
+#slidesh img {
+
+width: 100%;
+height: 100%;
+margin-left: 0%;
+margin-right: :0%;
+bottom: 0%;
+
+}
+#slideshdesc {
+position: absolute;
+width: 100%;
+height: 15%;
+margin-left: 0%;
+margin-right: :0%;
+bottom: 0%;
+background: rgba(0, 0, 0, .4);
+}
+#slideshdesc p {
+color:white;
+margin-left: 5%;
+font-size: 14 px;
+
+
+}
+#slideshdesc a {
+color:white;
+margin-left: 5%;
+font-size: 14 px;
+
+
+}
+</style>

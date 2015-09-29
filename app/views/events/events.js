@@ -51,7 +51,7 @@ angular.module('app.events', ['ngRoute'])
 .controller('eventCtrl', ['$scope', '$http', 'localStorageService', '$routeParams',
     function($scope, $http, localStorageService, $routeParams, config) {
         $scope.title = "Event";
-        if (localStorageService.get('user_auth').user_auth[0]) {
+        if (localStorageService.get('user_auth')) {
             $scope.usergroup = localStorageService.get('user_auth').user_auth[0].usergroup;
 
         }
@@ -176,8 +176,6 @@ angular.module('app.events', ['ngRoute'])
 
 
         $scope.update = function(event) {
-            console.log(event);
-            debugger;
              var startdate = event.startdate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
              var enddate  = event.enddate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
             $http({
@@ -193,11 +191,12 @@ angular.module('app.events', ['ngRoute'])
                     'venue': event.venue,
                     'startdate': startdate,
                     'enddate': enddate,
-                    'points': parseInt(event.points)
+                    'points': parseInt(event.points),
+                    'token': localStorageService.get('user_auth').user_auth[0].token
                 }
             }).success(function(data, status, headers, config) {
-                $scope.event = data.event[0];
-                console.log(data.event[0]);
+                $scope.event = data.event;
+                console.log(data.event);
             });
 
         }

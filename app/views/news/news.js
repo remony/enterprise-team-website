@@ -21,7 +21,7 @@ angular.module('app.news', ['ngRoute'])
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
                     'page': 1,
-                    'pagesize': 5
+                    'pagesize':9000
                 }
             }).success(function(data, status, headers, config) {
 
@@ -67,34 +67,35 @@ angular.module('app.news', ['ngRoute'])
 
             function getCommments() {
                 $http({
-                url: backend + "/news/" + $routeParams.slug,
-                method: 'GET',
-                dataType: 'json',
-                data: '',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                }
-            }).success(function(data, status, headers, config) {
-                $scope.title = data.article[0].title;
-                $scope.article = data.article[0];
-                $scope.comments = data.article[0].comments;
-                //console.log(data.article[0]);
-            }).
-            error(function(data, status, headers, config) {
-                $scope.error = true;
-            });
+                    url: backend + "/news/" + $routeParams.slug,
+                    method: 'GET',
+                    dataType: 'json',
+                    data: '',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                    }
+                }).success(function(data, status, headers, config) {
+                    $scope.title = data.article[0].title;
+                    $scope.article = data.article[0];
+                    $scope.comments = data.article[0].comments;
+                    //console.log(data.article[0]);
+                }).
+                error(function(data, status, headers, config) {
+                    $scope.error = true;
+                });
             }
 
             getCommments();
-            
+
 
             $scope.comment = function(message) {
                 console.log(message);
 
                 if (localStorage.getItem('ls.user_auth')) {
                     var username = localStorage.getItem('ls.user_auth');
+                    $scope.username = JSON.parse(username).user_auth[0].username;
                     username = JSON.parse(username).user_auth[0].username;
-                    
+
                     $http({
                         url: backend + "/news/" + $routeParams.slug + "/comments",
                         method: 'POST',
@@ -114,7 +115,7 @@ angular.module('app.news', ['ngRoute'])
                     });
 
                 } else {
-                    console.eroor("not logged in");
+                    console.error("not logged in");
                 }
 
 
@@ -141,7 +142,7 @@ angular.module('app.news', ['ngRoute'])
                 "page_id": -1
             };
 
-           
+
 
 
             $scope.tinymceOptions = {
@@ -150,7 +151,10 @@ angular.module('app.news', ['ngRoute'])
                 },
                 inline: false,
                 plugins: 'advlist autolink link image lists charmap print preview youtube rImage',
-                toolbar: 'youtube rImage',
+                toolbar: [
+                    "undo redo | styleselect | bold italic | link image",
+                    "youtube rImage | alignleft aligncenter alignright"
+                ],
                 external_plugins: {
                     "rImage": '/assets/js/rimage/plugin.js'
                 },
@@ -185,7 +189,7 @@ angular.module('app.news', ['ngRoute'])
                 var permission = 'admin';
 
 
-                console.log(editor);
+           
                 $http({
                     url: "http://localhost:8080/news/" + slug,
                     method: 'POST',

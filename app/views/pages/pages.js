@@ -60,7 +60,23 @@ angular.module('app.pages', ['ngRoute'])
         function($scope, $http, localStorageService, $rootScope) {
             $scope.title = "Admin Pages";
             $scope.error = false;
+$scope.tinymceOptions = {
+                onChange: function(e) {
+                    // put logic here for keypress and cut/paste changes
+                },
+                inline: false,
+                plugins: 'advlist autolink link image lists charmap print preview youtube rImage',
+                toolbar: [
+                    "undo redo | styleselect | bold italic | link image",
+                    "youtube rImage | alignleft aligncenter alignright"
+                ],
+                external_plugins: {
+                    "rImage": '/assets/js/rimage/plugin.js'
+                },
+                theme: "modern",
+                skin: 'light'
 
+            };
 
 
             function loadPages() {

@@ -17,6 +17,7 @@ var App = angular.module('app', [
     'app.my',
     'app.points.manager',
     'app.quiz',
+    'app.register',
     //Factories
     'app.config',
 
@@ -63,7 +64,7 @@ App.controller('appCtrl', ['$scope', '$http',
         $scope.admin_items = [{
             "items": []
         }];
-        console.log("Page is loading");
+      
         $http({
             url: backend + '/',
             method: 'GET',
@@ -75,7 +76,6 @@ App.controller('appCtrl', ['$scope', '$http',
         }).success(function(data, status, headers, config) {
 
             $scope.data = data;
-            console.log(data);
 
         }).
         error(function(data, status, headers, config) {
@@ -95,7 +95,6 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
         function getPages() {
 
             var pages = [];
-            console.log("getting pages");
             $http({
                 url: backend + "/pages",
                 method: 'GET',
@@ -104,13 +103,13 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
             }).success(function(data, status, headers) {
                 pages = data.pages;
                 var j = data.pages.length;
-                console.log(data);
+
 
                 for (var i = 0; i < j; i++) {
-                    console.log(data.pages[i].title);
+                    console.log(data.pages[i]);
                     var newitem = {
                         "title": data.pages[i].title,
-                        "link": data.pages[i].link
+                        "link": '#/page/' + data.pages[i].slug
                     }
 
                     // debugger;
@@ -118,7 +117,7 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
 
                 }
 
-                console.log(data.pages);
+              
 
             }).error(function(data, status, headers) {
                 console.log("The file doesn't exist - please contact the site owner");
@@ -156,7 +155,7 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                     var isAuthed = localStorageService.get('user_auth').user_auth[0];
 
 
-
+                    $scope.usergroup = isAuthed.usergroup;
 
 
                     var username = isAuthed.username;
@@ -168,19 +167,7 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                             "title": "Admin Panel",
                             "link": "#/admin"
                         })
-                    } else if (isAuthed.usergroup === 'editor') {
-                        // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]},{"title":"Editor","link":"#/add","subitems":[{"title":"Add News","link":"#/admin/news/add"},{"title":"Add Event","link":"#/admin/events/new"},{"title":"Add Page","link":"#/"},{"title":"Add Subpage","link":"#/logout"}]}]}];
-                        //location.reload();
-                        $scope.items[0].items.push({
-                            "title": "editor"
-                        })
-                    } else {
-                        // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]}]}];
-                        //location.reload();
-                    }
-                    //$scope.items =$scope.items[0].items;
-
-                    $scope.admin_items[0].items.push({
+                         $scope.admin_items[0].items.push({
                         "title": "Editor",
                         "link": "#/add",
                         "subitems": [{
@@ -197,6 +184,31 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                             "link": "#/admin/quiz/builder"
                         }]
                     })
+                    } else if (isAuthed.usergroup === 'editor') {
+                         $scope.admin_items[0].items.push({
+                        "title": "Editor",
+                        "link": "#/add",
+                        "subitems": [{
+                            "title": "Add News",
+                            "link": "#/admin/news/add"
+                        }, {
+                            "title": "Add Event",
+                            "link": "#/admin/events/add"
+                        }, {
+                            "title": "Add Page",
+                            "link": "#/admin/pages"
+                        }, {
+                            "title": "Add quiz",
+                            "link": "#/admin/quiz/builder"
+                        }]
+                    })
+                    } else {
+                        // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]}]}];
+                        //location.reload();
+                    }
+                    //$scope.items =$scope.items[0].items;
+
+                   
                     $scope.admineditor = true;
 
                     $scope.login = true;
@@ -267,16 +279,15 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
         $rootScope.$on('loginStatus', function(event, args) {
             resetMenu();
 
-            console.log("New login status: " + args);
         });
 
 
         $scope.$watch(function() {
             return localStorageService.get('loggedIn');
         }, function(newVal, oldVal) {
-            console.log("new value > " + newVal);
+            
             if (newVal != null) {
-                console.log(newVal);
+                
                 resetMenu();
             }
 

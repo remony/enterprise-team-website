@@ -1,7 +1,7 @@
 <div class="admin">
 	<b><h1  ng-bind="active | uppercase">Admin Panel</h1></b>
 </div>
-<div class="row">
+<div class="row" ng-if="usergroup === 'admin'">
 	<div class="col s3">
 		<div class="collection">
 			<a ng-repeat="link in links" href="{{link.link}}" class="collection-item" ng-click="click(link.title)">{{link.title}}</a>
@@ -12,15 +12,17 @@
 				Site editing section
 		-->
 		<div ng-if="active === 'site'">
+		<form ng-submit="updateSiteDetails(site)">
 			<p>Site name<br>
-				<input type="password" name="user.password" ng-model="siteinfo.site_name" required>
+				<input type="text" name="site.title" ng-model="site.title" required>
 			</p>
 			<p>Site description<br>
-				<input type="password" name="user.password" ng-model="siteinfo.site_description" required>
+				<input type="text" name="site.description" ng-model="site.description" required>
 			</p>
 			<p>
 				<input class="waves-effect waves-light btn" type="submit" value="Update">
 			</p>
+			</form>
 		</div>
 		<!--
 					User editing section
@@ -51,7 +53,7 @@
 		</div>
 
 		<!-- QUiz editing section -->
-		<div ng-if="active === 'users'">
+		<div ng-if="active === 'quiz'">
 			<div class="row">
 				
 			</div>
@@ -62,6 +64,8 @@
 				<thead>
 					<tr>
 						<th>Quiz title</th>
+						<th>Points</th>
+						<th>Pass mark</th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -69,7 +73,9 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="quiz in quizzes">
-						<td>{{quiz.title}}</td>
+						<td>{{quiz.quiz_title}}</td>
+						<td>{{quiz.points}}</td>
+						<td>{{quiz.passmark}}</td>
 						<td><a class="waves-effect waves-light btn">Edit</a></td>
 						<td><a class="waves-effect waves-light btn red">Delete</a></td>
 					</tr>
@@ -137,8 +143,33 @@
 		</div>
 		<div ng-if="active === 'pages'">
 			<div class="row">
-				<input type="text"></div><div class="col s1"><a href="#/admin/news/add" class="waves-effect waves-light btn">Add</a></div>
+				<div class="col s1"><a href="#/admin/pages" class="waves-effect waves-light btn">Add</a></div>
 			</div>
+			<table st-table="rowCollection" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Page title</th>
+						<th>Description</th>
+						<th>Number of subpages</th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
+					
+				</thead>
+				<tbody>
+					<tr ng-repeat="page in pages">
+						<td>{{page.title}}</td>
+						<td>{{page.description}}</td>
+						<td>{{page.subpages.length}}</td>
+						<td><a href="#/page/{{page.slug}}" class="waves-effect waves-light btn green">View</a></td>
+						<td><a href="#/page/{{page.slug}}/edit" class="waves-effect waves-light btn">Edit</a></td>
+						<td><a class="waves-effect waves-light btn red">Delete</a></td>
+					</tr>
+				</tbody>
+				<div class="panel-body" export-table="newUsers">
+				</div>
+			</table>
 			
 		</div>
 	</div>
