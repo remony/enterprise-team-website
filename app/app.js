@@ -146,6 +146,9 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                     "title": "Calendar",
                     "link": "#/calendar",
                     "order": 3
+                }, {
+                    "title": "Quizzes",
+                    "link": "#/admin/quizzes"
                 }]
             }];
             getPages();
