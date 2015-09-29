@@ -57,7 +57,7 @@ angular.module('app.pages', ['ngRoute'])
     }
 ])
     .controller('adminPagesCtrl', ['$scope', '$http', 'localStorageService', '$rootScope',
-        function($scope, $http, localStorageService, $rootScope) {
+        function($scope, $http, localStorageService, $rootScope, config) {
             $scope.title = "Admin Pages";
             $scope.error = false;
 $scope.tinymceOptions = {
@@ -77,7 +77,6 @@ $scope.tinymceOptions = {
                 skin: 'light'
 
             };
-
 
             function loadPages() {
                 $http({
@@ -116,7 +115,7 @@ $scope.tinymceOptions = {
 
                 var slug = page.parent.replace(/\s+/g, '-').toLowerCase();
                 $http({
-                    url: "http://localhost:8080/pages",
+                    url: backend + "/pages",
                     method: 'POST',
                     dataType: 'json',
                     data: page.body,
@@ -145,7 +144,7 @@ $scope.tinymceOptions = {
             $scope.delete = function(page) {
                 console.log(page);
                 $http({
-                    url: "http://localhost:8080/pages/" + page.slug + "/delete",
+                    url: backend + "/pages/" + page.slug + "/delete",
                     method: 'POST',
                     dataType: 'json',
                     headers: {
@@ -171,7 +170,7 @@ $scope.tinymceOptions = {
     ])
 
 .controller('pageCtrl', ['$scope', '$http', 'localStorageService', '$rootScope', '$routeParams',
-    function($scope, $http, localStorageService, $rootScope, $routeParams) {
+    function($scope, $http, localStorageService, $rootScope, $routeParams, config) {
         $scope.title = $routeParams.slug;
 
         getPage($routeParams.slug);
@@ -205,18 +204,22 @@ $scope.tinymceOptions = {
             getPage($routeParams.slug);
 
  $scope.tinymceOptions = {
-    onChange: function(e) {
-      // put logic here for keypress and cut/paste changes
-    },
-    inline: false,
-    plugins : 'advlist autolink link image lists charmap print preview rImage youtube',
-    toolbar: ["undo redo | styleselect | bold italic | link image",
-        "alignleft aligncenter alignright | youtube rImage"],
-    external_plugins: {
+                onChange: function(e) {
+                    // put logic here for keypress and cut/paste changes
+                },
+                inline: false,
+                plugins: 'advlist autolink link image lists charmap print preview youtube rImage',
+                toolbar: [
+                    "undo redo | styleselect | bold italic | link image",
+                    "youtube rImage | alignleft aligncenter alignright"
+                ],
+                external_plugins: {
                     "rImage": '/assets/js/rimage/plugin.js'
-                },theme: "modern",
+                },
+                theme: "modern",
                 skin: 'light'
-  };
+
+            };
 
 
             $scope.update = function(page) {

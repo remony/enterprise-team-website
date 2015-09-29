@@ -17,7 +17,7 @@ tinymce.PluginManager.add('rImage', function(editor, url) {
                 onsubmit: function(e, a, b) {
 
 
-                    var uploadUrl = "http://localhost:8080/file";
+                    var uploadUrl = "http://46.101.32.73:8080/api/file";
 
 var files = document.querySelector('input[type=file].mce-textbox').files[0];
                     var data = new FormData();
@@ -37,7 +37,7 @@ var files = document.querySelector('input[type=file].mce-textbox').files[0];
                             editor.insertContent('<img class="materialboxed" src=' + JSON.parse(this.responseText).file[0].access_url + '/>');
                         }
                     });
-                    xhr.open("POST", "http://localhost:8080/file");
+                    xhr.open("POST", "http://46.101.32.73:8080/api/file");
 
                     xhr.send(data);
 

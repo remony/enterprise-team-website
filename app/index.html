@@ -38,8 +38,10 @@
         
       </ul> -->
       <nav class="light-blue lighten-1" role="navigation">
+        <!-- Title bar -->
+
         
-        <div class="nav-wrapper container "><a id="logo-container" href="#/" class="brand-logo">{{data.title}}</a>
+        <div class="nav-wrapper container "><a id="logo-container" href="#/" class="brand-logo"><img class="logo" src="assets/images/logo.png"/>{{data.title}}</a>
         
         <br>
         <ul class="center left navigaiton hide-on-med-and-down">
@@ -98,7 +100,7 @@
         <div class="col l3 s12">
           <h5 class="white-text">Connect</h5>
           <ul>
-            <li><a class="white-text" href="#!/pages/contact"><i class="fa fa-envelope"></i> Contact</a></li>
+            <li><a class="white-text" href="#/page/contact-us"><i class="fa fa-envelope"></i> Contact</a></li>
             <li><a class="white-text" href="https://twitter.com/Enterprise_Gym"><i class="fa fa-twitter"></i> Twitter</a></li>
             <li><a class="white-text" href="https://www.facebook.com/EnterpriseGym"><i class="fa fa-facebook-official"></i> Facebook</a></li>
             <li><a class="white-text" href="https://www.linkedin.com/grps?mostPopular&gid=3278209"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
@@ -169,6 +171,7 @@
   <script src="assets/js/jquery.fitvids.js"></script>
   <script src="assets/js/draggable-list.js"></script>
   <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+ <script src="bower_components/cryptojslib/rollups/sha512.js"></script>
   <script>(function($){
   $(function(){
   $('.button-collapse').sideNav();

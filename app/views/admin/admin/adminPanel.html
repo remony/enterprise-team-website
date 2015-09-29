@@ -12,22 +12,22 @@
 				Site editing section
 		-->
 		<div ng-if="active === 'site'">
-		<form ng-submit="updateSiteDetails(site)">
-			<p>Site name<br>
-				<input type="text" name="site.title" ng-model="site.title" required>
-			</p>
-			<p>Site description<br>
-				<input type="text" name="site.description" ng-model="site.description" required>
-			</p>
-			<p>
-				<input class="waves-effect waves-light btn" type="submit" value="Update">
-			</p>
+			<form ng-submit="updateSiteDetails(site)">
+				<p>Site name<br>
+					<input type="text" name="site.title" ng-model="site.title" required>
+				</p>
+				<p>Site description<br>
+					<input type="text" name="site.description" ng-model="site.description" required>
+				</p>
+				<p>
+					<input class="waves-effect waves-light btn" type="submit" value="Update">
+				</p>
 			</form>
 		</div>
 		<!--
-					User editing section
+							New users section
 		-->
-		<div ng-if="active === 'users'">
+		<div ng-if="active === 'newusers'">
 			<div class="row">
 				
 			</div>
@@ -41,9 +41,9 @@
 					
 				</thead>
 				<tbody>
-					<tr ng-repeat="row in newUsers">
-						<td>{{row.username}}</td>
-						<td><a class="waves-effect waves-light btn">Edit</a></td>
+					<tr ng-repeat="newuser in newUsers">
+						<td>{{newuser.username}}</td>
+						<td><a ng-click="approve(newuser.id)" class="waves-effect waves-light btn green">Approve</a></td>
 						<td><a class="waves-effect waves-light btn red">Delete</a></td>
 					</tr>
 				</tbody>
@@ -51,7 +51,34 @@
 				</div>
 			</table>
 		</div>
-
+		
+		<!--
+					User editing section
+		-->
+		<div ng-if="active === 'users'">
+			<div class="row">
+				<div class="col s1"><a href="#/register" class="waves-effect waves-light btn">Add New User</a></div>
+			</div>
+			<table st-table="rowCollection" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th></th>
+						<th></th>
+					</tr>
+					
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in users">
+						<td>{{user.username}}</td>
+						<td><a class="waves-effect waves-light btn green">View Profile</a></td>
+						<td><a class="waves-effect waves-light btn red">Delete</a></td>
+					</tr>
+				</tbody>
+				<div class="panel-body" export-table="newUsers">
+				</div>
+			</table>
+		</div>
 		<!-- QUiz editing section -->
 		<div ng-if="active === 'quiz'">
 			<div class="row">
@@ -84,8 +111,6 @@
 				</div>
 			</table>
 		</div>
-
-
 		<div ng-if="active === 'events'">
 			<div class="row">
 				<div class="col s1"><a href="#/admin/events/add" class="waves-effect waves-light btn">Add</a></div>
@@ -103,6 +128,7 @@
 				<tbody>
 					<tr ng-repeat="event in events">
 						<td>{{event.name}}</td>
+						<td><a href="#/events/{{event.id}}" class="waves-effect waves-light btn green">View Event</a></td>
 						<td><a href="#/events/{{event.id}}/edit" class="waves-effect waves-light btn">Edit</a></td>
 						<td><a ng-click="delete(event.id)" class="waves-effect waves-light btn red">Delete</a></td>
 					</tr>
@@ -129,13 +155,15 @@
 						<th>News Title</th>
 						<th></th>
 						<th></th>
+						<th></th>
 					</tr>
 					
 				</thead>
 				<tbody>
-					<tr ng-repeat="row in newUsers">
-						<td>{{row.username}}</td>
-						<td><a class="waves-effect waves-light btn">Edit</a></td>
+					<tr ng-repeat="new in news">
+						<td>{{new.title}}</td>
+						<td><a href="#/news/{{new.slug}}" class="waves-effect waves-light btn green">View</a></td>
+						<td><a href="#/news/{{new.slug}}/edit" class="waves-effect waves-light btn">Edit</a></td>
 						<td><a class="waves-effect waves-light btn red">Delete</a></td>
 					</tr>
 				</tbody>

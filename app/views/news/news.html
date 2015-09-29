@@ -10,7 +10,7 @@
       <div class="article" ng-repeat="new in news">
 			<div class="divider"></div>
 			<div class="section">
-				<a href="#/news/{{new.slug}}"><b><h2>{{new.title}}</h2></b></a>
+				<a href="#/news/{{new.slug}}"><b><h4>{{new.title}}</h4></b></a>
 				<br>
 				<div><p ng-bind-html="new.text | cut:true:240"></p></div>
 				<p><a href="#/news/{{new.slug}}">Read more</a></p>

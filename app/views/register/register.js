@@ -18,7 +18,7 @@ angular.module('app.register', ['ngRoute'])
     //$scope.error = false;
     var auth = "";
     $scope.user = "";
-    if ( localStorageService.get('user_auth').user_auth){
+    if ( localStorageService.get('user_auth')){
     auth = localStorageService.get('user_auth').user_auth[0];
     console.log(auth.username);
     $scope.username = auth.username;
@@ -68,7 +68,7 @@ angular.module('app.register', ['ngRoute'])
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
           'username': user.username,
-          'password': user.password,
+          'password': CryptoJS.SHA512(user.password).toString(),
           'firstname': user.firstname,
           'lastname': user.lastname,
           'gender': user.gender,

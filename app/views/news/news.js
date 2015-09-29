@@ -21,7 +21,7 @@ angular.module('app.news', ['ngRoute'])
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
                     'page': 1,
-                    'pagesize':9000
+                    'pagesize': 9000
                 }
             }).success(function(data, status, headers, config) {
 
@@ -64,6 +64,7 @@ angular.module('app.news', ['ngRoute'])
     ])
     .controller('newsArticleCtrl', ['$scope', '$http', '$routeParams',
         function($scope, $http, $routeParams, LocalStorageModule) {
+    
 
             function getCommments() {
                 $http({
@@ -89,12 +90,13 @@ angular.module('app.news', ['ngRoute'])
             getCommments();
 
 
+
             $scope.comment = function(message) {
                 console.log(message);
 
-                if (localStorage.getItem('ls.user_auth')) {
-                    var username = localStorage.getItem('ls.user_auth');
-                    $scope.username = JSON.parse(username).user_auth[0].username;
+                if (localStorage.getItem('user_auth')) {
+                    var username = localStorage.getItem('user_auth');
+                    $scope.username = localStorage.getItem('user_auth').user_auth[0].username;
                     username = JSON.parse(username).user_auth[0].username;
 
                     $http({
@@ -132,8 +134,8 @@ angular.module('app.news', ['ngRoute'])
             });
         }
     ])
-    .controller('newsArticleEditorCtrl', ['$scope', '$http', '$routeParams', 'toastr', '$location', 'FileUploader',
-        function($scope, $http, $routeParams, toastr, $location, FileUploader) {
+    .controller('newsArticleEditorCtrl', ['$scope', '$http', '$routeParams', 'toastr', '$location', 'FileUploader', 'localStorageService',
+        function($scope, $http, $routeParams, toastr, $location, FileUploader, localStorageService) {
             var slug = $routeParams.slug;
             $scope.uploader = new FileUploader();
 
@@ -191,7 +193,7 @@ angular.module('app.news', ['ngRoute'])
                 var permission = 'admin';
 
 
-           
+
                 $http({
                     url: "http://localhost:8080/news/" + slug,
                     method: 'POST',
@@ -200,7 +202,8 @@ angular.module('app.news', ['ngRoute'])
                     headers: {
                         'Content-Type': 'application/json; charset=utf-8',
                         'title': title,
-                        'permission': permission
+                        'permission': permission,
+                        'token': localStorageService.get('user_auth').user_auth[0].token
                     }
                 }).success(function(data, status, headers) {
                     console.log(data);
@@ -238,7 +241,10 @@ angular.module('app.news', ['ngRoute'])
                 },
                 inline: false,
                 plugins: 'advlist autolink link image lists charmap print preview youtube rImage',
-                toolbar: 'youtube rImage',
+                toolbar: [
+                    "undo redo | styleselect | bold italic | link image",
+                    "youtube rImage | alignleft aligncenter alignright"
+                ],
                 external_plugins: {
                     "rImage": '/assets/js/rimage/plugin.js'
                 },
@@ -264,7 +270,7 @@ angular.module('app.news', ['ngRoute'])
                         'Content-Type': 'application/json; charset=utf-8',
                         'title': title,
                         'permission': permission,
-                            'token': '3740cb78a1794f11a77c1dcfa9fe76da'
+                        'token': localStorageService.get('user_auth').user_auth[0].token
                     },
                     data: "'" + $scope.editor.content + "'"
 

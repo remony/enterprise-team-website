@@ -4,6 +4,23 @@
   </div>
 
 <div class="col s12 m12 l11">
+
+       <div class="row">
+        <div class="col s12 m12">
+          <div class="card darken-1">
+            <div class="card-content black-text">
+              <span class="card-title">About {{data.title}}</span>
+              <p>{{data.description}}</p>
+            </div>
+            <div class="card-action">
+              <a href="#/login">Login</a>
+              <a href="#/register">signup</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     <div id="slidesh">
       <img src="{{image}}" class="animated fadeIn" >
       <div id="slideshdesc"><p><a href="#/events/{{id}}">{{title}}</a></p></div>
@@ -18,13 +35,13 @@
   <div class="col s12 m1 l1">
     <p></p>
   </div>
-  <div class="col s12 m8 l8">
+  <div class="col s12 m7 l7">
     
     <h3><b>Latest News</b></h3>
     <div class="article" ng-repeat="new in news">
       <div class="divider"></div>
       <div class="section">
-        <a href="#/news/{{new.slug}}"><b><h4>{{new.title}}</h4></b></a>
+        <a href="#/news/{{new.slug}}"><b><h5>{{new.title}}</h5></b></a>
         <br>
         <div><p ng-bind-html="new.text | cut:true:120"></p></div>
         <p><a href="#/news/{{new.slug}}">Read more</a></p>
@@ -35,15 +52,35 @@
     <a href="#/news/">View more news</a>
 
   </div>
-  <div class="col s12 m3 l3">
-    <ul class="collection with-header">
+  <div class="col s12 m4 l4">
+  <h5><b>Upcoming Events</b></h5>
+  <ul>
+  <li  ng-repeat="event_item in events">
+  <p ng-click="reveal = !reveal">{{event_item.title | cut:true:25}} <i class="fa fa-arrow-down" ng-hide="reveal"></i><i ng-show="reveal" class="fa fa-arrow-up"></i></p>
+  <p ng-show="reveal">{{event_item.start | amCalendar}}<br><i>{{event_item.description | cut:true:20}}</i></p>
+
+  <div class="col s12 m6 l6" ng-show="reveal">
+     <a href="#/events/{{event_item.eventid}}" class="waves-effect waves-blue btn-flat">View</a>
+  </div>
+  <div class="col s12 m6 l6" ng-show="reveal">
+    <form>
+     <a ng-click="attend(event_item)" class="waves-effect waves-green btn-flat">Attend</a>
+    </form>
+  </div>
+  <hr>
+  </li>
+  </ul>
+   <!--  <ul class="collection with-header">
       <li class="collection-header"><h4><b>Upcoming Events</b></h4></li>
       <li class="collection-item" ng-repeat="event in events"><div><a href="{{event.url}}">{{event.title}} {{event.start | amCalendar}}</a><a ng-click="attend()" class="secondary-content">Attend</a></div></li>
-    </ul>
 
+      <li class="collection-item" ng-click="reveal = !reveal" ng-repeat="event in events">{{event.title}}</li>
+      <li class="collection-item" ng-hide="reveal" ng-repeat="event in events">{{event.description}}</li>
+    </ul>
+ -->
     <br>
 
-    <iframe src="https://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FEnterpriseGym&amp;width=305&amp;colorscheme=light&amp;show_faces=false&amp;border_color=%23315c99&amp;stream=true&amp;header=false&amp;height=395" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:305px; height:395px; background-color: #FFFFFF;" allowTransparency="false"></iframe>
+    <iframe src="https://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FEnterpriseGym&amp;width=305&amp;colorscheme=light&amp;show_faces=false&amp;border_color=%23315c99&amp;stream=true&amp;header=false&amp;height=395" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:305px; height:395px; background-color: #FFFFFF;" allowTransparency="true"></iframe>
 
     
   </div>

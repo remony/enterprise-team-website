@@ -314,7 +314,7 @@ angular.module('app.events', ['ngRoute'])
                 }
             }).success(function(data, status, headers, config) {
                 $scope.participants = data.participants;    
-                console.log(data);
+                // console.log(data);
             });
             }
 
@@ -322,7 +322,14 @@ angular.module('app.events', ['ngRoute'])
 
 
         $scope.attend = function(username) {
-            console.log(username + " has attended");
+            
+            // console.log(username + " has attended");
+            var attended = 0;
+            if (username.attended === 0) {
+                attended = 1;
+            } else {
+                attended = 0;
+            }
 
             $http({
                     url: backend + '/events/' + $routeParams.eventid + '/participants',
@@ -332,11 +339,11 @@ angular.module('app.events', ['ngRoute'])
                     headers: {
                         'Content-Type': 'application/json; charset=utf-8',
                         'token': token,
-                        'attendeeid': parseInt(username),
-                        'attendance': 1
+                        'attendeeid': parseInt(username.userid),
+                        'attendance': parseInt(attended)
                     }
                 }).success(function(data, status, headers, config) {
-                    console.log(data);
+                    Materialize.toast("Updated, updating data.", 1000);
                     getData();
                 });
 

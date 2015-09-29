@@ -32,7 +32,7 @@ angular.module('app.login', ['ngRoute'])
         console.log(auth);
         if (auth != null) {
             $scope.loggedIn = true;
-            console.log(auth.user_auth[0].username);
+            // console.log(auth.user_auth[0].username);
             $scope.username = auth.user_auth[0].username;
               $location.path( "#/" );
         } else {
@@ -63,7 +63,7 @@ angular.module('app.login', ['ngRoute'])
          headers: {
              'Content-Type': 'application/json; charset=utf-8',
              'username':username.username,
-             'password':username.password
+             'password':CryptoJS.SHA512(username.password).toString()
          }
             }).success(function(data, status, headers, config) {
                 

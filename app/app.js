@@ -40,6 +40,7 @@ var App = angular.module('app', [
     // 'ui.bootstrap.datetimepicker',
     'scDateTime',
     'ngMaterial',
+    // 'angularjs-crypto',
 
 
 
@@ -64,7 +65,7 @@ App.controller('appCtrl', ['$scope', '$http',
         $scope.admin_items = [{
             "items": []
         }];
-      
+
         $http({
             url: backend + '/',
             method: 'GET',
@@ -117,7 +118,7 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
 
                 }
 
-              
+
 
             }).error(function(data, status, headers) {
                 console.log("The file doesn't exist - please contact the site owner");
@@ -130,11 +131,13 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
 
 
             $scope.items = [{
-                "items": [{
-                    "title": "Home",
-                    "link": "#/",
-                    "order": 0
-                }, {
+                "items": [
+                // {
+                //     "title": "Home",
+                //     "link": "#/",
+                //     "order": 0
+                // }, 
+                {
                     "title": "News",
                     "link": "#/news",
                     "order": 1
@@ -146,9 +149,6 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                     "title": "Calendar",
                     "link": "#/calendar",
                     "order": 3
-                }, {
-                    "title": "Quizzes",
-                    "link": "#/admin/quizzes"
                 }]
             }];
             getPages();
@@ -170,48 +170,48 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                             "title": "Admin Panel",
                             "link": "#/admin"
                         })
-                         $scope.admin_items[0].items.push({
-                        "title": "Editor",
-                        "link": "#/add",
-                        "subitems": [{
-                            "title": "Add News",
-                            "link": "#/admin/news/add"
-                        }, {
-                            "title": "Add Event",
-                            "link": "#/admin/events/add"
-                        }, {
-                            "title": "Add Page",
-                            "link": "#/admin/pages"
-                        }, {
-                            "title": "Add quiz",
-                            "link": "#/admin/quiz/builder"
-                        }]
-                    })
+                        $scope.admin_items[0].items.push({
+                            "title": "Editor",
+                            "link": "#/add",
+                            "subitems": [{
+                                "title": "Add News",
+                                "link": "#/admin/news/add"
+                            }, {
+                                "title": "Add Event",
+                                "link": "#/admin/events/add"
+                            }, {
+                                "title": "Add Page",
+                                "link": "#/admin/pages"
+                            }, {
+                                "title": "Add quiz",
+                                "link": "#/admin/quiz/builder"
+                            }]
+                        })
                     } else if (isAuthed.usergroup === 'editor') {
-                         $scope.admin_items[0].items.push({
-                        "title": "Editor",
-                        "link": "#/add",
-                        "subitems": [{
-                            "title": "Add News",
-                            "link": "#/admin/news/add"
-                        }, {
-                            "title": "Add Event",
-                            "link": "#/admin/events/add"
-                        }, {
-                            "title": "Add Page",
-                            "link": "#/admin/pages"
-                        }, {
-                            "title": "Add quiz",
-                            "link": "#/admin/quiz/builder"
-                        }]
-                    })
+                        $scope.admin_items[0].items.push({
+                            "title": "Editor",
+                            "link": "#/add",
+                            "subitems": [{
+                                "title": "Add News",
+                                "link": "#/admin/news/add"
+                            }, {
+                                "title": "Add Event",
+                                "link": "#/admin/events/add"
+                            }, {
+                                "title": "Add Page",
+                                "link": "#/admin/pages"
+                            }, {
+                                "title": "Add quiz",
+                                "link": "#/admin/quiz/builder"
+                            }]
+                        })
                     } else {
                         // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":isAuthed.username,"link":"","order":4,"subitems":[{"title":"My Profile","link":"#/user/" + isAuthed.username},{"title":"My Events","link":"#/my/events"},{"title":"My Points","link":"#/my/points"},{"title":"Logout","link":"#/logout/"}]}]}];
                         //location.reload();
                     }
                     //$scope.items =$scope.items[0].items;
 
-                   
+
                     $scope.admineditor = true;
 
                     $scope.login = true;
@@ -220,23 +220,35 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                         "link": "",
                         "order": 4,
                         "subitems": [{
-                            "title": "My Profile",
-                            "link": "#/user/" + isAuthed.username
-                        }, {
-                            "title": "My Events",
-                            "link": "#/my/events"
-                        }, {
-                            "title": "My Points",
-                            "link": "#/my/points"
-                        }, {
-                            "title": "Logout",
-                            "link": "#/logout/"
-                        }]
-                    })
+                                "title": "My Profile",
+                                "link": "#/user/" + isAuthed.username
+                            }, {
+                                "title": "My Events",
+                                "link": "#/my/events"
+                            },
+                            // {
+                            //     "title": "My Points",
+                            //     "link": "#/my/points"
+                            // }, 
+                            {
+                                "title": "Quizzes",
+                                "link": "#/admin/quizzes"
+                            }, {
+                                "title": "Logout",
+                                "link": "#/logout/"
+                            }
+                        ]
+                    }, {
+                                "title": "Quizzes",
+                                "link": "#/admin/quizzes"
+                            })
                 } else {
                     $scope.items[0].items.push({
-                        "title": "login",
+                        "title": "Login",
                         "link": "#/login"
+                    }, {
+                        "title": "Register",
+                        "link": "#/register"
                     })
                     // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
                     //setTimeout(function() {$rootScope.$apply();}, 10);
@@ -246,9 +258,12 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
 
             } else {
                 $scope.items[0].items.push({
-                    "title": "login",
+                    "title": "Login",
                     "link": "#/login"
-                })
+                }, {
+                        "title": "Register",
+                        "link": "#/register"
+                    })
                 $scope.login = false;
                 // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
                 //setTimeout(function() {$rootScope.$apply();}, 10);
@@ -288,9 +303,9 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
         $scope.$watch(function() {
             return localStorageService.get('loggedIn');
         }, function(newVal, oldVal) {
-            
+
             if (newVal != null) {
-                
+
                 resetMenu();
             }
 

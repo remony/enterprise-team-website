@@ -69,7 +69,7 @@ $scope.attend = function(id) {
                 var token = user_info.token;
 
                 $http({
-                    url: backend + '/events/' + id + '/signup',
+                    url: backend + '/events/' + id.eventid + '/signup',
                     method: 'POST',
                     dataType: 'json',
                     data: '',
@@ -79,6 +79,8 @@ $scope.attend = function(id) {
                     }
                 }).success(function(data, status, headers, config) {
                     Materialize.toast("You are now attending", 1000);
+                }).error(function() {
+                    Materialize.toast("You are already attending", 1000);
                 });
 
 
