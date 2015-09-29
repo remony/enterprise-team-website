@@ -55,6 +55,7 @@ $http({
                 }
             }).success(function(data, status, headers, config) {
                 $scope.events = data.upcoming;
+                console.log("BBBBBBBB");
                 console.log(data.upcoming);
             }).
             error(function(data, status, headers, config) {
