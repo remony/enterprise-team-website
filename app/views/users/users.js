@@ -2,7 +2,7 @@
 function myFunction() {
             if(document.getElementById("expanduser").style.display == "block"){
                 document.getElementById("expanduser").style.display="none",
-                document.getElementById("button").innerHTML="Display"}
+                document.getElementById("button").innerHTML="Expand"}
             else{
                 document.getElementById("expanduser").style.display="block",
                 document.getElementById("button").innerHTML="Hide"}
@@ -72,6 +72,40 @@ angular.module('app.users', ['ngRoute'])
                 }
             }).success(function(data, status, headers, config) {
                 $scope.users =  data.UserInfo[0];
+            }).
+            error(function(data, status, headers, config) {
+                $scope.error = true;
+            });
+
+            $http({
+                url: backend+"/points/" + $routeParams.user,
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'token':token
+                }
+            }).success(function(data, status, headers, config) {
+                if(data.points.length==0)
+                {
+                    $scope.enterprise=0;
+                    $scope.total=0;
+                    $scope.virtual=0;
+                    $scope.project=0;
+                    $scope.action=0;
+                    $scope.theory=0;
+                }
+                else{
+                    $scope.enterprise=data.points[0].enterprise_challenge;
+                    $scope.total=data.points[0].total;
+                    $scope.virtual=data.points[0].virtual;
+                    $scope.project=data.points[0].total;
+                    $scope.action=data.points[0].action;
+                    $scope.theory=data.points[0].theory;
+                }
+
+               
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
@@ -286,70 +320,41 @@ angular.module('app.users', ['ngRoute'])
 }])
 
 
+.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.when('/user/:userid/quizzes', {
+        templateUrl: 'views/users/userQuiz.html',
+        controller: 'userQuizzesCtrl'
+    });
+}])
 
 
+.controller('userQuizzesCtrl', ['$scope', '$http', 'localStorageService', '$routeParams',
+    function($scope, $http, localStorageService, $routeParams, config) {
 
-.config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.when('/slider',{
-            templateUrl: 'views/slider/slider.html',
-            controller: 'SliderCtrl'
-        });
-    }
-])
-
-    .controller('SliderCtrl',  ['$scope', '$http', 'localStorageService', '$routeParams', function($scope, $http, localStorageService, $routeParams,config) {
-        
-        var imageNo=0;
-         $scope.slides = [
-            {image: '../assets/images/1.jpg', description: 'Image 00'},
-            {image: '../assets/images/2.jpg', description: 'Image 01'},
-            {image: '../assets/images/3.jpg', description: 'Image 02'},
-            {image: '../assets/images/4.jpg', description: 'Image 03'},
-            
-        ];
-
-        $http({
-            url: backend + "/events",
+       $http({
+            url: backend + '/quiz/users/3',
             method: 'GET',
             dataType: 'json',
-            data: '',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
+                'token': localStorageService.get('user_auth').user_auth[0].token
             }
         }).success(function(data, status, headers, config) {
-            $scope.eventtitle = [ data.events[0].name,data.events[1].name,data.events[2].name,data.events[3].name,data.events[4].name];
-            $scope.eventid = [ data.events[0].id,data.events[1].id,data.events[2].id,data.events[3].id,data.events[4].id];
-
-             $scope.image=$scope.slides[imageNo].image;
-             $scope.title=$scope.eventtitle[imageNo];
-             $scope.id=$scope.eventid[imageNo];
+            $scope.quizzes = data.attempts;
+            console.log(data);
+        }).
+        error(function(data, status, headers, config) {
+            $scope.error = true;
         });
 
 
 
-       
-   
-          setInterval(function(){
-            imageNo++;
-            if(imageNo===$scope.slides.length)
-            {
-                imageNo=0;
-            }
-           $scope.image=$scope.slides[imageNo].image;
-           $scope.title=$scope.eventtitle[imageNo];
-           $scope.id=$scope.eventid[imageNo];
-
-           $scope.$digest();
-         }, 4000);
-        
 
 
-    
 
 
-    }]);
-   
+    }
+])
 
 
 

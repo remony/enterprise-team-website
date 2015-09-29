@@ -1,0 +1,23 @@
+<h2>My Quizzes</h2>
+
+	<div ng-repeat="quiz in quizzes">
+		<ul class="collection">
+        	<li class="collection-item"> <div style="float:left">{{quiz.quiz_title}}</div><div align="right"><a class="waves-effect waves-light btn" id="button" onClick="myFunction()">Expand</a></div></li> 
+
+   	    </ul>
+   	    <ul class="collection" id="expanduser" style="display:none",  >
+   	    <div>
+	   	    <li class="collection-item">
+	        <p>Number of attempts: {{quiz.no_of_attempts}}</p>
+	        <p>Completed (times): {{quiz.completed}}</p>
+	        <p>Score: {{quiz.score}}</p>
+	        <div align="right"><a class="waves-effect waves-light btn" id="button" onClick="myFunction()">Take quiz again</a></div>
+	       <div> </div>
+
+	    </li>
+
+   	    </div>
+   	    </ul>
+   	</div>
+
+	
