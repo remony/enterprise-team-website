@@ -1,7 +1,15 @@
 'use strict';
+/*
+        Module: app.admin
+        Description: This module contains all the routing and controllers for admin related 
 
+*/
 angular.module('app.admin', ['ngRoute'])
-
+/*
+        Endpoint: /admin
+        Description: This endpoint is responsible of the admin panel
+    
+*/
 .config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.when('/admin', {
@@ -14,11 +22,15 @@ angular.module('app.admin', ['ngRoute'])
 .controller('panelCtrl', ['$scope', '$http', 'localStorageService',
     function($scope, $http, localStorageService, taOptions, element) {
         $scope.title = "Admin Panel";
+
+        //set the usergroup so non admins cannot see any content
         $scope.usergroup = localStorageService.get('user_auth').user_auth[0].usergroup;
 
 
         Materialize.toast("Welcome " + localStorageService.get('user_auth').user_auth[0].username, 1000);
+
         $scope.active = null;
+        // Set a scope of all posible admin options in the admin panel
         $scope.links = [{
             "title": "Site",
             "link": "#/admin"
@@ -44,7 +56,7 @@ angular.module('app.admin', ['ngRoute'])
 
 
 
-
+        //When a user clicks on an option change the active scope to show the relevant content
         $scope.click = function(selection) {
 
             if (selection === 'Users') {
@@ -89,9 +101,10 @@ angular.module('app.admin', ['ngRoute'])
 
         updateEvents();
 
+        // Call the get users endpoint 
         function updateNewUsers() {
             $http({
-                url: "http://localhost:8080/admin/users",
+                url: backend + "/admin/users",
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -100,7 +113,7 @@ angular.module('app.admin', ['ngRoute'])
                     'token': localStorageService.get('user_auth').user_auth[0].token
                 }
             }).success(function(data, status, headers, config) {
-                console.log(data);
+                // return the json 
                 $scope.newUsers = data.unauthorisedusers;
                 $scope.userGroups = {
                     "user_groups": [{
@@ -111,24 +124,19 @@ angular.module('app.admin', ['ngRoute'])
                         "name": "editor"
                     }]
                 };
-
-
-
-                // self.tableParams = new NgTableParams({}, {
-                //     data: data.unauthorisedusers
-                // });
-
-
-
-
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
             });
         }
 
-
+        /*
+                    $scope.approve
+                When the user clicks on the approve option when displaying new users, we will authorize new users so that they can log in
+            
+        */
         $scope.approve = function(userid) {
+            // Send the POST request to the endpoint to change the usergroup value
             $http({
                 url: backend + "/admin/users",
                 method: 'POST',
@@ -143,14 +151,13 @@ angular.module('app.admin', ['ngRoute'])
                 }
             }).success(function(data, status, headers, config) {
                 updateNewUsers();
-                console.log(data)
             }).
             error(function(data, status, headers, config) {
-
                 $scope.error = true;
             });
         }
 
+        // Get all the pages
         function updatePages() {
             $http({
                 url: backend + "/pages",
@@ -162,15 +169,13 @@ angular.module('app.admin', ['ngRoute'])
                 }
             }).success(function(data, status, headers, config) {
                 $scope.pages = data.pages;
-
             }).
             error(function(data, status, headers, config) {
                 console.log(status);
-
             });
-
         }
 
+        // Get all news
         function updateNews() {
             $http({
                 url: backend + "/news",
@@ -183,19 +188,14 @@ angular.module('app.admin', ['ngRoute'])
                     'pagesize': 9000
                 }
             }).success(function(data, status, headers, config) {
-
                 $scope.news = data.allnews;
-                console.log(data);
-
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
-
-
-
             });
         }
 
+        // Get all users
         function updateUsers() {
             $http({
                 url: backend + "/users",
@@ -208,14 +208,13 @@ angular.module('app.admin', ['ngRoute'])
                 }
             }).success(function(data, status, headers, config) {
                 $scope.users = data.UserInfo;
-                console.log(data.UserInfo);
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
             });
-
         }
 
+        // Get all events
         function updateEvents() {
             $http({
                 url: backend + "/events",
@@ -230,6 +229,7 @@ angular.module('app.admin', ['ngRoute'])
             });
         }
 
+        // Get index information (the site information (title, description))
         function getIndex() {
             $http({
                 url: backend + '/',
@@ -247,6 +247,7 @@ angular.module('app.admin', ['ngRoute'])
             });
         }
 
+        // When clicking update of site information send a post request
         $scope.updateSiteDetails = function(site) {
             $http({
                 url: backend + '/',
@@ -260,14 +261,14 @@ angular.module('app.admin', ['ngRoute'])
                     'id': 1
                 }
             }).success(function(data, status, headers, config) {
-                console.log(data);
+                getIndex();
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
             });
         }
 
-
+        // Get all quizzes
         function updateQuizzes() {
             $http({
                 url: backend + '/quiz',
@@ -279,13 +280,13 @@ angular.module('app.admin', ['ngRoute'])
                 }
             }).success(function(data, status, headers, config) {
                 $scope.quizzes = data.quiz;
-                console.log(data);
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
             });
         }
 
+        // $scope.delete to delete events
         $scope.delete = function(event_id) {
             console.log("deleting " + event_id);
             $http({
@@ -298,6 +299,7 @@ angular.module('app.admin', ['ngRoute'])
                     'eventid': event_id
                 }
             }).success(function(data, status, headers, config) {
+                // If delete is successful then get all the events to update the scope
                 updateEvents();
             });
         }
@@ -313,11 +315,15 @@ angular.module('app.admin', ['ngRoute'])
             });
         }
     ])
+/*
+            Controller: pagesAddCtrl
+            Description: a controller which allows us to display and allow adding of new pages and subpages
 
+*/
 .controller('pagesAddCtrl', ['$scope', '$http', 'localStorageService',
     function($scope, $http, localStorageService, taOptions, element) {
         $scope.title = "Admin Panel";
-
+        // Get a json of all pages
         function updatePages() {
             $http({
                 url: backend + "/pages",
@@ -333,6 +339,7 @@ angular.module('app.admin', ['ngRoute'])
 
         }
         updatePages();
+        // When adding a page 
         $scope.addParent = function(name, order) {
             /*
                 parentSlug

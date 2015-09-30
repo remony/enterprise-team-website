@@ -14,9 +14,7 @@ angular.module('app.events', ['ngRoute'])
 .controller('eventsCtrl', ['$scope', '$http', 'localStorageService', '$filter',
     function($scope, $http, localStorageService, taOptions, $filter) {
         $scope.title = "Events";
-
-  
-
+        //Get all events
         $http({
             url: backend + "/events",
             method: 'GET',
@@ -27,15 +25,7 @@ angular.module('app.events', ['ngRoute'])
             }
         }).success(function(data, status, headers, config) {
             $scope.events = data.events;
-            console.log("events");
-            console.log(data);
-
         });
-
-
-
-
-
     }
 ])
 
@@ -53,7 +43,6 @@ angular.module('app.events', ['ngRoute'])
         $scope.title = "Event";
         if (localStorageService.get('user_auth')) {
             $scope.usergroup = localStorageService.get('user_auth').user_auth[0].usergroup;
-
         }
 
         $http({
@@ -66,17 +55,13 @@ angular.module('app.events', ['ngRoute'])
             }
         }).success(function(data, status, headers, config) {
             $scope.event = data.event[0];
-            console.log(data.event[0]);
         });
 
 
         $scope.attend = function() {
             if (localStorageService.get('user_auth')) {
                 var user_info = localStorageService.get('user_auth').user_auth[0];
-                console.log(user_info);
                 var token = user_info.token;
-
-                console.log(token);
 
                 $http({
                     url: backend + '/events/' + $routeParams.id + '/signup',
@@ -88,18 +73,10 @@ angular.module('app.events', ['ngRoute'])
                         'token': token
                     }
                 }).success(function(data, status, headers, config) {
-                    console.log(data);
+
                 });
-
-
             }
-
-
         }
-
-
-
-
     }
 ])
     .config(['$routeProvider',
@@ -110,30 +87,33 @@ angular.module('app.events', ['ngRoute'])
             });
         }
     ])
+/*
+        calenderCtrl: Get a json of all events from the api and display in the calendar
 
+*/
 .controller('calenderCtrl', ['$scope', '$http', 'localStorageService', '$routeParams',
     function($scope, $http, localStorageService, $routeParams, $watch, uiCalendarConfig, config) {
         $scope.title = "Calendar";
         $scope.eventSources = {};
-
         $scope.events = [];
 
+        // set information for the calender
         $scope.uiConfig = {
             calendar: {
                 height: '100%',
-                editable: false,
+                editable: false, // if we want to be able to allow users to update ht eevent we can enable this
                 header: {
                     left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
                 },
-                dayClick: $scope.alertEventOnClick,
+                dayClick: $scope.alertEventOnClick, //example function that could be created to allow events or modules/alerts
                 eventDrop: $scope.alertOnDrop,
                 eventResize: $scope.alertOnResize
             }
         };
 
-
+        // Get all events
         $http({
             url: backend + "/calendar",
             method: 'GET',
@@ -143,19 +123,13 @@ angular.module('app.events', ['ngRoute'])
                 'Content-Type': 'application/json; charset=utf-8',
             }
         }).success(function(data, status, headers, config) {
-
+            // Push the json array into eventSources json
             $scope.events.push(data.calendar);
-
-
         });
 
-
+        //If we want to add in future google calenders we can push that data into the same scope
         $scope.eventSources = $scope.events;
-
-
-
     }
-
 ])
 
 .config(['$routeProvider',
@@ -176,8 +150,8 @@ angular.module('app.events', ['ngRoute'])
 
 
         $scope.update = function(event) {
-             var startdate = event.startdate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
-             var enddate  = event.enddate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
+            var startdate = event.startdate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
+            var enddate = event.enddate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
             $http({
                 url: backend + "/events/insert",
                 method: 'POST',
@@ -192,16 +166,13 @@ angular.module('app.events', ['ngRoute'])
                     'startdate': startdate,
                     'enddate': enddate,
                     'points': parseInt(event.points),
+                    'points_category': event.points_category,
                     'token': localStorageService.get('user_auth').user_auth[0].token
                 }
             }).success(function(data, status, headers, config) {
                 $scope.event = data.event;
-                console.log(data.event);
             });
-
         }
-
-
     }
 ])
 
@@ -221,40 +192,26 @@ angular.module('app.events', ['ngRoute'])
         $scope.event = [];
         $scope.event.points = 100;
         var sd;
-            var ed;
+        var ed;
 
         $http({
-                url: backend + "/events/" + $routeParams.eventid,
-                method: 'GET',
-                dataType: 'json',
-                data: '',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                }
-            }).success(function(data, status, headers, config) {
-                $scope.event = data.event[0];
-                sd = data.event[0].startate;
-                ed = data.event[0].endDate;
-
-
-
-
-
-                console.log(data.event[0]);
-            });
+            url: backend + "/events/" + $routeParams.eventid,
+            method: 'GET',
+            dataType: 'json',
+            data: '',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).success(function(data, status, headers, config) {
+            $scope.event = data.event[0];
+            sd = data.event[0].startate;
+            ed = data.event[0].endDate;
+        });
 
 
         $scope.update = function(event) {
-            console.log(event);
-            
-            
-     
-                var startdate = event.startdate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
-        
-                var enddate = event.enddate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
-    
-
-            console.log(event);
+            var startdate = event.startdate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
+            var enddate = event.enddate.toString().replace(/ *\([^)]*\) */g, "").replace(/([A-z]{2,3})([\+\-]?)([0-9]+)/gi, "$1 $2$3");
 
             $http({
                 url: backend + "/events/update/" + $routeParams.eventid,
@@ -283,8 +240,6 @@ angular.module('app.events', ['ngRoute'])
     }
 ])
 
-
-
 .config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.when('/events/:eventid/participants', {
@@ -298,40 +253,37 @@ angular.module('app.events', ['ngRoute'])
     function($scope, $http, localStorageService, $routeParams, $watch, uiCalendarConfig, config) {
         $scope.title = "Participants";
         if (localStorageService.get('user_auth')) {
-        var userdata = localStorageService.get('user_auth').user_auth[0];
-        $scope.usergroup = userdata.usergroup;
-        var token = userdata.token;
-        
+            var userdata = localStorageService.get('user_auth').user_auth[0];
+            $scope.usergroup = userdata.usergroup;
+            var token = userdata.token;
+
             function getData() {
                 $http({
-                url: backend + "/events/" + $routeParams.eventid + "/participants",
-                method: 'GET',
-                dataType: 'json',
-                data: '',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                    token: token
-                }
-            }).success(function(data, status, headers, config) {
-                $scope.participants = data.participants;    
-                // console.log(data);
-            });
+                    url: backend + "/events/" + $routeParams.eventid + "/participants",
+                    method: 'GET',
+                    dataType: 'json',
+                    data: '',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        token: token
+                    }
+                }).success(function(data, status, headers, config) {
+                    $scope.participants = data.participants;
+                });
             }
 
             getData();
 
+            $scope.attend = function(username) {
 
-        $scope.attend = function(username) {
-            
-            // console.log(username + " has attended");
-            var attended = 0;
-            if (username.attended === 0) {
-                attended = 1;
-            } else {
-                attended = 0;
-            }
+                var attended = 0;
+                if (username.attended === 0) {
+                    attended = 1;
+                } else {
+                    attended = 0;
+                }
 
-            $http({
+                $http({
                     url: backend + '/events/' + $routeParams.eventid + '/participants',
                     method: 'POST',
                     dataType: 'json',
@@ -346,14 +298,7 @@ angular.module('app.events', ['ngRoute'])
                     Materialize.toast("Updated, updating data.", 1000);
                     getData();
                 });
-
-
-
+            }
         }
-    }
-
-        
-
-
     }
 ]);

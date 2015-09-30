@@ -18,30 +18,23 @@ angular.module('app.home', ['ngRoute'])
 
         getUpcomingEvents();
 
-
-$http({
-                url: backend + "/news",
-                method: 'GET',
-                dataType: 'json',
-                data: '',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                    'page': 1,
-                    'pagesize': 5
-                }
-            }).success(function(data, status, headers, config) {
-
-                $scope.news = data.allnews;
-                console.log(data);
-
-            }).
-            error(function(data, status, headers, config) {
-                $scope.error = true;
-
-
-
-            });
-        
+        //Get all news
+        $http({
+            url: backend + "/news",
+            method: 'GET',
+            dataType: 'json',
+            data: '',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'page': 1,
+                'pagesize': 5
+            }
+        }).success(function(data, status, headers, config) {
+            $scope.news = data.allnews;
+        }).
+        error(function(data, status, headers, config) {
+            $scope.error = true;
+        });
 
         function getUpcomingEvents() {
             $http({
@@ -55,15 +48,13 @@ $http({
                 }
             }).success(function(data, status, headers, config) {
                 $scope.events = data.upcoming;
-                console.log("BBBBBBBB");
-                console.log(data.upcoming);
             }).
             error(function(data, status, headers, config) {
                 $scope.error = true;
             });
         }
 
-$scope.attend = function(id) {
+        $scope.attend = function(id) {
             if (localStorageService.get('user_auth')) {
                 var user_info = localStorageService.get('user_auth').user_auth[0];
                 var token = user_info.token;
@@ -82,15 +73,9 @@ $scope.attend = function(id) {
                 }).error(function() {
                     Materialize.toast("You are already attending", 1000);
                 });
-
-
             }
-
-            
-
-
         }
-
+        // Assign ui config for the calendar
         $scope.uiConfig = {
             calendar: {
                 height: '100%',
@@ -106,13 +91,21 @@ $scope.attend = function(id) {
             }
         };
 
-        var imageNo=0;
-         $scope.slides = [
-            {image: './assets/images/1.jpg', description: 'Image 00'},
-            {image: './assets/images/2.jpg', description: 'Image 01'},
-            {image: './assets/images/3.jpg', description: 'Image 02'},
-            {image: './assets/images/4.jpg', description: 'Image 03'},
-            
+        var imageNo = 0;
+        $scope.slides = [{
+                image: './assets/images/1.jpg',
+                description: 'Image 00'
+            }, {
+                image: './assets/images/2.jpg',
+                description: 'Image 01'
+            }, {
+                image: './assets/images/3.jpg',
+                description: 'Image 02'
+            }, {
+                image: './assets/images/4.jpg',
+                description: 'Image 03'
+            },
+
         ];
 
         $http({
@@ -124,53 +117,41 @@ $scope.attend = function(id) {
                 'Content-Type': 'application/json; charset=utf-8',
             }
         }).success(function(data, status, headers, config) {
-            $scope.eventtitle = [ data.events[0].name,data.events[1].name,data.events[2].name,data.events[3].name,data.events[4].name];
-            $scope.eventid = [ data.events[0].id,data.events[1].id,data.events[2].id,data.events[3].id,data.events[4].id];
+            $scope.eventtitle = [data.events[0].name, data.events[1].name, data.events[2].name, data.events[3].name, data.events[4].name];
+            $scope.eventid = [data.events[0].id, data.events[1].id, data.events[2].id, data.events[3].id, data.events[4].id];
 
-             $scope.image=$scope.slides[imageNo].image;
-             $scope.title=$scope.eventtitle[imageNo];
-             $scope.id=$scope.eventid[imageNo];
+            $scope.image = $scope.slides[imageNo].image;
+            $scope.title = $scope.eventtitle[imageNo];
+            $scope.id = $scope.eventid[imageNo];
         });
 
-$scope.image=$scope.slides[imageNo].image;
-           if ($scope.eventtitle) {
+        $scope.image = $scope.slides[imageNo].image;
+        if ($scope.eventtitle) {
 
-           $scope.title=$scope.eventtitle[imageNo];
-           } else {
+            $scope.title = $scope.eventtitle[imageNo];
+        } else {
             $scope.eventtitle = "null";
-           }
-           if ($scope.eventid) {
-           $scope.id=$scope.eventid[imageNo];
-       }
-           // $scope.$digest();
+        }
+        if ($scope.eventid) {
+            $scope.id = $scope.eventid[imageNo];
+        }
 
-       
-   
-          setInterval(function(){
+        setInterval(function() {
             imageNo++;
-            if(imageNo===$scope.slides.length)
-            {
-                imageNo=0;
+            if (imageNo === $scope.slides.length) {
+                imageNo = 0;
             }
-           $scope.image=$scope.slides[imageNo].image;
-           if ($scope.eventtitle) {
+            $scope.image = $scope.slides[imageNo].image;
+            if ($scope.eventtitle) {
 
-           $scope.title=$scope.eventtitle[imageNo];
-           } else {
-            $scope.eventtitle = "null";
-           }
-           if ($scope.eventid) {
-           $scope.id=$scope.eventid[imageNo];
-       }
-           $scope.$digest();
-         }, 4000);
-        
-
-
+                $scope.title = $scope.eventtitle[imageNo];
+            } else {
+                $scope.eventtitle = "null";
+            }
+            if ($scope.eventid) {
+                $scope.id = $scope.eventid[imageNo];
+            }
+            $scope.$digest();
+        }, 4000);
     }
-
-
-
-
-
 ]);

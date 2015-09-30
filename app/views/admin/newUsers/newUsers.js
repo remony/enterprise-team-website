@@ -12,15 +12,11 @@ angular.module('app.admin.newUsers', ['ngRoute'])
 ])
 
 .controller('newUsersCtrl', ['$scope', '$http', 'localStorageService', '$rootScope',
-    function($scope, $http, localStorageService, taOptions) {
+    function($scope, $http, localStorageService, taOptions, config) {
         $scope.title = "New Users";
-        var self = this;
-        // getUsers();
-
-        // function getUsers() {
 
         $http({
-            url: "http://localhost:8080/admin/users",
+            url: backend + "/admin/users",
             method: 'GET',
             dataType: 'json',
             data: '',
@@ -39,22 +35,11 @@ angular.module('app.admin.newUsers', ['ngRoute'])
                     "name": "editor"
                 }]
             };
-            console.log($scope.userGroups);
-
-           
-            // self.tableParams = new NgTableParams({}, {
-            //     data: data.unauthorisedusers
-            // });
-
-
-
 
         }).
         error(function(data, status, headers, config) {
             $scope.error = true;
         });
-
-        // }
 
         function updateUser(userid, userGroup, userStatus) {
             $http({

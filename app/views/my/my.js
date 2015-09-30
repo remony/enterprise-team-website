@@ -20,7 +20,7 @@ angular.module('app.my', ['ngRoute'])
             $scope.display = true;
             updateEvents(localStorageService.get('user_auth').user_auth[0].username);
         }
-        
+
 
         function updateEvents(username, token) {
             $http({
@@ -30,16 +30,15 @@ angular.module('app.my', ['ngRoute'])
                 data: '',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
-                    'token':token,
-                    'username':username
+                    'token': token,
+                    'username': username
                 }
             }).success(function(data, status, headers, config) {
                 $scope.events = data.events;
                 $scope.data = data;
-                console.log(data);
             });
         }
 
-       
+
     }
 ])

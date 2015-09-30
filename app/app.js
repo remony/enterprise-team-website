@@ -18,6 +18,9 @@ var App = angular.module('app', [
     'app.points.manager',
     'app.quiz',
     'app.register',
+
+
+
     //Factories
     'app.config',
 
@@ -107,7 +110,6 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
 
 
                 for (var i = 0; i < j; i++) {
-                    console.log(data.pages[i]);
                     var newitem = {
                         "title": data.pages[i].title,
                         "link": '#/page/' + data.pages[i].slug
@@ -132,24 +134,25 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
 
             $scope.items = [{
                 "items": [
-                // {
-                //     "title": "Home",
-                //     "link": "#/",
-                //     "order": 0
-                // }, 
-                {
-                    "title": "News",
-                    "link": "#/news",
-                    "order": 1
-                }, {
-                    "title": "Events",
-                    "link": "#/events",
-                    "order": 2
-                }, {
-                    "title": "Calendar",
-                    "link": "#/calendar",
-                    "order": 3
-                }]
+                    // {
+                    //     "title": "Home",
+                    //     "link": "#/",
+                    //     "order": 0
+                    // }, 
+                    {
+                        "title": "News",
+                        "link": "#/news",
+                        "order": 1
+                    }, {
+                        "title": "Events",
+                        "link": "#/events",
+                        "order": 2
+                    }, {
+                        "title": "Calendar",
+                        "link": "#/calendar",
+                        "order": 3
+                    }
+                ]
             }];
             getPages();
             if (localStorageService.get('user_auth')) {
@@ -239,9 +242,9 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                             }
                         ]
                     }, {
-                                "title": "Quizzes",
-                                "link": "#/admin/quizzes"
-                            })
+                        "title": "Quizzes",
+                        "link": "#/admin/quizzes"
+                    })
                 } else {
                     $scope.items[0].items.push({
                         "title": "Login",
@@ -261,9 +264,9 @@ App.controller('navigationCtrl', ['$scope', '$http', 'localStorageService', '$ro
                     "title": "Login",
                     "link": "#/login"
                 }, {
-                        "title": "Register",
-                        "link": "#/register"
-                    })
+                    "title": "Register",
+                    "link": "#/register"
+                })
                 $scope.login = false;
                 // $scope.items = [{"items":[{"title":"Home","link":"#/","order":0},{"title":"News","link":"#/news","order":1},{"title":"Events","link":"#/events","order":2},{"title":"Calendar","link":"#/calendar","order":3},{"title":"Login","link":"#/login","order":4}]}];
                 //setTimeout(function() {$rootScope.$apply();}, 10);
@@ -396,12 +399,15 @@ App.controller('authCtrl', ['$scope', 'localStorageService', '$http',
     }
 ]);
 
+
+// set any html to be safe, this means that it will be displayed
 App.filter('unsafe', function($sce) {
     return function(val) {
         return $sce.trustAsHtml(val);
     };
 });
 
+// change value to uppercase instead of lowercase
 App.filter('uppercase', function() {
     return function(val) {
         if (val != null)
@@ -431,3 +437,11 @@ App.filter('cut', function($sce) {
         return $sce.trustAsHtml(value + (tail || '…'));
     };
 });
+
+// Caps the first letter
+App.filter('capthis', function() {
+    return function(val) {
+        if (val != null)
+            return val.charAt(0).toUpperCase() + val.slice(1).replace('_', ' ');
+    }
+})

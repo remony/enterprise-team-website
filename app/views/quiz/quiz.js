@@ -85,7 +85,6 @@ angular.module('app.quiz', ['ngRoute'])
                     }).success(function(data, status, headers, config) {
 
                         $scope.data = data;
-                        console.log(data);
                         Materialize.toast("Quiz has been created", 1000);
 
                     }).
@@ -123,7 +122,6 @@ angular.module('app.quiz', ['ngRoute'])
             }
         }).success(function(data, status, headers, config) {
             $scope.quizzes = data.quiz;
-            console.log(data);
         }).
         error(function(data, status, headers, config) {
             $scope.error = true;
@@ -139,27 +137,6 @@ angular.module('app.quiz', ['ngRoute'])
         $scope.quiz = $routeParams;
         $scope.token = localStorageService.get('user_auth').user_auth[0].token;
         $scope.backend = backend;
-        // $http({
-        //     url: backend + '/quiz/' + $routeParams.id,
-        //     method: 'GET',
-        //     dataType: 'json',
-        //     data: '',
-        //     headers: {
-        //         'Content-Type': 'application/json; charset=utf-8',
-
-        //         'token': localStorageService.get('user_auth').user_auth[0].token
-        //     }
-        // }).success(function(data, status, headers, config) {
-
-        //     $scope.quiz = data;
-        //     console.log(data);
-        // });
-
-
-
-
-
-
 
     }
 ])

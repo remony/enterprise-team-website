@@ -2,8 +2,6 @@
 // var domain = 'http://46.101.32.73:8080/api';
 var domain = 'http://localhost:8080'
 
-//var port = '';
-
 var backend = domain;
 angular.module('app.config', [])
 
@@ -12,7 +10,3 @@ angular.module('app.config', [])
         backend: backend
     }
 });
-
-
-
-

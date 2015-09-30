@@ -26,8 +26,7 @@ angular.module('app.news', ['ngRoute'])
             }).success(function(data, status, headers, config) {
 
                 $scope.news = data.allnews;
-                 $scope.search = "";
-                console.log(data);
+                $scope.search = "";
 
             }).
             error(function(data, status, headers, config) {
@@ -37,21 +36,6 @@ angular.module('app.news', ['ngRoute'])
 
             });
 
-            // $scope.news = {
-            // 	"articles": [{
-            // 		"title": "first",
-            // 		"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis no...."
-            // 	},{
-            // 		"title": "second",
-            // 		"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis no...."
-            // 	},{
-            // 		"title": "third",
-            // 		"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis no...."
-            // 	},{
-            // 		"title": "fourths",
-            // 		"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis no...."
-            // 	}]
-            // }
         }
     ])
     .config(['$routeProvider',
@@ -64,7 +48,7 @@ angular.module('app.news', ['ngRoute'])
     ])
     .controller('newsArticleCtrl', ['$scope', '$http', '$routeParams',
         function($scope, $http, $routeParams, LocalStorageModule) {
-    
+
 
             function getCommments() {
                 $http({
@@ -76,11 +60,11 @@ angular.module('app.news', ['ngRoute'])
                         'Content-Type': 'application/json; charset=utf-8',
                     }
                 }).success(function(data, status, headers, config) {
-                    console.log(data);
+
                     $scope.title = data.article[0].title;
                     $scope.article = data.article[0];
                     $scope.comments = data.article[0].comments;
-                    //console.log(data.article[0]);
+
                 }).
                 error(function(data, status, headers, config) {
                     $scope.error = true;
@@ -92,7 +76,7 @@ angular.module('app.news', ['ngRoute'])
 
 
             $scope.comment = function(message) {
-                console.log(message);
+
 
                 if (localStorage.getItem('user_auth')) {
                     var username = localStorage.getItem('user_auth');
@@ -135,7 +119,7 @@ angular.module('app.news', ['ngRoute'])
         }
     ])
     .controller('newsArticleEditorCtrl', ['$scope', '$http', '$routeParams', 'toastr', '$location', 'FileUploader', 'localStorageService',
-        function($scope, $http, $routeParams, toastr, $location, FileUploader, localStorageService) {
+        function($scope, $http, $routeParams, toastr, $location, FileUploader, localStorageService, config) {
             var slug = $routeParams.slug;
             $scope.uploader = new FileUploader();
 
@@ -167,7 +151,7 @@ angular.module('app.news', ['ngRoute'])
 
             };
             $http({
-                url: "http://localhost:8080/news/" + slug,
+                url: backend + "/news/" + slug,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -195,7 +179,7 @@ angular.module('app.news', ['ngRoute'])
 
 
                 $http({
-                    url: "http://localhost:8080/news/" + slug,
+                    url: backend + "/news/" + slug,
                     method: 'POST',
                     dataType: 'json',
                     data: $scope.editor.content,
@@ -276,12 +260,10 @@ angular.module('app.news', ['ngRoute'])
 
 
                 }).success(function(data, status, headers) {
-                    console.log(data);
                     Materialize.toast("Post created successfully <a href=data", 1000);
                 }).
                 error(function(data, status, headers) {
                     Materialize.toast("Post Failed", 1000);
-                    //toastr.error('Login Success', 'Article failed to Update :(');
                 });
             }
         }
@@ -299,33 +281,30 @@ angular.module('app.news', ['ngRoute'])
     .controller('newsSearchCtrl', ['$scope', '$http', '$routeParams', '$location',
         function($scope, $http, $routeParams, config, $location) {
 
-                $http({
-                    url: backend + "/search/news",
-                    method: 'GET',
-                    dataType: 'json',
+            $http({
+                url: backend + "/search/news",
+                method: 'GET',
+                dataType: 'json',
 
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                        'searchtext': $routeParams.search
-                    },
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'searchtext': $routeParams.search
+                },
 
 
-                }).success(function(data, status, headers) {
-                    if(data.news.length===0)
-                    {
-                        $scope.found=false;
-                    }
-                    else
-                    {
-                        $scope.found=true;
-                    }
-                    $scope.news=data.news
+            }).success(function(data, status, headers) {
+                if (data.news.length === 0) {
+                    $scope.found = false;
+                } else {
+                    $scope.found = true;
+                }
+                $scope.news = data.news
 
-                    
-                }).
-                error(function(data, status, headers) {
-                    Materialize.toast("Post Failed", 1000);
-                });
-            }
-        
+
+            }).
+            error(function(data, status, headers) {
+                Materialize.toast("Post Failed", 1000);
+            });
+        }
+
     ]);

@@ -1,23 +1,16 @@
 <ul class="collection with-header">
-        <li class="collection-header"><h4>{{title}}</h4></li>
-      
-  <li class="collection-item"ng-repeat="page in pages track by $index" ng-click="show$index = !show$index"  draggable-list="pages" draggable="true">{{$index}}: {{ page.title }}</li>
-
-
+	<li class="collection-header"><h4>{{title}}</h4></li>
+	
+	<li class="collection-item"ng-repeat="page in pages track by $index" ng-click="show$index = !show$index"  draggable-list="pages" draggable="true">{{$index}}: {{ page.title }}</li>
 </ul>
-
 <ul class="collection with-header">
-        <li class="collection-header"><h4>subpages</h4></li>
-      
-  <li class="collection-item"ng-repeat="subpage in pages.subpages track by $index" ng-click="show$index = !show$index"  draggable-list="pages" draggable="true">{{$index}}: {{ subpage.title }}</li>
-
-  
+	<li class="collection-header"><h4>subpages</h4></li>
+	
+	<li class="collection-item"ng-repeat="subpage in pages.subpages track by $index" ng-click="show$index = !show$index"  draggable-list="pages" draggable="true">{{$index}}: {{ subpage.title }}</li>
+	
 </ul>
-
-
 <form class="input-field col s6" ng-submit="addParent(title, pages.length)">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
-        
-  </form>
-
+	<input placeholder="Placeholder" id="first_name" type="text" class="validate">
+	<label for="first_name">First Name</label>
+	
+</form>

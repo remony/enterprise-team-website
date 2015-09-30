@@ -1,5 +1,6 @@
 'use strict';
 
+// Unsure if being used
 function myFunction() {
     if (document.getElementById("expanduser").style.display == "block") {
         document.getElementById("expanduser").style.display = "none",
@@ -25,11 +26,10 @@ angular.module('app.users', ['ngRoute'])
 
 .controller('usersCtrl', ['$scope', '$http', 'localStorageService',
     function($scope, $http, localStorageService, config) {
-        console.log("Users has been loaded");
         $scope.title = "Users";
         var token = localStorageService.get('user_auth').user_auth[0].token;
 
-       
+
         $http({
             url: backend + "/users",
             method: 'GET',
@@ -40,9 +40,6 @@ angular.module('app.users', ['ngRoute'])
                 'token': token
             }
         }).success(function(data, status, headers, config) {
-            // $scope.title = data.article[0].title;
-            // $scope.article = data.article[0];
-            console.log(data.UserInfo);
             $scope.users = data.UserInfo;
         }).
         error(function(data, status, headers, config) {
@@ -64,12 +61,14 @@ angular.module('app.users', ['ngRoute'])
 
 .controller('userCtrl', ['$scope', '$http', 'localStorageService', '$routeParams',
     function($scope, $http, localStorageService, $routeParams, config) {
-
-        console.log("Users has been loaded");
         $scope.title = "Users";
         $scope.deleting = false;
-        var token = localStorageService.get('user_auth').user_auth[0].token;
-        //console.log("Token: " + token);
+        var token = "";
+        if (localStorageService.get('user_auth')) {
+            token = localStorageService.get('user_auth').user_auth[0].token;
+        }
+        
+        
 
         $http({
             url: backend + "/user/" + $routeParams.user,
@@ -81,7 +80,6 @@ angular.module('app.users', ['ngRoute'])
                 'token': token
             }
         }).success(function(data, status, headers, config) {
-            console.log(data);
             if (data.UserInfo) {
                 $scope.users = data.UserInfo[0];
             } else {
@@ -94,7 +92,7 @@ angular.module('app.users', ['ngRoute'])
         });
 
         function percentage(val) {
-            return val *0.14 * 10 + "%";
+            return val * 0.14 * 10 + "%";
         }
 
         $http({
@@ -107,7 +105,6 @@ angular.module('app.users', ['ngRoute'])
                 'token': token
             }
         }).success(function(data, status, headers, config) {
-            console.log(data.points[0]);
             if (data.points) {
                 $scope.points = data.points[0];
 
@@ -118,10 +115,7 @@ angular.module('app.users', ['ngRoute'])
                 $scope.progress.action = percentage(data.points[0].action);
                 $scope.progress.virtual = percentage(data.points[0].virtual);
                 $scope.progress.total = percentage(data.points[0].total);
-                // debugger;
-
-
-            }
+        }
 
 
         }).
@@ -169,8 +163,7 @@ angular.module('app.users', ['ngRoute'])
 
         var username = $routeParams.username;
         var token = localStorageService.get('user_auth').user_auth[0].token;
-        console.log("Token: " + token);
-        console.log("Username: " + username);
+
         $http({
             url: backend + "/user/" + username,
             method: 'GET',
@@ -245,13 +238,13 @@ angular.module('app.users', ['ngRoute'])
 
 
             }).success(function(data, status, headers) {
-                toastr.success('User information updated!', '<a href="localhost:8080/user.' + '/username' + '">View post</a>', {
-                    allowHtml: true,
-                    closeButton: true
-                });
+                // toastr.success('User information updated!', '<a href="localhost:8080/user.' + '/username' + '">View post</a>', {
+                //     allowHtml: true,
+                //     closeButton: true
+                // });
             }).
             error(function(data, status, headers) {
-                toastr.error('Login Success', 'User failed to Update :(');
+                // toastr.error('Login Success', 'User failed to Update :(');
             });
         }
     }
@@ -270,13 +263,10 @@ angular.module('app.users', ['ngRoute'])
 
 .controller('usersPasswordResetCtrl', ['$scope', '$http', 'localStorageService', '$routeParams',
     function($scope, $http, localStorageService, $routeParams, config) {
-        console.log("Users has been loaded");
-
         var username = $routeParams.username;
         if (localStorageService.get('user_auth').user_auth) {
             var token = localStorageService.get('user_auth').user_auth[0].token;
-            console.log("Token: " + token);
-            console.log("Username: " + username);
+
             $http({
                 url: backend + "/user/" + username,
                 method: 'GET',
@@ -366,17 +356,9 @@ angular.module('app.users', ['ngRoute'])
             }
         }).success(function(data, status, headers, config) {
             $scope.quizzes = data.attempts;
-            console.log(data);
         }).
         error(function(data, status, headers, config) {
             $scope.error = true;
         });
-
-
-
-
-
-
-
     }
 ])

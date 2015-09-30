@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col s12 m1">
-		
+		<p></p>
 	</div>
 	<div class="col s12 m10">
 		<!-- Title -->
@@ -12,31 +12,29 @@
 			</div>
 			<div class="col s12 m4">
 				
-				 <p>{{event.venue}} @ {{event.location}} <a href="https://www.google.co.uk/maps/place/{{event.venue}} {{event.location}}">Google maps</a></p>
+				<p>{{event.venue}} @ {{event.location}} <a href="https://www.google.co.uk/maps/place/{{event.venue}} {{event.location}}">Google maps</a></p>
 				
 			</div>
 			<div class="col s12 m2">
-			<a ng-click="attend()" ng-show="usergroup" class="waves-effect waves-light btn blue">Signup</a>
+				<a ng-click="attend()" ng-show="usergroup" class="waves-effect waves-light btn blue">Signup</a>
 				
 			</div>
 		</div>
-
 		<!-- Event content -->
 		<p>{{event.description}}</p>
-				<div class="col s12 m4 l6">
-					<p>Starts: {{event.startdate | amCalendar}}</p>
-				</div>
-				
-				<div class="col s12 m4 l6">
-					<p>Ends: {{event.enddate | amCalendar}}</p>
-				</div>
-				<p><b>Points available:</b> {{event.points}}</p>
-				
-				<a href="#/events/{{event.id}}/participants" class="waves-effect waves-light btn green" ng-if="usergroup === 'admin'|| usergroup === 'editor'">View Participants</a>
-				<a href="#/events/{{event.id}}/edit" class="waves-effect waves-light btn orange" ng-if="usergroup === 'admin'|| usergroup === 'editor'">Edit</a>
-
+		<div class="col s12 m4 l6">
+			<p>Starts: {{event.startdate | amCalendar}}</p>
+		</div>
+		
+		<div class="col s12 m4 l6">
+			<p>Ends: {{event.enddate | amCalendar}}</p>
+		</div>
+		<p><b>Points available:</b> {{event.points}} {{event.points_category | capthis}}</p>
+		
+		<a href="#/events/{{event.id}}/participants" class="waves-effect waves-light btn green" ng-if="usergroup === 'admin'|| usergroup === 'editor'">View Participants</a>
+		<a href="#/events/{{event.id}}/edit" class="waves-effect waves-light btn orange" ng-if="usergroup === 'admin'|| usergroup === 'editor'">Edit</a>
 	</div>
 	<div class="col s12 m1">
-		
+		<p></p>
 	</div>
 </div>

@@ -43,24 +43,18 @@ angular.module('app.pages', ['ngRoute'])
             }
         }).success(function(data, status, headers, config) {
             $scope.pages = data.pages;
-            console.log(data.pages);
-
         }).
         error(function(data, status, headers, config) {
             console.log(status);
 
         });
-
-
-
-
     }
 ])
     .controller('adminPagesCtrl', ['$scope', '$http', 'localStorageService', '$rootScope',
         function($scope, $http, localStorageService, $rootScope, config) {
             $scope.title = "Admin Pages";
             $scope.error = false;
-$scope.tinymceOptions = {
+            $scope.tinymceOptions = {
                 onChange: function(e) {
                     // put logic here for keypress and cut/paste changes
                 },
@@ -89,8 +83,6 @@ $scope.tinymceOptions = {
                     }
                 }).success(function(data, status, headers, config) {
                     $scope.pages = data.pages;
-                    console.log(data.pages);
-
                 }).
                 error(function(data, status, headers, config) {
                     console.log(status);
@@ -100,8 +92,6 @@ $scope.tinymceOptions = {
             loadPages();
 
             $scope.ad = function(page, index) {
-                console.log(page);
-                console.log(index);
                 addPage(page, index);
             }
 
@@ -131,18 +121,15 @@ $scope.tinymceOptions = {
                     }
                 }).success(function(data, status, headers, config) {
                     $scope.pages = data.pages;
-                    console.log(data);
                     loadPages();
 
                 }).
                 error(function(data, status, headers, config) {
                     console.log(status);
-
                 });
             }
 
             $scope.delete = function(page) {
-                console.log(page);
                 $http({
                     url: backend + "/pages/" + page.slug + "/delete",
                     method: 'POST',
@@ -153,7 +140,7 @@ $scope.tinymceOptions = {
                         'token': localStorageService.get('user_auth').user_auth[0].token
                     }
                 }).success(function(data, status, headers, config) {
-                    
+
                     loadPages();
 
                 }).
@@ -186,7 +173,6 @@ $scope.tinymceOptions = {
                 }
             }).success(function(data, status, headers, config) {
                 $scope.page = data.singlepage;
-                console.log(data.singlepage);
 
             }).
             error(function(data, status, headers, config) {
@@ -203,7 +189,7 @@ $scope.tinymceOptions = {
 
             getPage($routeParams.slug);
 
- $scope.tinymceOptions = {
+            $scope.tinymceOptions = {
                 onChange: function(e) {
                     // put logic here for keypress and cut/paste changes
                 },
@@ -223,7 +209,7 @@ $scope.tinymceOptions = {
 
 
             $scope.update = function(page) {
-             
+
 
                 $http({
                     url: backend + "/pages/" + $routeParams.slug + '/edit',
@@ -242,7 +228,6 @@ $scope.tinymceOptions = {
                     }
                 }).success(function(data, status, headers, config) {
                     $scope.pages = data.pages;
-                    console.log($routeParams.slug);
                     getPage();
                     location.reload();
 
@@ -255,7 +240,7 @@ $scope.tinymceOptions = {
 
 
             }
-            
+
 
             function getPage(slug) {
                 $http({
@@ -269,7 +254,6 @@ $scope.tinymceOptions = {
                 }).success(function(data, status, headers, config) {
                     $scope.page = data.singlepage[0];
                     $scope.body = data.singlepage[0].text;
-                    console.log(data.singlepage[0]);
 
                 }).
                 error(function(data, status, headers, config) {

@@ -3,14 +3,14 @@
 		<p></p>
 	</div>
 	<div class="col s12 m10">
-	<h1>{{title}}</h1>
+		<h1>{{title}}</h1>
 		<table>
 			<thead>
 				<tr>
-					<th ></th>
-					<th >Title</th>
-					<th >Description</th>
-					<th >When</th>
+					<th></th>
+					<th>Title</th>
+					<th>Description</th>
+					<th>When</th>
 					<th>Where</th>
 					<th>Points available</th>
 				</tr>
@@ -25,7 +25,7 @@
 					<td>{{event.venue}} @ {{event.location}}</td>
 					<td><div class="chip">
 						{{event.points}}
-					</div></td>
+					</div> {{event.points_category | capthis}}</td>
 				</tr>
 			</tbody>
 		</table>
