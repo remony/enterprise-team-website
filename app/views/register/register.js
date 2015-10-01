@@ -15,7 +15,9 @@ angular.module('app.register', ['ngRoute'])
 .controller('registerCtrl', ['$scope', '$http', 'localStorageService', '$rootScope',
     function($scope, $http, localStorageService, $rootScope, $location, config) {
         $scope.title = "Register";
-
+        // $scope.user = {};
+        // $scope.user.univeristy={};
+        $scope.universityother="other";
         var auth = "";
         $scope.user = "";
         if (localStorageService.get('user_auth')) {
@@ -36,6 +38,10 @@ angular.module('app.register', ['ngRoute'])
 
 
         $scope.userregister = function(user) {
+
+            if (user.university = 'other') {
+                user.university = $scope.universityother;
+            }
 
             $http({
                 url: backend + "/registration",
@@ -64,7 +70,7 @@ angular.module('app.register', ['ngRoute'])
             }).success(function(data, status, headers, config) {
 
                 Materialize.toast("Registration success", 1000);
-                $location.path("");
+                $location.path("#/");
 
 
             }).
