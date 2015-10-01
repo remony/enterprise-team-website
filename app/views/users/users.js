@@ -67,8 +67,8 @@ angular.module('app.users', ['ngRoute'])
         if (localStorageService.get('user_auth')) {
             token = localStorageService.get('user_auth').user_auth[0].token;
         }
-        
-        
+
+
 
         $http({
             url: backend + "/user/" + $routeParams.user,
@@ -107,7 +107,7 @@ angular.module('app.users', ['ngRoute'])
         }).success(function(data, status, headers, config) {
             if (data.points) {
                 $scope.points = data.points[0];
-
+                debugger;
                 $scope.progress = [];
                 $scope.progress.enterprise_challenge = percentage(data.points[0].enterprise_challenge);
                 $scope.progress.theory = percentage(data.points[0].theory);

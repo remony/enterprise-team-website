@@ -65,7 +65,7 @@ angular.module('app.pages', ['ngRoute'])
                     "youtube rImage | alignleft aligncenter alignright"
                 ],
                 external_plugins: {
-                    "rImage": '/assets/js/rimage/plugin.js'
+                    "rImage": local + 'assets/js/rimage/plugin.js'
                 },
                 theme: "modern",
                 skin: 'light'

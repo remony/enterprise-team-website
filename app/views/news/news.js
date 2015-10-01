@@ -144,7 +144,7 @@ angular.module('app.news', ['ngRoute'])
                     "youtube rImage | alignleft aligncenter alignright"
                 ],
                 external_plugins: {
-                    "rImage": '/assets/js/rimage/plugin.js'
+                    "rImage": local + 'assets/js/rimage/plugin.js'
                 },
                 theme: "modern",
                 skin: 'light'
@@ -210,8 +210,8 @@ angular.module('app.news', ['ngRoute'])
         });
     }
 ])
-    .controller('newsArticleEditorNewCtrl', ['$scope', '$http', '$routeParams', '$location', 'localStorageService',
-        function($scope, $http, $routeParams, config, $location, localStorageService) {
+    .controller('newsArticleEditorNewCtrl', ['$scope', '$http', 'localStorageService', '$routeParams', '$location',
+        function($scope, $http, localStorageService, $routeParams, config, $location) {
             $scope.title = "News Article Editor";
             $scope.editor = {};
             $scope.editor.title = "example title";
@@ -230,14 +230,17 @@ angular.module('app.news', ['ngRoute'])
                     "youtube rImage | alignleft aligncenter alignright"
                 ],
                 external_plugins: {
-                    "rImage": '/assets/js/rimage/plugin.js'
+                    "rImage": local + 'assets/js/rimage/plugin.js'
                 },
                 theme: "modern",
                 skin: 'light'
 
             };
 
-
+            var token = "";
+                if (localStorageService.get('user_auth')) {
+                    token = localStorageService.get('user_auth').user_auth[0].token
+                }
             $scope.update = function(editor) {
                 var title = $scope.editor.title;
                 var text = $scope.editor.content;
@@ -254,7 +257,7 @@ angular.module('app.news', ['ngRoute'])
                         'Content-Type': 'application/json; charset=utf-8',
                         'title': title,
                         'permission': permission,
-                        'token': localStorageService.get('user_auth').user_auth[0].token
+                        'token': token
                     },
                     data: "'" + $scope.editor.content + "'"
 
