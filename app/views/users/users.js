@@ -107,7 +107,7 @@ angular.module('app.users', ['ngRoute'])
         }).success(function(data, status, headers, config) {
             if (data.points) {
                 $scope.points = data.points[0];
-                debugger;
+                
                 $scope.progress = [];
                 $scope.progress.enterprise_challenge = percentage(data.points[0].enterprise_challenge);
                 $scope.progress.theory = percentage(data.points[0].theory);
@@ -232,19 +232,17 @@ angular.module('app.users', ['ngRoute'])
                     'usergroup': usergroup,
                     'userid': userid,
                     'young_es': young_es,
+                    'token': localStorageService.get('user_auth').user_auth[0].token
 
                 },
 
 
 
             }).success(function(data, status, headers) {
-                // toastr.success('User information updated!', '<a href="localhost:8080/user.' + '/username' + '">View post</a>', {
-                //     allowHtml: true,
-                //     closeButton: true
-                // });
+                Materialize.toast("User details updated", 1000);
             }).
             error(function(data, status, headers) {
-                // toastr.error('Login Success', 'User failed to Update :(');
+                Materialize.toast("User details failed to update", 1000);
             });
         }
     }
@@ -307,9 +305,10 @@ angular.module('app.users', ['ngRoute'])
                         data: '',
                         headers: {
                             'Content-Type': 'application/json; charset=utf-8',
-                            'password': password,
-                            'newpassword': newpassword,
-                            'email': email
+                            'password': CryptoJS.SHA512(password).toString(),
+                            'newpassword': CryptoJS.SHA512(newpassword).toString(),
+                            'email': email,
+                            'token': localStorageService.get('user_auth').user_auth[0].token
                         }
                     }).success(function(data, status, headers, config) {
                         if (data.change === "wrongpassword") {

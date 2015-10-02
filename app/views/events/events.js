@@ -226,11 +226,13 @@ angular.module('app.events', ['ngRoute'])
                     'venue': event.venue,
                     'startdate': startdate,
                     'enddate': enddate,
-                    'points': parseInt(event.points)
+                    'points': parseInt(event.points),
+                        'token': localStorageService.get('user_auth').user_auth[0].token
                 }
             }).success(function(data, status, headers, config) {
                 if (data.event[0]) {
                     $scope.event = data.event[0];
+                    Materialize.toast("Event Updated", 1000);
                 }
             });
 
